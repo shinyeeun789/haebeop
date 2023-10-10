@@ -25,4 +25,18 @@ public class TestController {
         return "/test/testList";
     }
 
+    @GetMapping("list2")
+    public String testList2(Model model) throws Exception {
+        List<Test> testList = testService.testList2();
+        model.addAttribute("testList", testList);
+        return "/test/testList";
+    }
+
+    @GetMapping("list3")
+    public String testList3(Model model) throws Exception {
+        List<Test> testList = testService.testList3();
+        model.addAttribute("testList", testList);
+        return "/test/testList";
+    }
+
 }
