@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
@@ -85,7 +85,6 @@
 </footer>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="${path}/resources/js/jquery-3.2.1.min.js"></script>
 <script src="${path}/resources/js/popper.js"></script>
 <script src="${path}/resources/js/bootstrap.min.js"></script>
 <script src="${path}/resources/vendors/nice-select/js/jquery.nice-select.min.js"></script>

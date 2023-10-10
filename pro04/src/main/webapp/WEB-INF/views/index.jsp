@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -10,11 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <link rel="icon" href="${path}/resources/img/favicon.png" type="image/png"/>
     <title> 해법학원 </title>
-    <jsp:include page="./WEB-INF/views/layout/head.jsp"/>
+    <jsp:include page="layout/head.jsp"/>
 </head>
 
 <body>
-<jsp:include page="./WEB-INF/views/layout/header.jsp"/>
+<jsp:include page="layout/header.jsp"/>
 <section class="home_banner_area">
     <div class="banner_inner">
         <div class="container">
@@ -37,9 +37,7 @@
         </div>
     </div>
 </section>
-<!--================ End Home Banner Area =================-->
 
-<!--================ Start Feature Area =================-->
 <section class="feature_area section_gap_top">
     <div class="container">
         <div class="row justify-content-center">
@@ -477,7 +475,7 @@
         </div>
     </div>
 </div>
-<jsp:include page="./WEB-INF/views/layout/footer.jsp" />
+<jsp:include page="layout/footer.jsp" />
 
 </body>
 </html>

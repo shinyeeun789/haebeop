@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -10,6 +10,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> 로그인 </title>
     <jsp:include page="../layout/head.jsp" />
+    <script type="text/javascript">
+        <c:if test="${msg == 0}">
+            $(document).ready(() => {
+                $("#msg").html("<i class='fa-solid fa-circle-exclamation'></i> 아이디 또는 비밀번호가 틀렸습니다");
+            });
+        </c:if>
+    </script>
 </head>
 <body>
     <jsp:include page="../layout/header.jsp" />
@@ -31,8 +38,36 @@
             </div>
         </div>
     </section>
-    <div class="container">
-        
+    <div class="container p-5 shadow" style="margin: 150px auto; height: 600px">
+        <div class="row">
+            <div class="col"
+                style="background-image: url('${path}/resources/img/login.png');
+                        background-position: center;
+                        background-size: cover">
+            </div>
+            <div class="col p-5">
+                <h1> 로그인하기 <i class="fa-solid fa-arrow-right-to-bracket"></i> </h1>
+                <form action="${path}/user/login" method="post">
+                    <div class="form-group mt-3">
+                        <label for="id"> ID </label>
+                        <input type="text" name="id" id="id" class="form-control">
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="pw"> Password </label>
+                        <input type="password" name="pw" id="pw" class="form-control">
+                        <p id="msg" class="mt-3" style="color: red"></p>
+                    </div>
+                    <div class="form-group form-check">
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault"> 아이디 기억하기 </label>
+                    </div>
+                    <input type="submit" value="Log In" class="btn btn-primary btn-lg">
+                </form>
+            </div>
+        </div>
+        <div class="container text-center">
+            <p>회원이 아니신가요? <a href="#"> 회원가입하기 </a></p>
+        </div>
     </div>
     <jsp:include page="../layout/footer.jsp" />
 </body>
