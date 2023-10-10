@@ -15,7 +15,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 // applicationContext.xml을 대신하는 RootConfig.java : kr.ed.haebeop.config
 @Configuration
-@ComponentScan(basePackages = {"kr.ed.haebeop.service", "kr.ed.haebeop.repository"})
+@ComponentScan(basePackages = {"kr.ed.haebeop.service", "kr.ed.haebeop.persistence"})
 @MapperScan(basePackages = {"kr.ed.haebeop.persistence"})       // MyBatis-Spring
 public class RootConfig {
 
