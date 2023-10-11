@@ -11,14 +11,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4650da48-520d-4e16-9d7e-ffd2b4d08f1e" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/join.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/myPage.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/term.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/img/signup.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/NoticeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/domain/Notice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/persistence/NoticeMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/NoticeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/NoticeServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/util/Page.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mappers/noticeMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/noticeDetail.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/noticeEdit.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/noticeInsert.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/noticeList.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/config/ApplicationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/config/ApplicationConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/layout/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/layout/header.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/login.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +36,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
         <option value="Jsp File" />
       </list>
     </option>
@@ -65,7 +73,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/shin/project04/pro04/src/main/webapp/resources/img",
+    "last_opened_file_path": "D:/shin/project04/pro04/src/main/webapp/WEB-INF/views/notice",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -80,12 +88,19 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\shin\project04\pro04\src\main\webapp\WEB-INF\views\notice" />
+      <recent name="D:\shin\project04\pro04\src\main\resources\mappers" />
+      <recent name="D:\shin\project04\pro04\src\main\java\kr\ed\haebeop\service" />
       <recent name="D:\shin\project04\pro04\src\main\webapp\resources\img" />
       <recent name="D:\github\project04\pro04\src\main\webapp\resources\js" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\github\project04\pro04\src\main\webapp\resources\img" />
       <recent name="D:\github\project04\pro04\src\main\webapp\WEB-INF\views" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="kr.ed.haebeop.util" />
+      <recent name="kr.ed.haebeop.domain" />
     </key>
   </component>
   <component name="RunManager">
@@ -194,7 +209,7 @@
       <updated>1696944046041</updated>
       <workItem from="1696944047666" duration="5741000" />
       <workItem from="1696949829320" duration="1170000" />
-      <workItem from="1696982538094" duration="7069000" />
+      <workItem from="1696982538094" duration="15912000" />
     </task>
     <servers />
   </component>

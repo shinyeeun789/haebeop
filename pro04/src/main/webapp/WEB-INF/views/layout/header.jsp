@@ -52,7 +52,7 @@
                                aria-expanded="false">고객지원</a>
                             <ul class="dropdown-menu">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="blog.html">공지사항</a>
+                                    <a class="nav-link" href="${path}/notice/list">공지사항</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="single-blog.html">Q&A</a>

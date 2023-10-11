@@ -2,10 +2,7 @@ package kr.ed.haebeop.config;
 
 import kr.ed.haebeop.persistence.TestRepository;
 import kr.ed.haebeop.persistence.TestRepositoryImpl;
-import kr.ed.haebeop.service.UserService;
-import kr.ed.haebeop.service.TestService;
-import kr.ed.haebeop.service.TestServiceImpl;
-import kr.ed.haebeop.service.UserServiceImpl;
+import kr.ed.haebeop.service.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +14,9 @@ public class ApplicationConfig {
 
     @Bean
     public UserService userService() { return new UserServiceImpl(); }
+
+    @Bean
+    public NoticeService noticeService() { return new NoticeServiceImpl(); }
 
     @Bean
     public TestService testService() { return new TestServiceImpl(); }

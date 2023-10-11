@@ -12,37 +12,37 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserMapper memberMapper;
+    private UserMapper userMapper;
 
     BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
 
     @Override
-    public List<User> userList() throws Exception {return memberMapper.userList(); }
+    public List<User> userList() throws Exception {return userMapper.userList(); }
 
     @Override
     public User getUser(String id) {
-        return memberMapper.getUser(id);
+        return userMapper.getUser(id);
     }
 
     @Override
     public boolean idCheck(String id) {
-        return memberMapper.getUser(id) == null ? true : false;
+        return userMapper.getUser(id) == null ? true : false;
     }
 
     @Override
     public void updateVisited(String id) throws Exception {
-        memberMapper.updateVisited(id);
+        userMapper.updateVisited(id);
     }
 
     @Override
     public void userInsert(User member) {
-        memberMapper.userInsert(member);
+        userMapper.userInsert(member);
     }
 
     @Override
     public boolean loginCheck(String id, String pw) throws Exception {
         boolean comp = false;
-        User member = memberMapper.loginCheck(id);
+        User member = userMapper.loginCheck(id);
 
         if(member!=null && pwEncoder.matches(pw, member.getPw())){
             comp = true;
@@ -53,18 +53,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void userEdit(User member) throws Exception{ memberMapper.userEdit(member); }
+    public void userEdit(User member) throws Exception{ userMapper.userEdit(member); }
 
     @Override
-    public void userDelete(String id) throws Exception { memberMapper.userDelete(id);}
+    public void userDelete(String id) throws Exception { userMapper.userDelete(id);}
 
     @Override
     public int userCnt() throws Exception {
-        return memberMapper.userCnt();
+        return userMapper.userCnt();
     }
 
 //    @Override
 //    public List<AdminChartVO> adminChart() throws Exception {
-//        return memberMapper.adminChart();
+//        return userMapper.adminChart();
 //    }
 }
