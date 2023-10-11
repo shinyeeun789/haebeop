@@ -94,6 +94,6 @@ public class NoticeController {
     @PostMapping("edit")
     public String noticeEdit(Notice notice, HttpServletRequest request, Model model) throws Exception {
         noticeService.noticeEdit(notice);
-        return "redirect:list";
+        return "redirect:detail?seq="+notice.getSeq()+"&page=1";
     }
 }

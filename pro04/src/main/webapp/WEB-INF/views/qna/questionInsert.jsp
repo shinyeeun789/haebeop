@@ -28,7 +28,7 @@
                         <div class="page_link">
                             <a href="${path}/"> Home </a>
                             <a href="${path}/notice/list"> Notice </a>
-                            <a href="${path}/notice/edit?seq=${detail.seq}"> Edit </a>
+                            <a href="${path}/notice/insert"> Insert </a>
                         </div>
                     </div>
                 </div>
@@ -39,18 +39,18 @@
 
 <section class="blog_area single-post-area section_gap">
     <div class="container shadow mb-30 p-5">
-        <h1> 글 수정하기 <i class="fa-solid fa-pencil"></i> </h1>
+        <h1> 글 작성하기 <i class="fa-solid fa-pencil"></i> </h1>
         <form action="" method="post">
             <div class="form-group mt-3">
                 <label for="title"> 제목 </label>
-                <input type="text" name="title" id="title" class="form-control" autocomplete="off" value="${detail.title}">
+                <input type="text" name="title" id="title" class="form-control" autocomplete="off">
             </div>
             <div class="form-group mt-3">
                 <label for="title"> 내용 </label>
-                <textarea name="content" id="content" class="form-control" cols="30" rows="10">${detail.content}</textarea>
+                <textarea name="content" id="content" class="form-control" cols="30" rows="10"></textarea>
             </div>
             <div class="text-right">
-                <button type="submit" class="btn btn-dark"> 수정하기 </button>
+                <button type="submit" class="btn btn-dark"> 등록하기 </button>
             </div>
         </form>
     </div>

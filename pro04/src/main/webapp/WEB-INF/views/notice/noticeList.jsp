@@ -79,6 +79,11 @@
                     <td> ${notice.visited} </td>
                 </tr>
             </c:forEach>
+            <c:if test="${empty noticeList}">
+                <tr class="text-center">
+                    <td colspan="4"> 등록된 공지사항이 없습니다. </td>
+                </tr>
+            </c:if>
             </tbody>
         </table>
 
