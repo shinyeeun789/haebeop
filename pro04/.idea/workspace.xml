@@ -11,29 +11,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4650da48-520d-4e16-9d7e-ffd2b4d08f1e" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/FaqController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/domain/Faq.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/persistence/FaqMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/FaqService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/FaqServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mappers/faqMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/faq/faqList.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/BoardController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/CommentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/domain/Board.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/domain/BoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/domain/Category.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/domain/Comment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/persistence/BoardMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/persistence/CommentMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/BoardService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/BoardServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/CommentService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/CommentServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/util/BoardPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mappers/boardMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mappers/commentMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/boardList.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../pro04.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../pro04.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/config/ApplicationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/config/ApplicationConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/layout/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/layout/header.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/noticeDetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/noticeDetail.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/noticeEdit.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/noticeEdit.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/noticeInsert.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/noticeInsert.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/noticeList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/noticeList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/qna/answerInsert.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/qna/answerInsert.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/qna/qnaDetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/qna/qnaDetail.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/qna/qnaEdit.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/qna/qnaEdit.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/qna/qnaList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/qna/qnaList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/qna/questionInsert.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/qna/questionInsert.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/join.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/join.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/myPage.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/myPage.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/term.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/term.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,9 +104,9 @@
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="kr.ed.haebeop.persistence" />
-      <recent name="kr.ed.haebeop.controller" />
       <recent name="kr.ed.haebeop.domain" />
       <recent name="kr.ed.haebeop.util" />
+      <recent name="kr.ed.haebeop.controller" />
     </key>
   </component>
   <component name="RunManager">
@@ -219,7 +215,7 @@
       <updated>1696944046041</updated>
       <workItem from="1696944047666" duration="5741000" />
       <workItem from="1696949829320" duration="1170000" />
-      <workItem from="1696982538094" duration="24889000" />
+      <workItem from="1696982538094" duration="26789000" />
     </task>
     <servers />
   </component>

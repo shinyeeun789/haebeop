@@ -33,7 +33,7 @@
                                aria-expanded="false"> 서비스 </a>
                             <ul class="dropdown-menu">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="courses.html"> 커뮤니티 </a>
+                                    <a class="nav-link" href="${path}/board/list"> 커뮤니티 </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="course-details.html"> 교육뉴스 </a>
