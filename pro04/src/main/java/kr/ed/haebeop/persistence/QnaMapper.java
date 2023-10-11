@@ -1,11 +1,11 @@
-package kr.co.teaspoon.dao;
+package kr.ed.haebeop.persistence;
 
-import kr.co.teaspoon.dto.Qna;
-import kr.co.teaspoon.util.Page;
+import kr.ed.haebeop.domain.Qna;
+import kr.ed.haebeop.util.Page;
 
 import java.util.List;
 
-public interface QnaDAO {
+public interface QnaMapper {
 
     public List<Qna> qnaList(Page page) throws Exception;
     public List<Qna> noAnswerList(Page page) throws Exception;

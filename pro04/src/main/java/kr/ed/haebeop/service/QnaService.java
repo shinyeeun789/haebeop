@@ -1,7 +1,7 @@
-package kr.co.teaspoon.service;
+package kr.ed.haebeop.service;
 
-import kr.co.teaspoon.dto.Qna;
-import kr.co.teaspoon.util.Page;
+import kr.ed.haebeop.domain.Qna;
+import kr.ed.haebeop.util.Page;
 
 import java.util.List;
 

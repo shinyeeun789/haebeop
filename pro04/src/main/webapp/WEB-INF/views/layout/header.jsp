@@ -55,7 +55,7 @@
                                     <a class="nav-link" href="${path}/notice/list">공지사항</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="single-blog.html">Q&A</a>
+                                    <a class="nav-link" href="${path}/qna/list">Q&A</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="single-blog.html">FAQ</a>

@@ -1,16 +1,14 @@
-package kr.co.teaspoon.controller;
+package kr.ed.haebeop.controller;
 
-
-import kr.co.teaspoon.dto.Qna;
-import kr.co.teaspoon.service.QnaService;
-import kr.co.teaspoon.util.Page;
+import kr.ed.haebeop.domain.Qna;
+import kr.ed.haebeop.service.QnaService;
+import kr.ed.haebeop.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -24,7 +22,7 @@ public class QnaController {
     private QnaService qnaService;
 
     //QnA 목록
-    @GetMapping("list.do")
+    @GetMapping("list")
     public String getQnaList(HttpServletRequest request, Model model) throws Exception {
         //Page
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
@@ -48,11 +46,17 @@ public class QnaController {
     }
 
     //QnA 상세보기
-    @GetMapping("detail.do")
+    @GetMapping("detail")
     public String getQnaDetail(HttpServletRequest request, Model model) throws Exception {
         int qno = Integer.parseInt(request.getParameter("qno"));
         Qna detail = qnaService.qnaDetail(qno);
         model.addAttribute("detail", detail);
+
+        Qna prev = qnaService.qnaDetail(qno-1);
+        Qna next = qnaService.qnaDetail(qno+1);
+        model.addAttribute("prev", prev);
+        model.addAttribute("next", next);
+
         model.addAttribute("curPage", request.getParameter("page"));
         model.addAttribute("type", request.getParameter("type"));
         model.addAttribute("keyword", request.getParameter("keyword"));
@@ -60,13 +64,13 @@ public class QnaController {
     }
 
     //Question 글 쓰기
-    @GetMapping("questionInsert.do")
+    @GetMapping("questionInsert")
     public String getQuestionInsert(Model model) throws Exception {
         return "/qna/questionInsert";
     }
 
     //Question 글쓰기 처리
-    @PostMapping("questionInsert.do")
+    @PostMapping("questionInsert")
     public String getQuestionInsertPro(HttpServletRequest request, Model model) throws Exception {
         HttpSession session = request.getSession();
         Qna dto = new Qna();
@@ -74,11 +78,11 @@ public class QnaController {
         dto.setContent(request.getParameter("content"));
         dto.setAuthor((String) session.getAttribute("sid"));
         qnaService.questionInsert(dto);
-        return "redirect:list.do";
+        return "redirect:list";
     }
 
     //Question 수정
-    @GetMapping("edit.do")
+    @GetMapping("edit")
     public String getQnaEdit(HttpServletRequest request, Model model) throws Exception {
         int qno = Integer.parseInt(request.getParameter("qno"));
         Qna detail = qnaService.qnaDetail(qno);
@@ -86,7 +90,7 @@ public class QnaController {
         return "/qna/qnaEdit";
     }
     //Question 수정처리
-    @PostMapping("edit.do")
+    @PostMapping("edit")
     public String getQnaEditPro(HttpServletRequest request, Model model) throws Exception {
         int qno = Integer.parseInt(request.getParameter("qno"));
         Qna dto = new Qna();
@@ -94,19 +98,19 @@ public class QnaController {
         dto.setTitle(request.getParameter("title"));
         dto.setContent(request.getParameter("content"));
         qnaService.qnaEdit(dto);
-        return "redirect:list.do";
+        return "redirect:detail?qno="+qno+"&page=1";
     }
 
     //QnA 삭제
-    @GetMapping("delete.do")
+    @GetMapping("delete")
     public String getQnaDelete(HttpServletRequest request, Model model) throws Exception {
         int qno = Integer.parseInt(request.getParameter("qno"));
         qnaService.qnaDelete(qno);
-        return "redirect:list.do";
+        return "redirect:list";
     }
 
     //답변 등록
-    @GetMapping("answerInsert.do")
+    @GetMapping("answerInsert")
     public String getAnswerInsert(HttpServletRequest request, Model model) throws Exception {
         int qno = Integer.parseInt(request.getParameter("qno"));
         Qna detail = qnaService.qnaDetail(qno);
@@ -115,11 +119,11 @@ public class QnaController {
     }
 
     //답변 등록 처리
-    @PostMapping("answerInsert.do")
+    @PostMapping("answerInsert")
     public String getAnswerInsertPro(Qna qna, HttpServletRequest request, Model model) throws Exception {
         HttpSession session = request.getSession();
         qna.setAuthor((String) session.getAttribute("sid"));
         qnaService.answerInsert(qna);
-        return "redirect:list.do";
+        return "redirect:list";
     }
 }

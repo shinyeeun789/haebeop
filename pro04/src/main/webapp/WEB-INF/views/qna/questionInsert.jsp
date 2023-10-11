@@ -11,7 +11,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> 공지사항 </title>
+    <title> Q&A </title>
     <jsp:include page="../layout/head.jsp"></jsp:include>
 </head>
 <body>
@@ -24,11 +24,11 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="banner_content text-center">
-                        <h2> Notice </h2>
+                        <h2> Question </h2>
                         <div class="page_link">
                             <a href="${path}/"> Home </a>
-                            <a href="${path}/notice/list"> Notice </a>
-                            <a href="${path}/notice/insert"> Insert </a>
+                            <a href="${path}/qna/list"> Q&A </a>
+                            <a href="${path}/qna/questionInsert"> Insert </a>
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
 
 <section class="blog_area single-post-area section_gap">
     <div class="container shadow mb-30 p-5">
-        <h1> 글 작성하기 <i class="fa-solid fa-pencil"></i> </h1>
+        <h1> 질문하기 <i class="fa-solid fa-pencil"></i> </h1>
         <form action="" method="post">
             <div class="form-group mt-3">
                 <label for="title"> 제목 </label>

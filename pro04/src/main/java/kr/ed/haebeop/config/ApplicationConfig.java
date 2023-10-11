@@ -19,6 +19,9 @@ public class ApplicationConfig {
     public NoticeService noticeService() { return new NoticeServiceImpl(); }
 
     @Bean
+    public QnaService qnaService() { return new QnaServiceImpl(); }
+
+    @Bean
     public TestService testService() { return new TestServiceImpl(); }
 
     @Bean

@@ -1,8 +1,8 @@
-package kr.co.teaspoon.service;
+package kr.ed.haebeop.service;
 
-import kr.co.teaspoon.dao.QnaDAO;
-import kr.co.teaspoon.dto.Qna;
-import kr.co.teaspoon.util.Page;
+import kr.ed.haebeop.domain.Qna;
+import kr.ed.haebeop.persistence.QnaMapper;
+import kr.ed.haebeop.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,57 +13,57 @@ import java.util.List;
 public class QnaServiceImpl implements QnaService{
 
     @Autowired
-    private QnaDAO qnaDAO;
+    private QnaMapper qnaMapper;
 
     @Override
     public List<Qna> qnaList(Page page) throws Exception {
-        return qnaDAO.qnaList(page);
+        return qnaMapper.qnaList(page);
     }
 
     @Override
     public List<Qna> noAnswerList(Page page) throws Exception {
-        return qnaDAO.noAnswerList(page);
+        return qnaMapper.noAnswerList(page);
     }
 
     @Override
     public int noAnswerCount() throws Exception {
-        return qnaDAO.noAnswerCount();
+        return qnaMapper.noAnswerCount();
     }
 
     @Override
     public Qna qnaDetail(int qno) throws Exception {
-        return qnaDAO.qnaDetail(qno);
+        return qnaMapper.qnaDetail(qno);
     }
 
     @Override
     public int getCount(Page page) throws Exception {
-        return qnaDAO.getCount(page);
+        return qnaMapper.getCount(page);
     }
 
     @Override
     public int noAnswerCount(Page page) throws Exception {
-        return qnaDAO.noAnswerCount(page);
+        return qnaMapper.noAnswerCount(page);
     }
 
     @Override
     @Transactional
     public void questionInsert(Qna dto) throws Exception {
-        qnaDAO.questionInsert(dto);
-        qnaDAO.parUpdate(dto);
+        qnaMapper.questionInsert(dto);
+        qnaMapper.parUpdate(dto);
     }
 
     @Override
     public void answerInsert(Qna dto) throws Exception {
-        qnaDAO.answerInsert(dto);
+        qnaMapper.answerInsert(dto);
     }
 
     @Override
     public void qnaDelete(int qno) throws Exception {
-        qnaDAO.qnaDelete(qno);
+        qnaMapper.qnaDelete(qno);
     }
 
     @Override
     public void qnaEdit(Qna dto) throws Exception {
-        qnaDAO.qnaEdit(dto);
+        qnaMapper.qnaEdit(dto);
     }
 }

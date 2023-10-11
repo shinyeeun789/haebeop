@@ -28,7 +28,7 @@
                         <div class="page_link">
                             <a href="${path}/"> Home </a>
                             <a href="${path}/qna/list"> Q&A </a>
-                            <a href="${path}/qna/detail"> Detail </a>
+                            <a href="${path}/qna/detail?qno=${detail.qno}&page=${curPage}"> Detail </a>
                         </div>
                     </div>
                 </div>
@@ -44,8 +44,11 @@
                 <a href="${path}/qna/list?page=${curPage}<c:if test="${!empty cate}">&cate=${cate}</c:if><c:if test="${!empty keyword}">&type=${type}&keyword=${keyword}</c:if>"
                    class="btn btn-outline-dark"> 목록 </a>
                 <c:if test="${(sid eq 'admin') or (sid eq detail.author)}">
-                    <a href="${path}/qna/edit?seq=${detail.seq}" class="btn btn-outline-dark"> 수정 </a>
-                    <a href="${path}/qna/delete?seq=${detail.seq}" class="btn btn-danger"> 삭제 </a>
+                    <a href="${path}/qna/edit?qno=${detail.qno}" class="btn btn-outline-dark"> 수정 </a>
+                    <a href="${path}/qna/delete?qno=${detail.qno}" class="btn btn-danger"> 삭제 </a>
+                </c:if>
+                <c:if test="${(sid eq 'admin') and (detail.lev eq 0)}">
+                    <a href="${path}/qna/answerInsert?qno=${detail.qno}" class="btn btn-dark"> 답변하기 </a>
                 </c:if>
             </div>
             <div class="col-lg-12 posts-list">
@@ -70,16 +73,16 @@
                         <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
                             <c:if test="${not empty prev}">
                                 <div class="arrow">
-                                    <a href="${path}/qna/detail?seq=${prev.seq}&page=${curPage}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>" style="color: #333"><i class="fa-solid fa-angle-left"></i></a>
+                                    <a href="${path}/qna/detail?qno=${prev.qno}&page=${curPage}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>" style="color: #333"><i class="fa-solid fa-angle-left"></i></a>
                                 </div>
                             </c:if>
                             <div class="detials ml-5">
-                                <p>이전 공지사항</p>
+                                <p>이전 질의응답</p>
                                 <c:if test="${empty prev}">
                                     <h4> 첫 번째 글입니다. </h4>
                                 </c:if>
                                 <c:if test="${not empty prev}">
-                                    <a href="${path}/qna/detail?seq=${prev.seq}&page=${curPage}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>">
+                                    <a href="${path}/qna/detail?qno=${prev.qno}&page=${curPage}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>">
                                         <h4>${prev.title}</h4>
                                     </a>
                                 </c:if>
@@ -87,19 +90,19 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
                             <div class="detials mr-5">
-                                <p>다음 공지사항</p>
+                                <p>다음 질의응답</p>
                                 <c:if test="${empty next}">
                                     <h4> 마지막 글입니다. </h4>
                                 </c:if>
                                 <c:if test="${not empty next}">
-                                    <a href="${path}/qna/detail?seq=${next.seq}&page=${curPage}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>">
+                                    <a href="${path}/qna/detail?qno=${next.qno}&page=${curPage}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>">
                                         <h4>${next.title}</h4>
                                     </a>
                                 </c:if>
                             </div>
                             <c:if test="${not empty next}">
                                 <div class="arrow">
-                                    <a href="${path}/qna/detail?seq=${next.seq}&page=${curPage}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>" style="color: #333"><i class="fa-solid fa-angle-right"></i></a>
+                                    <a href="${path}/qna/detail?qno=${next.qno}&page=${curPage}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>" style="color: #333"><i class="fa-solid fa-angle-right"></i></a>
                                 </div>
                             </c:if>
                         </div>
