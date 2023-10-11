@@ -3,6 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
+<c:if test="${not empty cookie.userID}">
+    <c:set value="checked" var="checked" />
+</c:if>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +53,7 @@
                 <form action="${path}/user/login" method="post">
                     <div class="form-group mt-3">
                         <label for="id"> ID </label>
-                        <input type="text" name="id" id="id" class="form-control">
+                        <input type="text" name="id" id="id" class="form-control" autocomplete="off" value="${cookie.userID.value}">
                     </div>
                     <div class="form-group mt-3">
                         <label for="pw"> Password </label>
@@ -58,7 +61,7 @@
                         <p id="msg" class="mt-3" style="color: red"></p>
                     </div>
                     <div class="form-group form-check">
-                        <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="saveId" value="save" ${checked}>
                         <label class="form-check-label" for="flexCheckDefault"> 아이디 기억하기 </label>
                     </div>
                     <input type="submit" value="Log In" class="btn btn-primary btn-lg">
@@ -66,7 +69,7 @@
             </div>
         </div>
         <div class="container text-center">
-            <p>회원이 아니신가요? <a href="#"> 회원가입하기 </a></p>
+            <p>회원이 아니신가요? <a href="${path}/user/term"> 회원가입하기 </a></p>
         </div>
     </div>
     <jsp:include page="../layout/footer.jsp" />

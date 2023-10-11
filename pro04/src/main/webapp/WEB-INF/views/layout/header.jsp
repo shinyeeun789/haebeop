@@ -65,12 +65,30 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="${path}/user/login">로그인</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="${path}/user/term">회원가입</a>
-                        </li>
+                        <c:if test="${empty sid}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="${path}/user/login">로그인</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="${path}/user/term">회원가입</a>
+                            </li>
+                        </c:if>
+                        <c:if test="${not empty sid and sid eq 'admin'}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="${path}/user/logout">로그아웃</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="${path}/user/admin">관리자페이지</a>
+                            </li>
+                        </c:if>
+                        <c:if test="${not empty sid and sid ne 'admin'}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="${path}/user/logout">로그아웃</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="${path}/user/myPage">마이페이지</a>
+                            </li>
+                        </c:if>
                     </ul>
                 </div>
             </div>
