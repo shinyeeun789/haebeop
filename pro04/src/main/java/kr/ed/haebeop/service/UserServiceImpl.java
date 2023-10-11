@@ -35,16 +35,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void userInsert(User member) {
-        userMapper.userInsert(member);
+    public void userInsert(User user) {
+        userMapper.userInsert(user);
     }
 
     @Override
     public boolean loginCheck(String id, String pw) throws Exception {
         boolean comp = false;
-        User member = userMapper.loginCheck(id);
+        User user = userMapper.loginCheck(id);
 
-        if(member!=null && pwEncoder.matches(pw, member.getPw())){
+        if(user!=null && pwEncoder.matches(pw, user.getPw())){
             comp = true;
         } else {
             comp = false;
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void userEdit(User member) throws Exception{ userMapper.userEdit(member); }
+    public void userEdit(User user) throws Exception{ userMapper.userEdit(user); }
 
     @Override
     public void userDelete(String id) throws Exception { userMapper.userDelete(id);}
