@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -41,13 +40,13 @@
         <!-- 검색어 입력 부분 -->
         <form action="${path}/notice/list" method="get" class="w-50 float-right">
             <div class="row">
-                <div class="col">
+                <div class="col mt-2">
                     <select id="type" name="type" class="form-select">
                         <option value="T"> 제목 </option>
                         <option value="C"> 내용 </option>
                     </select>
                 </div>
-                <div class="col-8">
+                <div class="col-xl-8 col-lg-12 col-md-12 mt-2">
                     <div class="input-group">
                         <div class="input-group-prepend">
 

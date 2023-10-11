@@ -58,7 +58,7 @@
                                     <a class="nav-link" href="${path}/qna/list">Q&A</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="single-blog.html">FAQ</a>
+                                    <a class="nav-link" href="${path}/faq/list">FAQ</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="single-blog.html">자료실</a>

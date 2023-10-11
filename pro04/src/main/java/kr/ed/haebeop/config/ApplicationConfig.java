@@ -22,6 +22,9 @@ public class ApplicationConfig {
     public QnaService qnaService() { return new QnaServiceImpl(); }
 
     @Bean
+    public FaqService faqService() { return new FaqServiceImpl(); }
+
+    @Bean
     public TestService testService() { return new TestServiceImpl(); }
 
     @Bean
