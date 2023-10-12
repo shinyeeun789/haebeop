@@ -53,9 +53,8 @@
                     </div>
                     <div class="col-md-9">
                         <div class="blog_post">
-                            <img src="img/blog/main-blog/m-blog-1.jpg" alt="">
                             <div class="blog_details">
-                                <a href="single-blog.html">
+                                <a href="${url}">
                                     <h2>${titles[status.index]}</h2>
                                 </a>
                                 <p>${contents[status.index]}</p>
