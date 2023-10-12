@@ -39,6 +39,16 @@
                                     <a class="nav-link" href="${path}/board/list"> 커뮤니티 </a>
                                 </li>
                                 <li class="nav-item">
+                                    <c:if test="${not empty sid}">
+                                        <a class="nav-link" href="${path}/attendance/check"> 출석체크 </a>
+                                    </c:if>
+                                    <c:if test="${empty sid}">
+                                        <a class="nav-link" href="${path}/user/login" onclick="return alert('로그인 후 접근 가능한 페이지입니다 : )')">
+                                            출석체크
+                                        </a>
+                                    </c:if>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link" href="${path}/news/list"> 교육뉴스 </a>
                                 </li>
                                 <li class="nav-item">

@@ -4,6 +4,7 @@ import kr.ed.haebeop.domain.User;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface UserMapper {
@@ -15,5 +16,6 @@ public interface UserMapper {
     public void userEdit(User member);
     public void userDelete(String id);
     public int userCnt();
+    public void updatePt(Map<String, Object> data);
 
 }

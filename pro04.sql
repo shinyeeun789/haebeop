@@ -180,6 +180,11 @@ create table winner(
    resdate datetime default CURRENT_TIMESTAMP,	/* 작성일 */
    FOREIGN key(eno) references event(eno));
 
+-- 출석체크 테이블
+CREATE TABLE attendance (
+   ano INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+   id VARCHAR(20),
+   attend DATE DEFAULT current_date);
 	
 -- 과목(과목코드, 과목명, 과목단가)
 CREATE TABLE SUBJECT(

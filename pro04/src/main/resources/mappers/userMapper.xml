@@ -30,7 +30,7 @@
     </update>
 
     <!-- 포인트 획득! -->
-    <update id="updatePt">
+    <update id="updatePt" parameterType="hashMap">
         update user set pt=pt+#{pt}
         where id=#{id}
     </update>

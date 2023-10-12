@@ -13,36 +13,6 @@ import org.springframework.context.annotation.Configuration;
 public class ApplicationConfig {
 
     @Bean
-    public UserService userService() { return new UserServiceImpl(); }
-
-    @Bean
-    public NoticeService noticeService() { return new NoticeServiceImpl(); }
-
-    @Bean
-    public QnaService qnaService() { return new QnaServiceImpl(); }
-
-    @Bean
-    public FaqService faqService() { return new FaqServiceImpl(); }
-
-    @Bean
-    public BoardService boardService() { return new BoardServiceImpl(); }
-
-    @Bean
-    public CommentService commentService() { return new CommentServiceImpl(); }
-
-    @Bean
-    public DataRoomService dataRoomService() { return new DataRoomServiceImpl(); }
-
-    @Bean
-    public EventService eventService() { return new EventServiceImpl(); }
-
-    @Bean
-    public ApplyService applyService() { return new ApplyServiceImpl(); }
-
-    @Bean
-    public WinnerService winnerService() { return new WinnerServiceImpl(); }
-
-    @Bean
     public TestService testService() { return new TestServiceImpl(); }
 
     @Bean
