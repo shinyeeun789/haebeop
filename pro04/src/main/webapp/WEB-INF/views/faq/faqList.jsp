@@ -91,27 +91,30 @@
 				</div>
 			</form>
 		</div>
-		<ul class="faqlist mb-30" style="list-style: none;">
+		<!-- FAQ 부분 -->
+		<div class="accordion" id="accordionExample">
 			<c:if test="${!empty faqList}">
 				<c:forEach items="${faqList }" var="faq" varStatus="status">
-					<li class="mb-10">
-						<div class="message-header">${faq.question }</div>
-						<div class="message-body mb-30" style="background-color: rgb(245,245,245);">${faq.answer }</div>
-					</li>
+					<div class="card">
+						<div class="card-header" id="heading${status.index + 1}">
+							<h2 class="mb-0">
+								<button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse${status.index + 1}" aria-expanded="false" aria-controls="collapse${status.index + 1}">
+									${faq.question}
+								</button>
+							</h2>
+						</div>
+						<div id="collapse${status.index + 1}" class="collapse" aria-labelledby="heading${status.index + 1}" data-parent="#accordionExample">
+							<div class="card-body">
+								${faq.answer}
+							</div>
+						</div>
+					</div>
 				</c:forEach>
 			</c:if>
 			<c:if test="${empty faqList}">
 				<div class="text-center"> FAQ가 없습니다. </div>
 			</c:if>
-		</ul>
-		<script>
-			$(document).ready(function(){
-				$(".faqlist li").click(function(){
-					$(this).find(".message-body").slideToggle(500);
-					$(this).find(".message-header").toggleClass("on");
-				});
-			});
-		</script>
+		</div>
 	</div>
 </section>
 <!-- FAQ 영역 끝-->
