@@ -42,7 +42,7 @@
         <form action="${path}/notice/insert" method="post">
             <div class="form-group mt-3">
                 <label for="title"> 제목 </label>
-                <input type="text" name="title" id="title" class="form-control" autocomplete="off">
+                <input type="text" name="title" id="title" class="form-control" autocomplete="off" required>
             </div>
             <div class="form-group mt-3">
                 <label for="title"> 내용 </label>

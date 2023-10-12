@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -35,8 +37,11 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public BoardVO boardRef(int seq) throws Exception {
-        return boardMapper.boardDetail(seq);
+    public BoardVO boardRef(int seq, String type) throws Exception {
+        Map<String, Object> data = new HashMap<>();
+        data.put("seq", seq);
+        data.put("type", type);
+        return boardMapper.boardRef(data);
     }
 
     @Override

@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class NoticeServiceImpl implements NoticeService {
@@ -38,8 +40,11 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public Notice noticeRef(int seq) throws Exception {
-        return noticeMapper.noticeDetail(seq);
+    public Notice noticeRef(int seq, String type) throws Exception {
+        Map<String, Object> data = new HashMap<>();
+        data.put("seq", seq);
+        data.put("type", type);
+        return noticeMapper.noticeRef(data);
     }
 
     @Override

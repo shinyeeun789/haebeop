@@ -42,7 +42,7 @@
         <form action="${path}/notice/edit" method="post">
             <div class="form-group mt-3">
                 <label for="title"> 제목 </label>
-                <input type="text" name="title" id="title" class="form-control" autocomplete="off" value="${detail.title}">
+                <input type="text" name="title" id="title" class="form-control" autocomplete="off" value="${detail.title}" required>
                 <input type="hidden" name="seq" id="seq" value="${detail.seq}">
             </div>
             <div class="form-group mt-3">

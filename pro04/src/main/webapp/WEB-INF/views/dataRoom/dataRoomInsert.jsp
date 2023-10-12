@@ -42,14 +42,14 @@
         <form action="${path}/dataRoom/insert" method="post" enctype="multipart/form-data">
             <div class="form-group mt-3">
                 <label for="title"> 제목 </label>
-                <input type="text" name="title" id="title" class="form-control" autocomplete="off">
+                <input type="text" name="title" id="title" class="form-control" autocomplete="off" required>
             </div>
             <div class="form-group mt-3">
                 <label for="title"> 내용 </label>
                 <textarea name="content" id="content" class="form-control" cols="30" rows="10"></textarea>
             </div>
             <div class="custom-file mt-3">
-                <input type="file" name="upfile" class="custom-file-input" id="customFile" multiple>
+                <input type="file" name="upfile" class="custom-file-input" id="customFile" multiple required>
                 <label class="custom-file-label" id="file-label" for="customFile">Choose file</label>
             </div>
             <div class="text-right mt-3">

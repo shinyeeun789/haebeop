@@ -115,8 +115,10 @@ CREATE TABLE dataRoom (
   regdate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-SELECT * FROM dataRoom;
-SELECT * FROM fileInfo;
+SELECT * FROM dataRoom
+WHERE articleNo < 4 ORDER BY articleNo DESC LIMIT 1;
+
+
 
 -- 업로드 된 파일 정보 테이블 생성
 CREATE TABLE fileInfo(
@@ -127,6 +129,56 @@ CREATE TABLE fileInfo(
   saveFile VARCHAR(300) NOT NULL,
   FOREIGN KEY(articleNo) REFERENCES dataRoom(articleNo) ON DELETE CASCADE 
 );
+
+-- 이벤트 글 테이블
+CREATE TABLE event (
+	eno int  PRIMARY KEY AUTO_INCREMENT,
+   title VARCHAR(100) NOT NULL,
+   content VARCHAR(1000) NOT NULL,
+   STATUS VARCHAR(5) CHECK(status IN(0, 1)),
+   sdate DATE,
+   edate DATE,
+   author VARCHAR(16),
+   regdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+   cnt INT DEFAULT 0 NOT NULL
+);
+
+-- 이벤트 더미데이터 생성
+SELECT * FROM EVENT;
+
+
+-- 회원의 이벤트 접수
+create table apply(
+   appno int AUTO_INCREMENT PRIMARY KEY,		/* 접수 번호 */
+   eno int not NULL,									/* 이벤트글 번호 */
+   id varchar(100) not NULL,						/* 당첨자 아이디 */
+   name varchar(100) not NULL,					/* 당첨자 이름 */
+   tel varchar(13),									/* 전화번호 */
+   foreign key(eno) references event(eno) on delete cascade,
+   FOREIGN KEY(id) references user(id) on delete CASCADE);
+
+-- 당첨자 리스트
+create table winnerList(
+   appno int auto_increment primary key not null,			
+   eno int not NULL,										
+   id varchar(100) not NULL,										
+   name varchar(100) not NULL,						
+   tel varchar(13),													
+   foreign key(eno) references event(eno) on delete cascade,
+   FOREIGN key(id) references user(id) on delete cascade);
+
+SELECT * FROM winnerList;
+
+
+--당첨자 발표 글
+create table winner(
+	wno int primary key AUTO_INCREMENT,			/* 당첨글 번호 */
+   eno int not NULL,									/* 이벤트 글 번호 */
+   title varchar(100),								/* 글 제목 */
+   content varchar(1000),							/* 글 내용 */
+   author varchar(100),								/* 작성자 */
+   resdate datetime default CURRENT_TIMESTAMP,	/* 작성일 */
+   FOREIGN key(eno) references event(eno));
 
 	
 -- 과목(과목코드, 과목명, 과목단가)

@@ -51,8 +51,8 @@ public class NoticeController {
         Notice detail = noticeService.noticeDetail(seq);
         model.addAttribute("detail", detail);
 
-        Notice prev = noticeService.noticeRef(seq-1);
-        Notice next = noticeService.noticeRef(seq+1);
+        Notice prev = noticeService.noticeRef(seq, "prev");
+        Notice next = noticeService.noticeRef(seq, "next");
         model.addAttribute("prev", prev);
         model.addAttribute("next", next);
 

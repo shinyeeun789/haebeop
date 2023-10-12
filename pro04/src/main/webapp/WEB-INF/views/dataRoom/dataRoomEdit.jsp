@@ -38,11 +38,11 @@
 
 <section class="blog_area single-post-area section_gap">
     <div class="container shadow mb-30 p-5">
-        <h1> 글 작성하기 <i class="fa-solid fa-pencil"></i> </h1>
+        <h1> 글 수정하기 <i class="fa-solid fa-pencil"></i> </h1>
         <form action="${path}/dataRoom/edit" method="post" enctype="multipart/form-data">
             <div class="form-group mt-3">
                 <label for="title"> 제목 </label>
-                <input type="text" name="title" id="title" class="form-control" value="${dataRoom.title}" autocomplete="off">
+                <input type="text" name="title" id="title" class="form-control" value="${dataRoom.title}" autocomplete="off" required>
                 <input type="hidden" id="articleNo" name="articleNo" value="${dataRoom.articleNo}">
                 <input type="hidden" id="page" name="page" value="${curPage}">
             </div>
@@ -55,7 +55,7 @@
                 <label class="custom-file-label" id="file-label" for="customFile">Choose file</label>
             </div>
             <div class="text-right mt-3">
-                <button type="submit" class="btn btn-dark"> 등록하기 </button>
+                <button type="submit" class="btn btn-dark"> 수정하기 </button>
             </div>
         </form>
     </div>

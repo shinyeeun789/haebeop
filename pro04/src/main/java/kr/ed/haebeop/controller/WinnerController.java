@@ -1,8 +1,8 @@
-package kr.co.teaspoon.controller;
+package kr.ed.haebeop.controller;
 
-import kr.co.teaspoon.dto.Winner;
-import kr.co.teaspoon.service.WinnerService;
-import kr.co.teaspoon.util.Page;
+import kr.ed.haebeop.domain.Winner;
+import kr.ed.haebeop.service.WinnerService;
+import kr.ed.haebeop.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +31,7 @@ public class WinnerController {
     private WinnerService winnerService;
 
     //당첨자 발표 게시글 목록
-    @GetMapping("list.do")
+    @GetMapping("list")
     public String winnerList(HttpServletRequest request, Model model) throws Exception {
         //Page
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
@@ -51,7 +51,7 @@ public class WinnerController {
     }
 
     //당첨자발표 글 상세보기
-    @GetMapping("detail.do")
+    @GetMapping("detail")
     public String getWinnerDetail(HttpServletRequest request, Model model) throws Exception {
         int wno = Integer.parseInt(request.getParameter("wno"));
         Winner detail = winnerService.winnerDetail(wno);
@@ -61,24 +61,24 @@ public class WinnerController {
     }
     
     // 당첨자발표 글 등록
-    @PostMapping("insert.do")
+    @PostMapping("insert")
     public String winnerInsert(Winner winner, HttpServletRequest request, Model model) throws Exception {
         HttpSession session = request.getSession();
         winner.setAuthor((String)session.getAttribute("sid"));
         winnerService.winnerInsert(winner);
-        return "redirect:/winner/list.do";
+        return "redirect:/winner/list";
     }
     
     //당첨자발표 글 삭제
-    @GetMapping("delete.do")
+    @GetMapping("delete")
     public String getWinnerDelete(HttpServletRequest request, Model model) throws Exception {
         int wno = Integer.parseInt(request.getParameter("wno"));
         winnerService.winnerDelete(wno);
-        return "redirect:/admin/selectWinner.do";
+        return "redirect:/admin/selectWinner";
     }
 
     //ckeditor를 이용한 이미지 업로드
-    @PostMapping("imageUpload.do")
+    @PostMapping("imageUpload")
     public void imageUpload(HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest multiFile, @RequestParam MultipartFile upload) throws Exception{
         // 랜덤 문자 생성
         UUID uid = UUID.randomUUID();
@@ -133,7 +133,7 @@ public class WinnerController {
     }
 
     //ckeditor를 이용한 서버에 전송된 이미지 뿌려주기
-    @RequestMapping(value="ckImgSubmit.do")
+    @RequestMapping(value="ckImgSubmit")
     public void ckSubmit(@RequestParam(value="uid") String uid, @RequestParam(value="fileName") String fileName, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         //서버에 저장된 이미지 경로
         String path = "D:\\github\\project03\\tspoon\\src\\main\\webapp\\resources\\upload\\winner/";	// 이미지 경로 설정

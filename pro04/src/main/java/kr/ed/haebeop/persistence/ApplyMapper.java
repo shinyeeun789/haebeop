@@ -1,9 +1,13 @@
-package kr.co.teaspoon.dao;
+package kr.ed.haebeop.persistence;
 
-import kr.co.teaspoon.dto.Apply;
+import kr.ed.haebeop.domain.Apply;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface ApplyDAO {
-    public Apply getApply (String id, int eno) throws Exception;
+import java.util.Map;
+
+@Mapper
+public interface ApplyMapper {
+    public Apply getApply (Map<String, Object> data) throws Exception;
     public int getCount(int appno) throws Exception;
     public Apply appCheck(String id) throws Exception;
     public void applyInsert(Apply apply) throws Exception;

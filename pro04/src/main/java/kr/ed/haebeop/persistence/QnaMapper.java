@@ -4,12 +4,14 @@ import kr.ed.haebeop.domain.Qna;
 import kr.ed.haebeop.util.Page;
 
 import java.util.List;
+import java.util.Map;
 
 public interface QnaMapper {
 
     public List<Qna> qnaList(Page page) throws Exception;
     public List<Qna> noAnswerList(Page page) throws Exception;
     public Qna qnaDetail(int qno) throws Exception;
+    public Qna qnaRef(Map<String, Object> data) throws Exception;
     public int getCount(Page page) throws Exception;
     public int noAnswerCount(Page page) throws Exception;
     public int noAnswerCount() throws Exception;

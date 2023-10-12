@@ -68,8 +68,8 @@ public class BoardController {
     public String getBoardDetail(HttpServletRequest request, Model model) throws Exception {
         BoardVO detail = boardService.boardDetail(Integer.parseInt(request.getParameter("seq")));
 
-        BoardVO prev = boardService.boardRef(detail.getSeq() - 1);
-        BoardVO next = boardService.boardRef(detail.getSeq() + 1);
+        BoardVO prev = boardService.boardRef(detail.getSeq(), "prev");
+        BoardVO next = boardService.boardRef(detail.getSeq(), "next");
 
         // 게시판 목록에서 사용자가 선택한 게시물이 속해있는 페이지
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
@@ -91,8 +91,10 @@ public class BoardController {
         model.addAttribute("prev", prev);
         model.addAttribute("next", next);
         model.addAttribute("commentList", commentList);
+        model.addAttribute("page", page);
         model.addAttribute("curPage", curPage);
         model.addAttribute("commentPage", commentPage);
+        model.addAttribute("commentCnt", total);
 
         return "/board/boardDetail";
     }

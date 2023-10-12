@@ -66,6 +66,22 @@
         where articleNo = #{articleNo}
     </select>
 
+    <select id="dataRoomRef" parameterType="hashMap" resultType="kr.ed.haebeop.domain.DataRoom">
+        select * from dataRoom
+        <choose>
+            <when test="type == 'next'.toString()">
+                <![CDATA[
+                 where articleNo > #{articleNo} limit 1
+                ]]>
+            </when>
+            <when test="type == 'prev'.toString()">
+                <![CDATA[
+                 WHERE articleNo < #{articleNo} ORDER BY articleNo DESC LIMIT 1
+                ]]>
+            </when>
+        </choose>
+    </select>
+
     <delete id="dataRoomDelete">
         delete from dataRoom
         where articleNo = #{articleNo}

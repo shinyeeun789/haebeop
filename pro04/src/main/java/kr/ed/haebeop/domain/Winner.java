@@ -1,4 +1,4 @@
-package kr.co.teaspoon.dto;
+package kr.ed.haebeop.domain;
 
 import lombok.Data;
 

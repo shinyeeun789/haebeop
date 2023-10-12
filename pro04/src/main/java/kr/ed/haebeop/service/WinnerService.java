@@ -1,9 +1,9 @@
-package kr.co.teaspoon.service;
+package kr.ed.haebeop.service;
 
-import kr.co.teaspoon.dto.Apply;
-import kr.co.teaspoon.dto.Winner;
-import kr.co.teaspoon.dto.WinnerDetail;
-import kr.co.teaspoon.util.Page;
+import kr.ed.haebeop.domain.Apply;
+import kr.ed.haebeop.domain.Winner;
+import kr.ed.haebeop.domain.WinnerDetail;
+import kr.ed.haebeop.util.Page;
 
 import java.util.List;
 

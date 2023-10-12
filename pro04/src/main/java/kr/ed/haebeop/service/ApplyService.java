@@ -1,6 +1,6 @@
-package kr.co.teaspoon.service;
+package kr.ed.haebeop.service;
 
-import kr.co.teaspoon.dto.Apply;
+import kr.ed.haebeop.domain.Apply;
 
 public interface ApplyService {
     public Apply getApply (String id, int eno) throws Exception;

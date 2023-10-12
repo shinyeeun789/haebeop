@@ -1,13 +1,15 @@
-package kr.co.teaspoon.dao;
+package kr.ed.haebeop.persistence;
 
-import kr.co.teaspoon.dto.Apply;
-import kr.co.teaspoon.dto.Winner;
-import kr.co.teaspoon.dto.WinnerDetail;
-import kr.co.teaspoon.util.Page;
+import kr.ed.haebeop.domain.Apply;
+import kr.ed.haebeop.domain.Winner;
+import kr.ed.haebeop.domain.WinnerDetail;
+import kr.ed.haebeop.util.Page;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-public interface WinnerDAO {
+@Mapper
+public interface WinnerMapper {
     public List<Apply> applyList(int eno) throws Exception;
     public void random(int eno) throws Exception;
     //당첨자 리스트

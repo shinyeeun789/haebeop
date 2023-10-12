@@ -62,7 +62,7 @@
                                     &nbsp; <i class="fa-regular fa-calendar"></i>
                                 </li>
                                 <li>${detail.visited} Views &nbsp; <i class="fa-regular fa-eye"></i></li>
-                                <li>${fn:length(commentList)} Comments &nbsp; <i class="fa-regular fa-comment"></i></li>
+                                <li>${commentCnt} Comments &nbsp; <i class="fa-regular fa-comment"></i></li>
                             </ul>
                         </div>
                     </div>
@@ -129,7 +129,7 @@
                     </form>
                 </div>
                 <div class="comments-area">
-                    <h4> ${fn:length(commentList)} Comments </h4>
+                    <h4> ${commentCnt} Comments </h4>
                     <c:forEach var="comment" items="${commentList}">
                         <c:set var="random" value="<%= (int) (java.lang.Math.random() * 4) + 1 %>"/>
                         <div class="comment-list">
@@ -164,7 +164,7 @@
                 <c:if test="${curPage > 5}">
                     <li class="page-item">
                         <a class="page-link"
-                           href="${path}/board/list?page=${page.blockStartNum - 1}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>"
+                           href="${path}/board/detail?seq=${detail.seq}&page=${curPage}&commentPage=${page.blockLastNum - 1}"
                            aria-label="Previous">
                             <span aria-hidden="true"><<</span>
                         </a>
@@ -172,16 +172,16 @@
                 </c:if>
                 <c:forEach var="i" begin="${page.blockStartNum}" end="${page.blockLastNum}">
                     <c:choose>
-                        <c:when test="${i == curPage}">
+                        <c:when test="${i == commentPage}">
                             <li class="page-item active" aria-current="page">
                                 <a class="page-link"
-                                   href="${path}/board/list?page=${i}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>">${i}</a>
+                                   href="${path}/board/detail?seq=${detail.seq}&page=${curPage}&commentPage=${i}">${i}</a>
                             </li>
                         </c:when>
                         <c:otherwise>
                             <li class="page-item">
                                 <a class="page-link"
-                                   href="${path}/board/list?page=${i}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>">${i}</a>
+                                   href="${path}/board/detail?seq=${detail.seq}&page=${curPage}&commentPage=${i}">${i}</a>
                             </li>
                         </c:otherwise>
                     </c:choose>
@@ -189,7 +189,7 @@
                 <c:if test="${page.blockLastNum < page.totalPageCount}">
                     <li class="page-item">
                         <a class="page-link"
-                           href="${path}/board/list?page=${page.blockLastNum + 1}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>"
+                           href="${path}/board/detail?seq=${detail.seq}&page=${curPage}&commentPage=${page.blockLastNum + 1}"
                            aria-label="Next">
                             <span aria-hidden="true">>></span>
                         </a>

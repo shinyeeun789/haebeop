@@ -42,7 +42,7 @@
         <form action="${path}/qna/edit" method="post">
             <div class="form-group mt-3">
                 <label for="title"> 제목 </label>
-                <input type="text" name="title" id="title" class="form-control" value="${detail.title}" autocomplete="off">
+                <input type="text" name="title" id="title" class="form-control" value="${detail.title}" autocomplete="off" required>
                 <input type="hidden" name="qno" id="qno" value="${detail.qno}">
             </div>
             <div class="form-group mt-3">

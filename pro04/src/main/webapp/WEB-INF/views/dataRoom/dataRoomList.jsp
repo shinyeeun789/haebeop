@@ -37,30 +37,32 @@
 
 <section class="section">
     <div class="container p-5" style="margin: 100px auto;">
-        <!-- 검색어 입력 부분 -->
-        <form action="${path}/dataRoom/list" method="get" class="w-50 float-right">
-            <div class="row">
-                <div class="col mt-2">
-                    <select id="type" name="type" class="form-select">
-                        <option value="T"> 제목 </option>
-                        <option value="C"> 내용 </option>
-                    </select>
-                </div>
-                <div class="col-xl-8 col-lg-12 col-md-12 mt-2">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
+        <div class="d-flex justify-content-end">
+            <!-- 검색어 입력 부분 -->
+            <form action="${path}/board/list" method="get" class="w-50 mb-5">
+                <div class="row">
+                    <div class="col mt-2">
+                        <select id="type" name="type" class="form-select">
+                            <option value="T"> 제목 </option>
+                            <option value="C"> 내용 </option>
+                        </select>
+                    </div>
+                    <div class="col-xl-8 col-lg-12 col-md-12 mt-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
 
-                        </div>
-                        <input type="text" class="form-control" id="keyword" name="keyword" placeholder="검색어를 입력해주세요" autocomplete="off" aria-label="검색어를 입력해주세요" aria-describedby="button-addon2" value="${page.keyword}">
-                        <div class="input-group-append">
-                            <button class="btn btn-dark" type="submit" id="button-addon2"> 검색 </button>
+                            </div>
+                            <input type="text" class="form-control" id="keyword" name="keyword" placeholder="검색어를 입력해주세요" autocomplete="off" aria-label="검색어를 입력해주세요" aria-describedby="button-addon2" value="${page.keyword}">
+                            <div class="input-group-append">
+                                <button class="btn btn-dark" type="submit" id="button-addon2"> 검색 </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
 
-        <table class="table table-hover mt-100 text-center">
+        <table class="table table-hover text-center">
             <thead>
             <tr>
                 <th width="100"> # </th>

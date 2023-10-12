@@ -1,8 +1,8 @@
-package kr.co.teaspoon.controller;
+package kr.ed.haebeop.controller;
 
-import kr.co.teaspoon.dto.Event;
-import kr.co.teaspoon.service.EventService;
-import kr.co.teaspoon.util.Page;
+import kr.ed.haebeop.domain.Event;
+import kr.ed.haebeop.service.EventService;
+import kr.ed.haebeop.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +25,7 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
-    @GetMapping("list.do")
+    @GetMapping("list")
     private String EventList(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
@@ -49,11 +49,16 @@ public class EventController {
         return "/event/eventList";
     }
 
-    @GetMapping("detail.do")
+    @GetMapping("detail")
     public String getEventDetail(@RequestParam("page") int curPage, HttpServletRequest request, Model model) throws Exception {
         int eno = Integer.parseInt(request.getParameter("eno"));
         Event detail = eventService.eventDetail(eno);
         model.addAttribute("detail", detail);
+
+        Event prev = eventService.eventRef(eno, "prev");
+        Event next = eventService.eventRef(eno, "next");
+        model.addAttribute("prev", prev);
+        model.addAttribute("next", next);
 
         model.addAttribute("curPage", curPage);
         model.addAttribute("type", request.getParameter("type"));
@@ -61,12 +66,12 @@ public class EventController {
         return "/event/eventDetail";
     }
 
-    @GetMapping("insert.do")
+    @GetMapping("insert")
     public String insertForm(HttpServletRequest request, Model model) throws Exception {
         return "/event/eventInsert";
     }
 
-    @PostMapping("insert.do")
+    @PostMapping("insert")
     public String eventInsert(HttpServletRequest request, Model model) throws Exception {
         Event event = new Event();
         event.setTitle(request.getParameter("title"));
@@ -75,17 +80,17 @@ public class EventController {
         event.setEdate(request.getParameter("edate"));
         event.setStatus(request.getParameter("status"));
         eventService.eventInsert(event);
-        return "redirect:list.do";
+        return "redirect:list";
     }
 
-    @GetMapping("delete.do")
+    @GetMapping("delete")
     public String eventDelete(HttpServletRequest request, Model model) throws Exception {
         int eno = Integer.parseInt(request.getParameter("eno"));
         eventService.eventDelete(eno);
-        return "redirect:list.do";
+        return "redirect:list";
     }
 
-    @GetMapping("edit.do")
+    @GetMapping("edit")
     public String editForm(HttpServletRequest request, Model model) throws Exception {
         int eno = Integer.parseInt(request.getParameter("eno"));
         Event detail = eventService.eventDetail(eno);
@@ -93,14 +98,14 @@ public class EventController {
         return "/event/eventEdit";
     }
 
-    @PostMapping("edit.do")
+    @PostMapping("edit")
     public String eventEdit(Event event, HttpServletRequest request, Model model) throws Exception {
         eventService.eventEdit(event);
-        return "redirect:list.do";
+        return "redirect:list";
     }
 
     //ckeditor를 이용한 이미지 업로드
-    @RequestMapping(value="imageUpload.do", method = RequestMethod.POST)
+    @RequestMapping(value="imageUpload", method = RequestMethod.POST)
     public void imageUpload(HttpServletRequest request,
                             HttpServletResponse response, MultipartHttpServletRequest multiFile
             , @RequestParam MultipartFile upload) throws Exception{
@@ -119,8 +124,8 @@ public class EventController {
             byte[] bytes = upload.getBytes();
 
             //이미지 경로 생성
-            String path = "D:\\github\\project03\\tspoon\\src\\main\\webapp\\resources\\upload\\event/";	// 이미지 경로 설정(폴더 자동 생성)
-            //String path = request.getRealPath("/resource/uploadckImage/");
+            String path = "D:\\github\\project04\\pro04\\src\\main\\webapp\\resources\\upload\\event/";	// 이미지 경로 설정(폴더 자동 생성)
+            //String path = request.getRealPath("/resource/upload/event/");
             String ckUploadPath = path + uid + "_" + fileName;
             File folder = new File(path);
             System.out.println("path:"+path);	// 이미지 저장경로 console에 확인
@@ -139,7 +144,7 @@ public class EventController {
 
             printWriter = response.getWriter();
             String contextPath = request.getContextPath();
-            String fileUrl = contextPath + "/event/ckImgSubmit.do?uid=" + uid + "&fileName=" + fileName; // 작성화면
+            String fileUrl = contextPath + "/event/ckImgSubmit?uid=" + uid + "&fileName=" + fileName; // 작성화면
 
             // 업로드시 메시지 출력
             printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
@@ -157,15 +162,15 @@ public class EventController {
     }
 
     //ckeditor를 이용한 서버에 전송된 이미지 뿌려주기
-    @RequestMapping(value="ckImgSubmit.do")
+    @RequestMapping(value="ckImgSubmit")
     public void ckSubmit(@RequestParam(value="uid") String uid
             , @RequestParam(value="fileName") String fileName
             , HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
 
         //서버에 저장된 이미지 경로
-        String path = "D:\\github\\project03\\tspoon\\src\\main\\webapp\\resources\\upload\\event/";	// 저장된 이미지 경로
-        //String path = request.getRealPath("/resource/uploadckImage/");
+        String path = "D:\\github\\project04\\pro04\\src\\main\\webapp\\resources\\upload\\event/";	// 저장된 이미지 경로
+        //String path = request.getRealPath("/resource/uploadck/event/");
         System.out.println("path:"+path);
         String sDirPath = path + uid + "_" + fileName;
 

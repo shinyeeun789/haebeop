@@ -55,13 +55,13 @@
                 <div class="col">
                     <div class="form-group mt-3">
                         <label for="title"> 제목 </label>
-                        <input type="text" name="title" id="title" class="form-control" autocomplete="off">
+                        <input type="text" name="title" id="title" class="form-control" autocomplete="off" required>
                     </div>
                 </div>
             </div>
             <div class="form-group mt-3">
                 <label for="title"> 내용 </label>
-                <textarea name="content" id="content" class="form-control" cols="30" rows="10"></textarea>
+                <textarea name="content" id="content" class="form-control" cols="30" rows="10" maxlength="1400"></textarea>
                 <script>
                     CKEDITOR.replace('content',	{filebrowserUploadUrl:'${path}/board/imageUpload'});
                 </script>

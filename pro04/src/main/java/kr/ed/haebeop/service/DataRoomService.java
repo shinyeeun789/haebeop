@@ -10,6 +10,7 @@ public interface DataRoomService {
     public int getCount(Page page) throws Exception;
     public void dataRoomInsert(DataRoom dataRoom) throws Exception;
     public DataRoom dataRoomDetail(int articleNo) throws Exception;
+    public DataRoom dataRoomRef(int articleNo, String type) throws Exception;
     public void dataRoomEdit(DataRoom dataRoom) throws Exception;
     public void dataRoomDelete(int articleNo) throws Exception;
 }

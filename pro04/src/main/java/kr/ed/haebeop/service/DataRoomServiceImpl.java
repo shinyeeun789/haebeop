@@ -4,11 +4,14 @@ import kr.ed.haebeop.domain.DataRoom;
 import kr.ed.haebeop.persistence.DataRoomMapper;
 import kr.ed.haebeop.persistence.FileInfoMapper;
 import kr.ed.haebeop.util.Page;
+import org.checkerframework.checker.units.qual.K;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DataRoomServiceImpl implements DataRoomService {
@@ -38,6 +41,14 @@ public class DataRoomServiceImpl implements DataRoomService {
     @Override
     public DataRoom dataRoomDetail(int articleNo) throws Exception {
         return dataRoomMapper.dataRoomDetail(articleNo);
+    }
+
+    @Override
+    public DataRoom dataRoomRef(int articleNo, String type) throws Exception {
+        Map<String, Object> data = new HashMap<>();
+        data.put("articleNo", articleNo);
+        data.put("type", type);
+        return dataRoomMapper.dataRoomRef(data);
     }
 
     @Transactional

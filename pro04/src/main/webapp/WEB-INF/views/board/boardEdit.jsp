@@ -39,7 +39,7 @@
 
 <section class="blog_area single-post-area section_gap">
     <div class="container shadow mb-30 p-5">
-        <h1> 글 작성하기 <i class="fa-solid fa-pencil"></i> </h1>
+        <h1> 글 수정하기 <i class="fa-solid fa-pencil"></i> </h1>
         <form action="${path}/board/edit" method="post">
             <div class="row">
                 <div class="col-3">
@@ -60,20 +60,20 @@
                 <div class="col">
                     <div class="form-group mt-3">
                         <label for="title"> 제목 </label>
-                        <input type="text" name="title" id="title" class="form-control" value="${detail.title}" autocomplete="off">
+                        <input type="text" name="title" id="title" class="form-control" value="${detail.title}" autocomplete="off" required>
                         <input type="hidden" name="seq" id="seq" value="${detail.seq}">
                     </div>
                 </div>
             </div>
             <div class="form-group mt-3">
                 <label for="title"> 내용 </label>
-                <textarea name="content" id="content" class="form-control" cols="30" rows="10">${detail.content}</textarea>
+                <textarea name="content" id="content" class="form-control" cols="30" rows="10" maxlength="1400">${detail.content}</textarea>
                 <script>
                     CKEDITOR.replace('content',	{filebrowserUploadUrl:'${path}/board/imageUpload'});
                 </script>
             </div>
             <div class="text-right">
-                <button type="submit" class="btn btn-dark"> 등록하기 </button>
+                <button type="submit" class="btn btn-dark"> 수정하기 </button>
             </div>
         </form>
     </div>

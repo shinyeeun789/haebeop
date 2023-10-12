@@ -1,24 +1,33 @@
-package kr.co.teaspoon.service;
+package kr.ed.haebeop.service;
 
-import kr.co.teaspoon.dao.ApplyDAO;
-import kr.co.teaspoon.dto.Apply;
+import kr.ed.haebeop.domain.Apply;
+import kr.ed.haebeop.persistence.ApplyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class ApplyServiceImpl implements ApplyService{
 
     @Autowired
-    private ApplyDAO applyDAO;
+    private ApplyMapper applyMapper;
 
     @Override
     public Apply getApply(String id, int eno) throws Exception {
-        return applyDAO.getApply(id,eno);
+        Map<String, Object> data = new HashMap<>();
+        data.put("id", id);
+        data.put("eno", eno);
+        return applyMapper.getApply(data);
     }
 
     @Override
     public boolean appCheck(String id, int eno) throws Exception {
-        Apply apply = applyDAO.getApply(id,eno);
+        Map<String, Object> data = new HashMap<>();
+        data.put("id", id);
+        data.put("eno", eno);
+        Apply apply = applyMapper.getApply(data);
 
         if (apply!= null && apply.getEno() == eno) {
             return false;
@@ -29,21 +38,21 @@ public class ApplyServiceImpl implements ApplyService{
 
     @Override
     public int getCount(int appno) throws Exception {
-        return applyDAO.getCount(appno);
+        return applyMapper.getCount(appno);
     }
 
     @Override
     public void applyInsert(Apply apply) throws Exception {
-        applyDAO.applyInsert(apply);
+        applyMapper.applyInsert(apply);
     }
 
     @Override
     public void applyDelete(int appno) throws Exception {
-        applyDAO.applyDelete(appno);
+        applyMapper.applyDelete(appno);
     }
 
     @Override
     public int applyCnt() throws Exception {
-        return applyDAO.applyCnt();
+        return applyMapper.applyCnt();
     }
 }

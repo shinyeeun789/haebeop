@@ -53,7 +53,7 @@
         <form action="${path}/qna/answerInsert" method="post">
             <div class="form-group mt-3">
                 <label for="title"> 답변 제목 </label>
-                <input type="text" name="title" id="title" class="form-control" autocomplete="off">
+                <input type="text" name="title" id="title" class="form-control" autocomplete="off" required>
                 <input type="hidden" id="par" name="par" value="${detail.qno}">
             </div>
             <div class="form-group mt-3">

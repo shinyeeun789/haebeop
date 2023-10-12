@@ -106,8 +106,8 @@ public class DataRoomController {
         int articleNo = request.getParameter("articleNo") != null ? Integer.parseInt(request.getParameter("articleNo")) : 0;
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 0;
         DataRoom dataRoom = dataRoomService.dataRoomDetail(articleNo);
-        DataRoom prev = dataRoomService.dataRoomDetail(articleNo - 1);
-        DataRoom next = dataRoomService.dataRoomDetail(articleNo + 1);
+        DataRoom prev = dataRoomService.dataRoomRef(articleNo, "prev");
+        DataRoom next = dataRoomService.dataRoomRef(articleNo, "next");
         List<FileInfo> fileList = fileInfoService.fileInfoList(articleNo);
 
         model.addAttribute("detail", dataRoom);

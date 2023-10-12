@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class QnaServiceImpl implements QnaService{
@@ -33,6 +35,14 @@ public class QnaServiceImpl implements QnaService{
     @Override
     public Qna qnaDetail(int qno) throws Exception {
         return qnaMapper.qnaDetail(qno);
+    }
+
+    @Override
+    public Qna qnaRef(int qno, String type) throws Exception {
+        Map<String, Object> data = new HashMap<>();
+        data.put("qno", qno);
+        data.put("type", type);
+        return qnaMapper.qnaRef(data);
     }
 
     @Override

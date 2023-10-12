@@ -42,7 +42,7 @@
                                     <a class="nav-link" href="${path}/news/list"> 교육뉴스 </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="course-details.html"> 이벤트 </a>
+                                    <a class="nav-link" href="${path}/event/list"> 이벤트 </a>
                                 </li>
                             </ul>
                         </li>

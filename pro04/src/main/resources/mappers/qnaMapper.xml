@@ -31,6 +31,22 @@
         select * from qna where qno=#{qno}
     </select>
 
+    <select id="qnaRef" parameterType="hashMap" resultType="kr.ed.haebeop.domain.Qna">
+        select * from qna
+        <choose>
+            <when test="type == 'next'.toString()">
+                <![CDATA[
+                 where qno > #{qno} limit 1
+                ]]>
+            </when>
+            <when test="type == 'prev'.toString()">
+                <![CDATA[
+                 WHERE qno < #{qno} ORDER BY qno DESC LIMIT 1
+                ]]>
+            </when>
+        </choose>
+    </select>
+
     <!--질문 상세보기-->
     <select id="questionDetail" resultType="kr.ed.haebeop.domain.Qna">
         select * from qna where par=#{par} and lev=0

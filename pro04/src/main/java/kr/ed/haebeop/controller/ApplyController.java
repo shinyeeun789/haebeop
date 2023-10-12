@@ -1,9 +1,9 @@
-package kr.co.teaspoon.controller;
+package kr.ed.haebeop.controller;
 
-import kr.co.teaspoon.dto.Apply;
-import kr.co.teaspoon.dto.Event;
-import kr.co.teaspoon.service.ApplyService;
-import kr.co.teaspoon.service.EventService;
+import kr.ed.haebeop.domain.Apply;
+import kr.ed.haebeop.domain.Event;
+import kr.ed.haebeop.service.ApplyService;
+import kr.ed.haebeop.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,14 +28,14 @@ public class ApplyController {
     @Autowired
     private EventService eventService;
 
-    @GetMapping("insert.do")
+    @GetMapping("insert")
     public String insertForm(HttpServletRequest request, Model model) throws Exception {
         Event event = eventService.eventDetail(Integer.parseInt(request.getParameter("eno").trim())); //
         request.setAttribute("event", event);
         return "/apply/appForm";
     }
 
-    @RequestMapping(value="insert.do", method= RequestMethod.POST)
+    @RequestMapping(value="insert", method= RequestMethod.POST)
     public String applyInsert(HttpServletRequest request, Model model) throws Exception {
         HttpSession session = request.getSession();
         int eno = Integer.parseInt(request.getParameter("eno").trim());
@@ -52,7 +52,7 @@ public class ApplyController {
         return "/apply/appSuc";
     }
 
-    @GetMapping("delete.do")
+    @GetMapping("delete")
     public ModelAndView applyDelete(HttpServletRequest request, Model model) throws Exception {
         int appno = Integer.parseInt(request.getParameter("appno"));
         applyService.applyDelete(appno);
@@ -60,10 +60,10 @@ public class ApplyController {
         model.addAttribute("eno", request.getParameter("eno"));
 
         ModelAndView mav = new ModelAndView();
-        mav.setView(new RedirectView(request.getContextPath() + "/member/eventMypage.do"));
+        mav.setView(new RedirectView(request.getContextPath() + "/member/eventMypage"));
         return mav;
     }
-    @RequestMapping(value = "appCheck.do", method = RequestMethod.POST)
+    @RequestMapping(value = "appCheck", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Boolean> appCheck(HttpServletRequest request) throws Exception {
         String id = request.getParameter("id");

@@ -56,6 +56,23 @@
     <select id="boardDetail" resultType="kr.ed.haebeop.domain.BoardVO">
         select seq, cateName, title, content, nickname, regdate, visited from board b join category c on(b.cate=c.cate) where seq=#{seq}
     </select>
+
+    <select id="boardRef" parameterType="hashMap" resultType="kr.ed.haebeop.domain.BoardVO">
+        select seq, cateName, title, content, nickname, regdate, visited from board b join category c on(b.cate=c.cate)
+        <choose>
+            <when test="type == 'next'.toString()">
+                <![CDATA[
+                 where seq > #{seq} limit 1
+                ]]>
+            </when>
+            <when test="type == 'prev'.toString()">
+                <![CDATA[
+                 WHERE seq < #{seq} ORDER BY seq DESC LIMIT 1
+                ]]>
+            </when>
+        </choose>
+    </select>
+
     <select id="boardCount" resultType="integer">
         select count(*) from board
     </select>

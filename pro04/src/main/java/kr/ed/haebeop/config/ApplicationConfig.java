@@ -34,6 +34,15 @@ public class ApplicationConfig {
     public DataRoomService dataRoomService() { return new DataRoomServiceImpl(); }
 
     @Bean
+    public EventService eventService() { return new EventServiceImpl(); }
+
+    @Bean
+    public ApplyService applyService() { return new ApplyServiceImpl(); }
+
+    @Bean
+    public WinnerService winnerService() { return new WinnerServiceImpl(); }
+
+    @Bean
     public TestService testService() { return new TestServiceImpl(); }
 
     @Bean

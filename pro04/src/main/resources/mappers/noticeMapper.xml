@@ -56,6 +56,22 @@
 		select * from notice where seq=#{seq}
 	</select>
 
+	<select id="noticeRef" parameterType="hashMap" resultType="kr.ed.haebeop.domain.Notice">
+		select * from notice
+		<choose>
+			<when test="type == 'next'.toString()">
+				<![CDATA[
+                 where seq > #{seq} limit 1
+                ]]>
+			</when>
+			<when test="type == 'prev'.toString()">
+				<![CDATA[
+                 WHERE seq < #{seq} ORDER BY seq DESC LIMIT 1
+                ]]>
+			</when>
+		</choose>
+	</select>
+
 	<!-- 글 수 카운트 -->
 	<select id="totalCount" resultType="integer" >
 		select count(*) from notice

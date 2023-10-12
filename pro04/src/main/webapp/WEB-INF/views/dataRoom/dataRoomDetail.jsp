@@ -85,7 +85,7 @@
                                 </div>
                             </c:if>
                             <div class="detials ml-5">
-                                <p>이전 공지사항</p>
+                                <p>이전 자료</p>
                                 <c:if test="${empty prev}">
                                     <h4> 첫 번째 글입니다. </h4>
                                 </c:if>
@@ -98,7 +98,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
                             <div class="detials mr-5">
-                                <p>다음 공지사항</p>
+                                <p>다음 자료</p>
                                 <c:if test="${empty next}">
                                     <h4> 마지막 글입니다. </h4>
                                 </c:if>
