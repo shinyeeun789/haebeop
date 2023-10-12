@@ -10,40 +10,436 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4650da48-520d-4e16-9d7e-ffd2b4d08f1e" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/BoardController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/CommentController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/domain/Board.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/domain/BoardVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/domain/Category.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/domain/Comment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/persistence/BoardMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/persistence/CommentMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/BoardService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/BoardServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/CommentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/CommentServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/util/BoardPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mappers/boardMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mappers/commentMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/boardList.jsp" afterDir="false" />
+    <list default="true" id="a147832c-7786-4925-9520-67c97c968941" name="변경" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/boardDetail.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/boardEdit.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/boardInsert.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/CHANGES.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/LICENSE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/SECURITY.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/adapters/jquery.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/bender-runner.config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/build-config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/ckeditor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/contents.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/af.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/ar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/az.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/bg.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/bn.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/bs.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/ca.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/cs.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/cy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/da.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/de-ch.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/de.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/el.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/en-au.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/en-ca.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/en-gb.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/en.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/eo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/es-mx.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/es.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/et.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/eu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/fa.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/fi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/fo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/fr-ca.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/fr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/gl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/gu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/he.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/hi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/hr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/hu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/id.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/is.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/it.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/ja.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/ka.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/km.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/ko.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/ku.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/lt.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/lv.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/mk.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/mn.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/ms.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/nb.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/nl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/no.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/oc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/pl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/pt-br.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/pt.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/ro.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/ru.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/si.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/sk.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/sl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/sq.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/sr-latn.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/sr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/sv.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/th.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/tr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/tt.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/ug.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/uk.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/vi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/zh-cn.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/lang/zh.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/a11yhelp.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/_translationstatus.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/af.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/ar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/az.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/bg.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/ca.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/cs.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/cy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/da.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/de-ch.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/de.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/el.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/en-au.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/en-gb.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/en.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/eo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/es-mx.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/es.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/et.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/eu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/fa.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/fi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/fo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/fr-ca.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/fr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/gl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/gu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/he.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/hi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/hr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/hu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/id.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/it.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/ja.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/km.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/ko.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/ku.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/lt.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/lv.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/mk.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/mn.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/nb.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/nl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/no.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/oc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/pl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/pt-br.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/pt.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/ro.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/ru.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/si.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/sk.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/sl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/sq.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/sr-latn.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/sr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/sv.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/th.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/tr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/tt.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/ug.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/uk.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/vi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/zh-cn.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/a11yhelp/dialogs/lang/zh.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/about/dialogs/about.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/about/dialogs/hidpi/logo_ckeditor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/about/dialogs/logo_ckeditor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/clipboard/dialogs/paste.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/dialog/dialogDefinition.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/dialog/styles/dialog.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/icons.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/icons_hidpi.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/image/dialogs/image.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/image/images/noimage.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/link/dialogs/anchor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/link/dialogs/link.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/link/images/anchor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/link/images/hidpi/anchor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/magicline/images/hidpi/icon-rtl.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/magicline/images/hidpi/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/magicline/images/icon-rtl.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/magicline/images/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/pastefromgdocs/filter/default.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/pastefromlibreoffice/filter/default.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/pastefromword/filter/default.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/pastetools/filter/common.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/pastetools/filter/image.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/scayt/CHANGELOG.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/scayt/LICENSE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/scayt/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/scayt/dialogs/dialog.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/scayt/dialogs/options.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/scayt/dialogs/toolbar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/scayt/skins/moono-lisa/scayt.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/_translationstatus.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/af.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/ar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/az.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/bg.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/ca.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/cs.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/cy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/da.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/de-ch.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/de.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/el.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/en-au.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/en-ca.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/en-gb.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/en.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/eo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/es-mx.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/es.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/et.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/eu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/fa.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/fi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/fr-ca.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/fr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/gl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/he.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/hr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/hu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/id.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/it.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/ja.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/km.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/ko.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/ku.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/lt.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/lv.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/nb.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/nl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/no.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/oc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/pl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/pt-br.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/pt.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/ro.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/ru.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/si.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/sk.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/sl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/sq.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/sr-latn.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/sr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/sv.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/th.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/tr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/tt.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/ug.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/uk.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/vi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/zh-cn.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/lang/zh.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/specialchar/dialogs/specialchar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/table/dialogs/table.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/tableselection/styles/tableselection.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/tabletools/dialogs/tableCell.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/plugins/widget/images/handle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/css/samples.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/img/github-top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/img/header-bg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/img/header-separator.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/img/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/img/logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/img/navigation-tip.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/js/sample.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/js/sf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/ajax.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/api.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/appendto.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/assets/inlineall/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/assets/outputxhtml/outputxhtml.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/assets/posteddata.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/assets/sample.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/assets/uilanguages/languages.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/datafiltering.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/dialog/assets/my_dialog.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/dialog/dialog.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/divreplace.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/enterkey/enterkey.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/htmlwriter/outputhtml.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/inlineall.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/inlinebycode.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/inlinetextarea.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/jquery.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/magicline/magicline.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/readonly.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/replacebyclass.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/replacebycode.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/sample.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/sample.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/sample_posteddata.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/tabindex.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/toolbar/toolbar.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/uicolor.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/uilanguages.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/wysiwygarea/fullpage.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/xhtmlstyle.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/toolbarconfigurator/css/fontello.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/toolbarconfigurator/font/LICENSE.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/toolbarconfigurator/font/config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/toolbarconfigurator/font/fontello.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/toolbarconfigurator/font/fontello.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/toolbarconfigurator/font/fontello.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/toolbarconfigurator/font/fontello.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/toolbarconfigurator/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/toolbarconfigurator/js/abstracttoolbarmodifier.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/toolbarconfigurator/js/fulltoolbareditor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/toolbarconfigurator/js/toolbarmodifier.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/toolbarconfigurator/js/toolbartextmodifier.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/toolbarconfigurator/lib/codemirror/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/toolbarconfigurator/lib/codemirror/codemirror.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/toolbarconfigurator/lib/codemirror/codemirror.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/toolbarconfigurator/lib/codemirror/javascript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/toolbarconfigurator/lib/codemirror/show-hint.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/toolbarconfigurator/lib/codemirror/show-hint.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/skins/moono-lisa/dialog.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/skins/moono-lisa/dialog_ie.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/skins/moono-lisa/dialog_ie8.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/skins/moono-lisa/dialog_iequirks.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/skins/moono-lisa/editor.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/skins/moono-lisa/editor_gecko.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/skins/moono-lisa/editor_ie.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/skins/moono-lisa/editor_ie8.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/skins/moono-lisa/editor_iequirks.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/skins/moono-lisa/icons.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/skins/moono-lisa/icons_hidpi.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/skins/moono-lisa/images/arrow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/skins/moono-lisa/images/close.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/skins/moono-lisa/images/hidpi/close.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/skins/moono-lisa/images/hidpi/lock-open.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/skins/moono-lisa/images/hidpi/lock.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/skins/moono-lisa/images/hidpi/refresh.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/skins/moono-lisa/images/lock-open.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/skins/moono-lisa/images/lock.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/skins/moono-lisa/images/refresh.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/skins/moono-lisa/images/spinner.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/skins/moono-lisa/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/styles.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/vendor/promise.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/img/profile01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/img/profile02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/img/profile03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/img/profile04.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../pro04.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../pro04.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/layout/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/layout/header.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/BoardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/CommentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/persistence/BoardMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/persistence/BoardMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/BoardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/BoardServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/BoardServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/boardMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/boardMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/boardList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/boardList.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/noticeDetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/noticeDetail.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/qna/qnaDetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/qna/qnaDetail.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/qna/qnaList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/qna/qnaList.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/add.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/author.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/c1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/c2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/c3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/c4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/c5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/c6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/cat-post/cat-post-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/cat-post/cat-post-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/cat-post/cat-post-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/causes/causes-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/causes/causes-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/causes/causes-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/feature-img1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/main-blog/m-blog-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/main-blog/m-blog-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/main-blog/m-blog-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/main-blog/m-blog-4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/main-blog/m-blog-5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/next.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/popular-post/post1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/popular-post/post2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/popular-post/post3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/popular-post/post4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/post-img1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/post-img2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/blog/prev.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/courses/author1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/courses/author2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/courses/author3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/courses/c1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/courses/c2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/courses/c3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/courses/course-details.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/_DS_Store" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/a.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/a2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/d.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/disabled-check.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/disabled-radio.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/f1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/f2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/f3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/f4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/f5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/f6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/f7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/f8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/g1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/g2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/g3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/g4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/g5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/g6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/g7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/g8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/primary-check.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/primary-radio.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/success-check.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/success-radio.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/user1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/elements/user2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/event/e1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/event/e2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/features/f1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/features/f2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/features/f3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/testimonials/t1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/testimonials/t2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/trainer/t1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/trainer/t2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/trainer/t3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/trainer/t4.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-        <option value="Interface" />
-        <option value="Jsp File" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -65,7 +461,7 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectId" id="2WZdTOptNt02ivCGTBpOQQwEyKQ" />
+  <component name="ProjectId" id="2WcDtMLrdJKsqwqlOTMhSFuTZUi" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -75,9 +471,8 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/shin/project04/pro04/src/main/resources/mappers",
+    "last_opened_file_path": "D:/github/project04/pro04",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -85,28 +480,15 @@
     "project.structure.last.edited": "프로젝트",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.grazie",
     "spring.configuration.checksum": "d3538b4f1cb4862d136facec5594f870",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\shin\project04\pro04\src\main\resources\mappers" />
-      <recent name="D:\shin\project04\pro04\src\main\java\kr\ed\haebeop\service" />
-      <recent name="D:\shin\project04\pro04\src\main\webapp\WEB-INF\views\faq" />
-      <recent name="D:\shin\project04\pro04\src\main\webapp\WEB-INF\views\qna" />
-      <recent name="D:\shin\project04\pro04\src\main\webapp\WEB-INF\views\notice" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\github\project04\pro04\src\main\webapp\WEB-INF\views\board" />
+      <recent name="D:\github\project04\pro04\src\main\webapp\resources" />
       <recent name="D:\github\project04\pro04\src\main\webapp\resources\img" />
-      <recent name="D:\github\project04\pro04\src\main\webapp\WEB-INF\views" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="kr.ed.haebeop.persistence" />
-      <recent name="kr.ed.haebeop.domain" />
-      <recent name="kr.ed.haebeop.util" />
-      <recent name="kr.ed.haebeop.controller" />
     </key>
   </component>
   <component name="RunManager">
@@ -126,7 +508,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="da3eb9b1-fe03-4602-977f-37f71650fd6e" />
+        <option name="BASE_DIRECTORY_NAME" value="d710f4bb-7cbc-4c04-995c-86f02b2758f5" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -134,7 +516,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="57734" />
+        <option name="DEBUG_PORT" value="49316" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -208,14 +590,13 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="디폴트 작업">
-      <changelist id="4650da48-520d-4e16-9d7e-ffd2b4d08f1e" name="변경" comment="" />
-      <created>1696944046041</created>
+      <changelist id="a147832c-7786-4925-9520-67c97c968941" name="변경" comment="" />
+      <created>1697023187912</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1696944046041</updated>
-      <workItem from="1696944047666" duration="5741000" />
-      <workItem from="1696949829320" duration="1170000" />
-      <workItem from="1696982538094" duration="26789000" />
+      <updated>1697023187912</updated>
+      <workItem from="1697023189129" duration="11449000" />
+      <workItem from="1697068580639" duration="418000" />
     </task>
     <servers />
   </component>

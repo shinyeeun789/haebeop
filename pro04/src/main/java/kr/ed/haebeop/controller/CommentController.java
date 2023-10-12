@@ -40,7 +40,7 @@ public class CommentController {
     }
 
     @GetMapping("delete")
-    public ModelAndView commentDelete(HttpServletRequest request, Model model) throws Exception {
+    public String commentDelete(HttpServletRequest request, Model model) throws Exception {
         int comNo = Integer.parseInt(request.getParameter("comNo"));
         commentService.commentDelete(comNo);
 
@@ -50,10 +50,7 @@ public class CommentController {
         model.addAttribute("type", request.getParameter("type"));
         model.addAttribute("keyword", request.getParameter("keyword"));
 
-        // 다른 컨트롤러의 페이지로 redirect하기
-        ModelAndView mav = new ModelAndView();
-        mav.setView(new RedirectView(request.getContextPath() + "/board/detail"));
-        return mav;
+        return "redirect:/board/detail";
     }
 
 }

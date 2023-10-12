@@ -55,8 +55,12 @@
                     <div class="col-lg-3 col-md-3">
                         <div class="blog_info text-right">
                             <ul class="blog_meta list">
-                                <li>${detail.author}<i class="ti-user"></i></li>
-                                <li>${detail.resdate}<i class="ti-calendar"></i></li>
+                                <li>${detail.author} &nbsp; <i class="fa-regular fa-user"></i></li>
+                                <li>
+                                    <fmt:parseDate value="${detail.regdate }" var="resdate" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                    <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd"/>
+                                    &nbsp; <i class="fa-regular fa-calendar"></i>
+                                </li>
                             </ul>
                         </div>
                     </div>

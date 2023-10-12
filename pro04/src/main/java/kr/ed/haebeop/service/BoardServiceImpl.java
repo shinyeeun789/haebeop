@@ -7,6 +7,7 @@ import kr.ed.haebeop.persistence.BoardMapper;
 import kr.ed.haebeop.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,7 +28,14 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    @Transactional
     public BoardVO boardDetail(int seq) throws Exception {
+        boardMapper.countUp(seq);
+        return boardMapper.boardDetail(seq);
+    }
+
+    @Override
+    public BoardVO boardRef(int seq) throws Exception {
         return boardMapper.boardDetail(seq);
     }
 

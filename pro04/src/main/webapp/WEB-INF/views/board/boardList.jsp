@@ -37,59 +37,87 @@
 
 <section class="section">
     <div class="container p-5" style="margin: 100px auto;">
-        <!-- 검색어 입력 부분 -->
-        <form action="${path}/board/list" method="get" class="w-50 float-right">
-            <div class="row">
-                <div class="col mt-2">
-                    <select id="type" name="type" class="form-select">
-                        <option value="T"> 제목 </option>
-                        <option value="C"> 내용 </option>
-                        <option value="W"> 작성자 </option>
-                    </select>
-                </div>
-                <div class="col-xl-8 col-lg-12 col-md-12 mt-2">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
+        <div class="d-flex justify-content-end">
+            <!-- 검색어 입력 부분 -->
+            <form action="${path}/board/list" method="get" class="w-50 mb-5">
+                <div class="row">
+                    <div class="col mt-2">
+                        <select id="type" name="type" class="form-select">
+                            <option value="T"> 제목 </option>
+                            <option value="C"> 내용 </option>
+                            <option value="W"> 작성자 </option>
+                        </select>
+                    </div>
+                    <div class="col-xl-8 col-lg-12 col-md-12 mt-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
 
-                        </div>
-                        <input type="text" class="form-control" id="keyword" name="keyword" placeholder="검색어를 입력해주세요" autocomplete="off" aria-label="검색어를 입력해주세요" aria-describedby="button-addon2" value="${page.keyword}">
-                        <div class="input-group-append">
-                            <button class="btn btn-dark" type="submit" id="button-addon2"> 검색 </button>
+                            </div>
+                            <input type="text" class="form-control" id="keyword" name="keyword" placeholder="검색어를 입력해주세요" autocomplete="off" aria-label="검색어를 입력해주세요" aria-describedby="button-addon2" value="${page.keyword}">
+                            <div class="input-group-append">
+                                <button class="btn btn-dark" type="submit" id="button-addon2"> 검색 </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
 
-        <table class="table table-hover mt-100 text-center">
-            <thead>
-            <tr>
-                <th width="100"> # </th>
-                <th width="120"> 카테고리 </th>
-                <th> 제목 </th>
-                <th widt="180"> 작성자 </th>
-                <th width="210"> 작성일 </th>
-                <th width="80"> 조회수 </th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="board" items="${boardList}">
-                <tr onclick="javascript: location.href='${path}/board/detail?seq=${board.seq}&page=${curPage}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>'" style="cursor: pointer">
-                    <td> ${board.seq} </td>
-                    <td> ${board.cate} </td>
-                    <td class="text-left"> ${board.title} </td>
-                    <td> ${board.nickname} </td>
-                    <td> ${board.regdate} </td>
-                    <td> ${board.visited} </td>
-                </tr>
-            </c:forEach>
-            <c:if test="${empty boardList}">
-                <tr class="text-center">
-                    <td colspan="6"> 작성된 글이 없습니다. </td>
-                </tr>
-            </c:if>
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col-2">
+                <div class="list-group">
+                    <c:if test="${empty curCategory}">
+                        <a href="${path}/board/list" class="list-group-item list-group-item-action active" aria-current="true">
+                            전체
+                        </a>
+                    </c:if>
+                    <c:if test="${!empty curCategory}">
+                        <a href="${path}/board/list" class="list-group-item list-group-item-action"> 전체 </a>
+                    </c:if>
+                    <c:forEach var="cate" items="${categories}">
+                        <c:if test="${cate.cate eq curCategory}">
+                            <a href="${path}/board/list?cate=${cate.cate}" class="list-group-item list-group-item-action active" aria-current="true">
+                                    ${cate.cateName}
+                            </a>
+                        </c:if>
+                        <c:if test="${cate.cate ne curCategory}">
+                            <a href="${path}/board/list?cate=${cate.cate}" class="list-group-item list-group-item-action"> ${cate.cateName} </a>
+                        </c:if>
+                    </c:forEach>
+                </div>
+            </div>
+            <div class="col">
+                <table class="table table-hover text-center">
+                    <thead>
+                    <tr>
+                        <th width="100"> # </th>
+                        <th width="120"> 카테고리 </th>
+                        <th> 제목 </th>
+                        <th widt="180"> 작성자 </th>
+                        <th width="210"> 작성일 </th>
+                        <th width="80"> 조회수 </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="board" items="${boardList}">
+                        <tr onclick="javascript: location.href='${path}/board/detail?seq=${board.seq}&page=${curPage}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>'" style="cursor: pointer">
+                            <td> ${board.seq} </td>
+                            <td> ${board.cateName} </td>
+                            <td class="text-left"> ${board.title} </td>
+                            <td> ${board.nickname} </td>
+                            <td> ${board.regdate} </td>
+                            <td> ${board.visited} </td>
+                        </tr>
+                    </c:forEach>
+                    <c:if test="${empty boardList}">
+                        <tr class="text-center">
+                            <td colspan="6"> 작성된 글이 없습니다. </td>
+                        </tr>
+                    </c:if>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
         <!-- pagination -->
         <nav aria-label="Page navigation example" class="mt-25 mb-30">
@@ -125,7 +153,7 @@
             </ul>
         </nav>
 
-        <c:if test="${sid eq 'admin'}">
+        <c:if test="${not empty sid}">
             <div class="text-right">
                 <a href="${path}/board/insert" class="btn btn-dark"> 글 작성하기 </a>
             </div>

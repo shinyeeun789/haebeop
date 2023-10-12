@@ -86,7 +86,7 @@
             </c:forEach>
             <c:if test="${empty qnaList}">
                 <tr class="text-center">
-                    <td colspan="5"> 등록된 공지사항이 없습니다. </td>
+                    <td colspan="5"> 등록된 Q&A가 없습니다. </td>
                 </tr>
             </c:if>
             </tbody>

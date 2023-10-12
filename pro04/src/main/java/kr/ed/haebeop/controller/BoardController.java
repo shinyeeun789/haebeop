@@ -66,7 +66,10 @@ public class BoardController {
 
     @GetMapping("detail")	//board/detail?seq=1
     public String getBoardDetail(HttpServletRequest request, Model model) throws Exception {
-        BoardVO comm = boardService.boardDetail(Integer.parseInt(request.getParameter("seq")));
+        BoardVO detail = boardService.boardDetail(Integer.parseInt(request.getParameter("seq")));
+
+        BoardVO prev = boardService.boardRef(detail.getSeq() - 1);
+        BoardVO next = boardService.boardRef(detail.getSeq() + 1);
 
         // 게시판 목록에서 사용자가 선택한 게시물이 속해있는 페이지
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
@@ -76,15 +79,17 @@ public class BoardController {
         // 댓글 페이징 처리
         BoardPage page = new BoardPage();
         // 페이징에 필요한 데이터 저장
-        int total = commentService.getCount(comm.getSeq());
-        page.setSeq(comm.getSeq());
+        int total = commentService.getCount(detail.getSeq());
+        page.setSeq(detail.getSeq());
         page.makeBlock(commentPage, total);
         page.makeLastPageNum(total);
         page.makePostStart(commentPage, total);
 
         List<Comment> commentList = commentService.commentList(page);
 
-        model.addAttribute("detail", comm);
+        model.addAttribute("detail", detail);
+        model.addAttribute("prev", prev);
+        model.addAttribute("next", next);
         model.addAttribute("commentList", commentList);
         model.addAttribute("curPage", curPage);
         model.addAttribute("commentPage", commentPage);
@@ -133,7 +138,7 @@ public class BoardController {
     @PostMapping("edit")
     public String boardEdit(Board board, HttpServletRequest request, Model model) throws Exception {
         boardService.boardEdit(board);
-        return "redirect:list";
+        return "redirect:detail?seq="+board.getSeq()+"&page=1";
     }
 
     //ckeditor를 이용한 이미지 업로드
@@ -154,7 +159,7 @@ public class BoardController {
             byte[] bytes = upload.getBytes();
 
             //이미지 경로 생성
-            String path = "D:\\github\\project03\\tspoon\\src\\main\\webapp\\resources\\upload\\board/";	// 이미지 경로 설정(폴더 자동 생성)
+            String path = "D:\\github\\project04\\pro04\\src\\main\\webapp\\resources\\upload\\board/";	// 이미지 경로 설정(폴더 자동 생성)
             //String path = request.getRealPath("/resource/upload/board");
             String ckUploadPath = path + uid + "_" + fileName;
             File folder = new File(path);
@@ -195,7 +200,7 @@ public class BoardController {
     @RequestMapping(value="ckImgSubmit")
     public void ckSubmit(@RequestParam(value="uid") String uid, @RequestParam(value="fileName") String fileName, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         //서버에 저장된 이미지 경로
-        String path = "D:\\github\\project3\\tspoon\\src\\main\\webapp\\resources\\upload\\board/";	// 이미지 경로 설정
+        String path = "D:\\github\\project04\\pro04\\src\\main\\webapp\\resources\\upload\\board/";	// 이미지 경로 설정
         //String path = request.getRealPath("/resource/uploadckImage/");
         String sDirPath = path + uid + "_" + fileName;
 

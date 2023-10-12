@@ -52,9 +52,13 @@
                     <div class="col-lg-3 col-md-3">
                         <div class="blog_info text-right">
                             <ul class="blog_meta list">
-                                <li>${detail.nickname}<i class="ti-user"></i></li>
-                                <li>${detail.regdate}<i class="ti-calendar"></i></li>
-                                <li>${detail.visited} Views<i class="ti-eye"></i></li>
+                                <li>${detail.nickname} &nbsp; <i class="fa-regular fa-user"></i></li>
+                                <li>
+                                    <fmt:parseDate value="${detail.regdate }" var="resdate" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                    <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd"/>
+                                    &nbsp; <i class="fa-regular fa-calendar"></i>
+                                </li>
+                                <li>${detail.visited} Views &nbsp; <i class="fa-regular fa-eye"></i></li>
                             </ul>
                         </div>
                     </div>

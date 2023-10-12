@@ -60,10 +60,14 @@
                         <input type="password" name="pw" id="pw" class="form-control">
                         <p id="msg" class="mt-3" style="color: red"></p>
                     </div>
-                    <div class="form-group form-check">
-                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="saveId" value="save" ${checked}>
-                        <label class="form-check-label" for="flexCheckDefault"> 아이디 기억하기 </label>
+                    <div class="switch-wrap d-flex mt-3">
+                        <div class="primary-switch">
+                            <input type="checkbox" id="default-switch" name="saveId" value="save" ${checked}>
+                            <label for="default-switch"></label>
+                        </div>
+                        <p class="ml-2"> 아이디 기억하기 </p>
                     </div>
+
                     <input type="submit" value="Log In" class="btn btn-primary btn-lg">
                 </form>
             </div>

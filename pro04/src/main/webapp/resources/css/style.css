@@ -1647,7 +1647,7 @@ button:focus {
 }
 
 .blog_right_sidebar {
-    background: #f1f9ff;
+    background: #eee;
     padding: 30px;
 }
 
@@ -2101,7 +2101,7 @@ button:focus {
 }
 
 .comments-area {
-    background: #f1f9ff;
+    background: #eee;
     padding: 50px 30px;
     margin-top: 50px;
 }
@@ -2189,7 +2189,7 @@ button:focus {
 }
 
 .comment-form {
-    background: #f1f9ff;
+    background: #eee;
     text-align: center;
     padding: 47px 30px 43px;
     margin-top: 50px;
@@ -3963,7 +3963,7 @@ h6 {
 
 .blog_btn {
     border: 1px solid #eeeeee;
-    background: #f1f9ff;
+    background: #eee;
     padding: 0px 32px;
     font-size: 13px;
     font-weight: 600;

@@ -62,7 +62,7 @@
     <update id="countUp">
         update board set visited=visited+1 where seq=#{seq}
     </update>
-    <update id="boardUpdate">
+    <update id="boardEdit">
         update board set cate=#{cate}, title=#{title}, content=#{content} where seq=#{seq}
     </update>
     <insert id="boardInsert">

@@ -13,7 +13,7 @@ CREATE TABLE user(
   pt INT(11) DEFAULT 0,
   visited INT(11) DEFAULT 0);
 
-SELECT * FROM user;  
+SELECT * FROM user;
 
 
 -- 커뮤니티 카테고리 테이블 생성
@@ -25,7 +25,7 @@ CREATE TABLE category(
 -- 카테고리 테이블 데이터
 INSERT INTO category VALUES('A', '자유게시판');
 INSERT INTO category VALUES('B', '교육정보');
-INSERT INTO category VALUES('C', '교재/학원 추천');
+INSERT INTO category VALUES('C', '강의 추천');
 INSERT INTO category VALUES('D', '진로상담');
 
 
@@ -37,10 +37,25 @@ CREATE TABLE board(
   content VARCHAR(1000),
   nickname VARCHAR(20),
   regdate DATETIME DEFAULT CURRENT_TIMESTAMP(),
-  cnt INT DEFAULT 0,
+  visited INT DEFAULT 0,
   FOREIGN KEY(cate) REFERENCES category(cate) ON DELETE CASCADE,
   FOREIGN KEY(nickname) REFERENCES user(id) ON DELETE CASCADE);
 DROP TABLE board;
+
+-- 커뮤니티 댓글 테이블 생성
+CREATE TABLE COMMENT(
+   comNo INT PRIMARY KEY AUTO_INCREMENT,
+   seq INT NOT NULL,
+   nickname VARCHAR(20) NOT NULL,
+   resdate DATETIME DEFAULT CURRENT_TIMESTAMP(),
+   content VARCHAR(1000) NOT NULL,
+   FOREIGN KEY(seq) REFERENCES board(seq) ON DELETE CASCADE,
+   FOREIGN KEY(nickname) REFERENCES user(id) ON DELETE CASCADE
+);
+
+SELECT * FROM comment;
+
+
 
 -- 공지사항 테이블 생성
 CREATE TABLE notice (
