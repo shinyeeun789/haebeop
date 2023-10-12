@@ -39,7 +39,7 @@
                                     <a class="nav-link" href="${path}/board/list"> 커뮤니티 </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="course-details.html"> 교육뉴스 </a>
+                                    <a class="nav-link" href="${path}/news/list"> 교육뉴스 </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="course-details.html"> 이벤트 </a>

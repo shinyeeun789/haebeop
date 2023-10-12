@@ -31,6 +31,9 @@ public class ApplicationConfig {
     public CommentService commentService() { return new CommentServiceImpl(); }
 
     @Bean
+    public DataRoomService dataRoomService() { return new DataRoomServiceImpl(); }
+
+    @Bean
     public TestService testService() { return new TestServiceImpl(); }
 
     @Bean

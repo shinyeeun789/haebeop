@@ -11,69 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a147832c-7786-4925-9520-67c97c968941" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/DataRoomController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/domain/DataRoom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/domain/FileInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/persistence/DataRoomMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/persistence/FileInfoMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/DataRoomService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/DataRoomServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/FileInfoService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/FileInfoServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mappers/dataRoomMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mappers/fileInfoMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/dataRoom/dataRoomDetail.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/dataRoom/dataRoomEdit.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/dataRoom/dataRoomInsert.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/dataRoom/dataRoomList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pro04.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../pro04.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/NewsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/news/newsList.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/config/ApplicationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/config/ApplicationConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/BoardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/CommentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/NoticeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/NoticeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/QnaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/QnaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/boardDetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/boardDetail.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/boardEdit.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/boardEdit.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/boardInsert.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/boardInsert.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/boardList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/boardList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/layout/head.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/layout/head.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/layout/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/layout/header.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/noticeEdit.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/noticeEdit.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/noticeInsert.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/noticeInsert.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/noticeList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/notice/noticeList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/qna/answerInsert.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/qna/answerInsert.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/qna/qnaDetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/qna/qnaDetail.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/qna/qnaEdit.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/qna/qnaEdit.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/qna/qnaList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/qna/qnaList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/qna/questionInsert.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/qna/questionInsert.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/ajax.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/ajax.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/api.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/api.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/appendto.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/appendto.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/datafiltering.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/datafiltering.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/dialog/dialog.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/dialog/dialog.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/divreplace.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/divreplace.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/enterkey/enterkey.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/enterkey/enterkey.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/htmlwriter/outputhtml.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/htmlwriter/outputhtml.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/inlineall.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/inlineall.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/inlinebycode.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/inlinebycode.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/inlinetextarea.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/inlinetextarea.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/jquery.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/jquery.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/magicline/magicline.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/magicline/magicline.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/readonly.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/readonly.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/replacebyclass.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/replacebyclass.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/replacebycode.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/replacebycode.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/tabindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/tabindex.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/toolbar/toolbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/toolbar/toolbar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/uicolor.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/uicolor.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/uilanguages.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/uilanguages.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/wysiwygarea/fullpage.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/wysiwygarea/fullpage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/xhtmlstyle.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/ckeditor/samples/old/xhtmlstyle.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/about.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/favicon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/img/favicon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/img/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/img/logo2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/img/logo2.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +26,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Jsp File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -248,7 +191,7 @@
       <option name="presentableId" value="Default" />
       <updated>1697023187912</updated>
       <workItem from="1697023189129" duration="11449000" />
-      <workItem from="1697068580639" duration="11891000" />
+      <workItem from="1697068580639" duration="15963000" />
     </task>
     <servers />
   </component>
@@ -276,5 +219,10 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
+        <watch expression="newsItems.get(0)" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
