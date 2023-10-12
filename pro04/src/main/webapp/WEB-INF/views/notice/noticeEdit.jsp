@@ -39,10 +39,11 @@
 <section class="blog_area single-post-area section_gap">
     <div class="container shadow mb-30 p-5">
         <h1> 글 수정하기 <i class="fa-solid fa-pencil"></i> </h1>
-        <form action="" method="post">
+        <form action="${path}/notice/edit" method="post">
             <div class="form-group mt-3">
                 <label for="title"> 제목 </label>
                 <input type="text" name="title" id="title" class="form-control" autocomplete="off" value="${detail.title}">
+                <input type="hidden" name="seq" id="seq" value="${detail.seq}">
             </div>
             <div class="form-group mt-3">
                 <label for="title"> 내용 </label>

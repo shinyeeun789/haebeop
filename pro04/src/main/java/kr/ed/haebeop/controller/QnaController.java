@@ -56,10 +56,7 @@ public class QnaController {
         Qna next = qnaService.qnaDetail(qno+1);
         model.addAttribute("prev", prev);
         model.addAttribute("next", next);
-
         model.addAttribute("curPage", request.getParameter("page"));
-        model.addAttribute("type", request.getParameter("type"));
-        model.addAttribute("keyword", request.getParameter("keyword"));
         return "/qna/qnaDetail";
     }
 

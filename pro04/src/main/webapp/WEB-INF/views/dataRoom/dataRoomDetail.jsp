@@ -10,7 +10,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> Q&A </title>
+    <title> 자료실 </title>
     <jsp:include page="../layout/head.jsp"></jsp:include>
 </head>
 <body>
@@ -23,11 +23,11 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="banner_content text-center">
-                        <h2> Q&A Detail </h2>
+                        <h2> 자료실 상세보기 </h2>
                         <div class="page_link">
                             <a href="${path}/"> Home </a>
-                            <a href="${path}/qna/list"> Q&A </a>
-                            <a href="${path}/qna/detail?qno=${detail.qno}&page=${curPage}"> Detail </a>
+                            <a href="${path}/dataRoom/list"> 자료실 </a>
+                            <a href="${path}/dataRoom/detail?articleNo=${detail.articleNo}&page=${curPage}"> Detail </a>
                         </div>
                     </div>
                 </div>
@@ -40,14 +40,11 @@
     <div class="container mb-30">
         <div class="row">
             <div class="col-lg-12 text-right">
-                <a href="${path}/qna/list?page=${curPage}"
+                <a href="${path}/dataRoom/list?page=${curPage}"
                    class="btn btn-outline-dark"> 목록 </a>
-                <c:if test="${(sid eq 'admin') or (sid eq detail.author)}">
-                    <a href="${path}/qna/edit?qno=${detail.qno}" class="btn btn-outline-dark"> 수정 </a>
-                    <a href="${path}/qna/delete?qno=${detail.qno}" class="btn btn-danger"> 삭제 </a>
-                </c:if>
-                <c:if test="${(sid eq 'admin') and (detail.lev eq 0)}">
-                    <a href="${path}/qna/answerInsert?qno=${detail.qno}" class="btn btn-dark"> 답변하기 </a>
+                <c:if test="${sid eq 'admin'}">
+                    <a href="${path}/dataRoom/edit?articleNo=${detail.articleNo}" class="btn btn-outline-dark"> 수정 </a>
+                    <a href="${path}/dataRoom/delete?articleNo=${detail.articleNo}" class="btn btn-danger"> 삭제 </a>
                 </c:if>
             </div>
             <div class="col-lg-12 posts-list">
@@ -55,9 +52,9 @@
                     <div class="col-lg-3 col-md-3">
                         <div class="blog_info text-right">
                             <ul class="blog_meta list">
-                                <li>${detail.author} &nbsp; <i class="fa-regular fa-user"></i></li>
+                                <li>${detail.id} &nbsp; <i class="fa-regular fa-user"></i></li>
                                 <li>
-                                    <fmt:parseDate value="${detail.resdate }" var="resdate" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                    <fmt:parseDate value="${detail.regdate }" var="resdate" pattern="yyyy-MM-dd HH:mm:ss"/>
                                     <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd"/>
                                     &nbsp; <i class="fa-regular fa-calendar"></i>
                                 </li>
@@ -69,6 +66,14 @@
                         <p>
                             ${detail.content}
                         </p>
+                        <div class="mt-100">
+                            <h4> 학습자료 (클릭하여 다운로드) </h4>
+                            <c:forEach var="file" items="${fileList}">
+                                <a href="${path}/resources/upload/dataRoom/${file.saveFolder}/${file.saveFile}" download="${file.originFile }" class="mr-3">
+                                    <i class="fas fa-file"></i> ${file.originFile }
+                                </a>
+                            </c:forEach>
+                        </div>
                     </div>
                 </div>
                 <div class="navigation-area">
@@ -76,16 +81,16 @@
                         <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
                             <c:if test="${not empty prev}">
                                 <div class="arrow">
-                                    <a href="${path}/qna/detail?qno=${prev.qno}&page=${curPage}" style="color: #333"><i class="fa-solid fa-angle-left"></i></a>
+                                    <a href="${path}/dataRoom/detail?articleNo=${prev.articleNo}&page=${curPage}" style="color: #333"><i class="fa-solid fa-angle-left"></i></a>
                                 </div>
                             </c:if>
                             <div class="detials ml-5">
-                                <p>이전 질의응답</p>
+                                <p>이전 공지사항</p>
                                 <c:if test="${empty prev}">
                                     <h4> 첫 번째 글입니다. </h4>
                                 </c:if>
                                 <c:if test="${not empty prev}">
-                                    <a href="${path}/qna/detail?qno=${prev.qno}&page=${curPage}">
+                                    <a href="${path}/dataRoom/detail?articleNo=${prev.articleNo}&page=${curPage}">
                                         <h4>${prev.title}</h4>
                                     </a>
                                 </c:if>
@@ -93,19 +98,19 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
                             <div class="detials mr-5">
-                                <p>다음 질의응답</p>
+                                <p>다음 공지사항</p>
                                 <c:if test="${empty next}">
                                     <h4> 마지막 글입니다. </h4>
                                 </c:if>
                                 <c:if test="${not empty next}">
-                                    <a href="${path}/qna/detail?qno=${next.qno}&page=${curPage}">
+                                    <a href="${path}/dataRoom/detail?articleNo=${next.articleNo}&page=${curPage}">
                                         <h4>${next.title}</h4>
                                     </a>
                                 </c:if>
                             </div>
                             <c:if test="${not empty next}">
                                 <div class="arrow">
-                                    <a href="${path}/qna/detail?qno=${next.qno}&page=${curPage}" style="color: #333"><i class="fa-solid fa-angle-right"></i></a>
+                                    <a href="${path}/dataRoom/detail?articleNo=${next.articleNo}&page=${curPage}" style="color: #333"><i class="fa-solid fa-angle-right"></i></a>
                                 </div>
                             </c:if>
                         </div>

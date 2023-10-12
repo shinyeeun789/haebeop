@@ -25,6 +25,12 @@ public class ApplicationConfig {
     public FaqService faqService() { return new FaqServiceImpl(); }
 
     @Bean
+    public BoardService boardService() { return new BoardServiceImpl(); }
+
+    @Bean
+    public CommentService commentService() { return new CommentServiceImpl(); }
+
+    @Bean
     public TestService testService() { return new TestServiceImpl(); }
 
     @Bean

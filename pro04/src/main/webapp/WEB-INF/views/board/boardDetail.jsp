@@ -40,8 +40,7 @@
     <div class="container mb-30">
         <div class="row">
             <div class="col-lg-12 text-right">
-                <a href="${path}/board/list?page=${curPage}<c:if test="${!empty cate}">&cate=${cate}</c:if><c:if test="${!empty keyword}">&type=${type}&keyword=${keyword}</c:if>"
-                   class="btn btn-outline-dark"> 목록 </a>
+                <a href="${path}/board/list" class="btn btn-outline-dark"> 목록 </a>
                 <c:if test="${(sid eq 'admin') or (sid eq detail.nickname)}">
                     <a href="${path}/board/edit?seq=${detail.seq}" class="btn btn-outline-dark"> 수정 </a>
                     <a href="${path}/board/delete?seq=${detail.seq}" class="btn btn-danger"> 삭제 </a>
@@ -79,7 +78,7 @@
                         <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
                             <c:if test="${not empty prev}">
                                 <div class="arrow">
-                                    <a href="${path}/board/detail?seq=${prev.seq}&page=${curPage}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>"
+                                    <a href="${path}/board/detail?seq=${prev.seq}"
                                        style="color: #333"><i class="fa-solid fa-angle-left"></i></a>
                                 </div>
                             </c:if>
@@ -89,7 +88,7 @@
                                     <h4> 첫 번째 글입니다. </h4>
                                 </c:if>
                                 <c:if test="${not empty prev}">
-                                    <a href="${path}/board/detail?seq=${prev.seq}&page=${curPage}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>">
+                                    <a href="${path}/board/detail?seq=${prev.seq}">
                                         <h4>${prev.title}</h4>
                                     </a>
                                 </c:if>
@@ -102,14 +101,14 @@
                                     <h4> 마지막 글입니다. </h4>
                                 </c:if>
                                 <c:if test="${not empty next}">
-                                    <a href="${path}/board/detail?seq=${next.seq}&page=${curPage}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>">
+                                    <a href="${path}/board/detail?seq=${next.seq}">
                                         <h4>${next.title}</h4>
                                     </a>
                                 </c:if>
                             </div>
                             <c:if test="${not empty next}">
                                 <div class="arrow">
-                                    <a href="${path}/board/detail?seq=${next.seq}&page=${curPage}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>"
+                                    <a href="${path}/board/detail?seq=${next.seq}"
                                        style="color: #333"><i class="fa-solid fa-angle-right"></i></a>
                                 </div>
                             </c:if>
@@ -125,13 +124,6 @@
                                       required=""></textarea>
                             <input type="hidden" id="seq" name="seq" value="${detail.seq}">
                             <input type="hidden" id="page" name="page" value="${curPage}">
-                            <c:if test="${!empty cate}">
-                                <input type="hidden" id="cate" name="cate" value="${cate}">
-                            </c:if>
-                            <c:if test="${!empty keyword}">
-                                <input type="hidden" id="type" name="type" value="${type}">
-                                <input type="hidden" id="keyword" name="keyword" value="${keyword}">
-                            </c:if>
                         </div>
                         <button type="submit" class="btn primary-btn"> 작성하기</button>
                     </form>
@@ -174,7 +166,7 @@
                         <a class="page-link"
                            href="${path}/board/list?page=${page.blockStartNum - 1}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>"
                            aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
+                            <span aria-hidden="true"><<</span>
                         </a>
                     </li>
                 </c:if>
@@ -199,7 +191,7 @@
                         <a class="page-link"
                            href="${path}/board/list?page=${page.blockLastNum + 1}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>"
                            aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
+                            <span aria-hidden="true">>></span>
                         </a>
                     </li>
                 </c:if>

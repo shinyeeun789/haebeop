@@ -70,6 +70,8 @@ CREATE TABLE notice (
 SELECT * FROM notice;
 
 
+
+
 -- faq 테이블 생성
 CREATE TABLE faq (
    fno INT  PRIMARY KEY AUTO_INCREMENT ,
@@ -103,23 +105,27 @@ CREATE TABLE qna(
   FOREIGN KEY(author) REFERENCES user(id) ON DELETE CASCADE);
 
 
--- 자료실
+
+-- 자료실 테이블 생성
 CREATE TABLE dataRoom (
-  dno int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  articleNo int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   id VARCHAR(20) NOT NULL,
   title varchar(100) NOT NULL,
   content varchar(2000) NOT NULL,
   regdate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-             
+SELECT * FROM dataRoom;
+SELECT * FROM fileInfo;
+
 -- 업로드 된 파일 정보 테이블 생성
 CREATE TABLE fileInfo(
-  fno int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  dno INT,
+  no int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  articleNo INT,
   saveFolder VARCHAR(300) NOT NULL,
   originFile VARCHAR(300) NOT NULL,
-  saveFile VARCHAR(300) NOT NULL
+  saveFile VARCHAR(300) NOT NULL,
+  FOREIGN KEY(articleNo) REFERENCES dataRoom(articleNo) ON DELETE CASCADE 
 );
 
 	

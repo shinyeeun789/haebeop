@@ -57,8 +57,6 @@ public class NoticeController {
         model.addAttribute("next", next);
 
         model.addAttribute("curPage", curPage);
-        model.addAttribute("type", request.getParameter("type"));
-        model.addAttribute("keyword", request.getParameter("keyword"));
         return "/notice/noticeDetail";
     }
 

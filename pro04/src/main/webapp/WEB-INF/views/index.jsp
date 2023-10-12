@@ -9,7 +9,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <link rel="icon" href="${path}/resources/img/favicon.png" type="image/png"/>
-    <title> 해법학원 </title>
+    <title> 해법 </title>
     <jsp:include page="layout/head.jsp"/>
 </head>
 

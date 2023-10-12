@@ -40,7 +40,7 @@
 <section class="blog_area single-post-area section_gap">
     <div class="container shadow mb-30 p-5">
         <h1> 글 작성하기 <i class="fa-solid fa-pencil"></i> </h1>
-        <form action="" method="post">
+        <form action="${path}/board/insert" method="post">
             <div class="row">
                 <div class="col-3">
                     <div class="form-group mt-3">

@@ -93,10 +93,6 @@ public class BoardController {
         model.addAttribute("commentList", commentList);
         model.addAttribute("curPage", curPage);
         model.addAttribute("commentPage", commentPage);
-        model.addAttribute("page", page);
-        model.addAttribute("cate", request.getParameter("cate"));
-        model.addAttribute("type", request.getParameter("type"));
-        model.addAttribute("keyword", request.getParameter("keyword"));
 
         return "/board/boardDetail";
     }
@@ -126,6 +122,7 @@ public class BoardController {
     @GetMapping("edit")
     public String editForm(HttpServletRequest request, Model model) throws Exception {
         int seq = Integer.parseInt(request.getParameter("seq"));
+        int page = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
         BoardVO detail = boardService.boardDetail(seq);
         model.addAttribute("detail", detail);
 
@@ -138,7 +135,8 @@ public class BoardController {
     @PostMapping("edit")
     public String boardEdit(Board board, HttpServletRequest request, Model model) throws Exception {
         boardService.boardEdit(board);
-        return "redirect:detail?seq="+board.getSeq()+"&page=1";
+        model.addAttribute("seq", board.getSeq());
+        return "redirect:detail";
     }
 
     //ckeditor를 이용한 이미지 업로드

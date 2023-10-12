@@ -72,7 +72,7 @@
             </thead>
             <tbody>
             <c:forEach var="qna" items="${qnaList}">
-                <tr onclick="javascript: location.href='${path}/qna/detail?qno=${qna.qno}&page=${curPage}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>'" style="cursor: pointer">
+                <tr onclick="javascript: location.href='${path}/qna/detail?qno=${qna.qno}&page=${curPage}'" style="cursor: pointer">
                     <td> ${qna.qno} </td>
                     <c:if test="${qna.lev eq 0}">
                         <td class="text-left"> ${qna.title} </td>
@@ -97,8 +97,8 @@
             <ul class="pagination justify-content-center">
                 <c:if test="${curPage > 5}">
                     <li class="page-item">
-                        <a class="page-link" href="${path}/qna/list?page=${page.blockStartNum - 1}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
+                        <a class="page-link" href="${path}/qna/list?page=${page.blockStartNum - 1}" aria-label="Previous">
+                            <span aria-hidden="true"><<</span>
                         </a>
                     </li>
                 </c:if>
@@ -106,20 +106,20 @@
                     <c:choose>
                         <c:when test="${i == curPage}">
                             <li class="page-item active" aria-current="page">
-                                <a class="page-link" href="${path}/qna/list?page=${i}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>">${i}</a>
+                                <a class="page-link" href="${path}/qna/list?page=${i}">${i}</a>
                             </li>
                         </c:when>
                         <c:otherwise>
                             <li class="page-item">
-                                <a class="page-link" href="${path}/qna/list?page=${i}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>">${i}</a>
+                                <a class="page-link" href="${path}/qna/list?page=${i}">${i}</a>
                             </li>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
                 <c:if test="${page.blockLastNum < page.totalPageCount}">
                     <li class="page-item">
-                        <a class="page-link" href="${path}/qna/list?page=${page.blockLastNum + 1}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
+                        <a class="page-link" href="${path}/qna/list?page=${page.blockLastNum + 1}" aria-label="Next">
+                            <span aria-hidden="true">>></span>
                         </a>
                     </li>
                 </c:if>

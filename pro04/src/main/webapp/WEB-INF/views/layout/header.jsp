@@ -8,7 +8,10 @@
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
                 <a class="navbar-brand logo_h" href="${path}/">
-                    <img src="${path}/resources/img/logo.png" alt=""/>
+                    <picture>
+                        <source srcset="${path}/resources/img/logo.png" media="all and (min-width: 992px)">
+                        <img src="${path}/resources/img/logo2.png" alt="해법 로고 이미지" style="height: 38px">
+                    </picture>
                 </a>
                 <button class="navbar-toggler"
                         type="button"
@@ -61,7 +64,7 @@
                                     <a class="nav-link" href="${path}/faq/list">FAQ</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="single-blog.html">자료실</a>
+                                    <a class="nav-link" href="${path}/dataRoom/list">자료실</a>
                                 </li>
                             </ul>
                         </li>

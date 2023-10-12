@@ -29,9 +29,6 @@ public class CommentController {
 
         model.addAttribute("seq", request.getParameter("seq"));
         model.addAttribute("page", request.getParameter("page"));
-        model.addAttribute("cate", request.getParameter("cate"));
-        model.addAttribute("type", request.getParameter("type"));
-        model.addAttribute("keyword", request.getParameter("keyword"));
         
         // 다른 컨트롤러의 페이지로 redirect하기
         ModelAndView mav = new ModelAndView();
@@ -46,9 +43,6 @@ public class CommentController {
 
         model.addAttribute("seq", request.getParameter("seq"));
         model.addAttribute("page", request.getParameter("page"));
-        model.addAttribute("cate", request.getParameter("cate"));
-        model.addAttribute("type", request.getParameter("type"));
-        model.addAttribute("keyword", request.getParameter("keyword"));
 
         return "redirect:/board/detail";
     }

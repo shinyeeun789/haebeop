@@ -125,7 +125,7 @@
                 <c:if test="${curPage > 5}">
                     <li class="page-item">
                         <a class="page-link" href="${path}/board/list?page=${page.blockStartNum - 1}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
+                            <span aria-hidden="true"><<</span>
                         </a>
                     </li>
                 </c:if>
@@ -146,7 +146,7 @@
                 <c:if test="${page.blockLastNum < page.totalPageCount}">
                     <li class="page-item">
                         <a class="page-link" href="${path}/board/list?page=${page.blockLastNum + 1}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
+                            <span aria-hidden="true">>></span>
                         </a>
                     </li>
                 </c:if>

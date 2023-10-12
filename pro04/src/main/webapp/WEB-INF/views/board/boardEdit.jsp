@@ -28,7 +28,7 @@
                         <div class="page_link">
                             <a href="${path}/"> Home </a>
                             <a href="${path}/board/list"> Community </a>
-                            <a href="${path}/board/edit"> Edit </a>
+                            <a href="${path}/board/edit?seq=${detail.seq}"> Edit </a>
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
 <section class="blog_area single-post-area section_gap">
     <div class="container shadow mb-30 p-5">
         <h1> 글 작성하기 <i class="fa-solid fa-pencil"></i> </h1>
-        <form action="" method="post">
+        <form action="${path}/board/edit" method="post">
             <div class="row">
                 <div class="col-3">
                     <div class="form-group mt-3">

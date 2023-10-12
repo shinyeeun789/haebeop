@@ -10,7 +10,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> 공지사항 </title>
+    <title> 자료실 </title>
     <jsp:include page="../layout/head.jsp"></jsp:include>
 </head>
 <body>
@@ -23,10 +23,10 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="banner_content text-center">
-                        <h2> Notice </h2>
+                        <h2> 자료실 </h2>
                         <div class="page_link">
                             <a href="${path}/"> Home </a>
-                            <a href="${path}/notice/list"> Notice </a>
+                            <a href="${path}/dataRoom/list"> 자료실 </a>
                         </div>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
 <section class="section">
     <div class="container p-5" style="margin: 100px auto;">
         <!-- 검색어 입력 부분 -->
-        <form action="${path}/notice/list" method="get" class="w-50 float-right">
+        <form action="${path}/dataRoom/list" method="get" class="w-50 float-right">
             <div class="row">
                 <div class="col mt-2">
                     <select id="type" name="type" class="form-select">
@@ -66,21 +66,19 @@
                 <th width="100"> # </th>
                 <th> 제목 </th>
                 <th width="210"> 작성일 </th>
-                <th width="80"> 조회수 </th>
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="notice" items="${noticeList}">
-                <tr onclick="javascript: location.href='${path}/notice/detail?seq=${notice.seq}&page=${curPage}'" style="cursor: pointer">
-                    <td> ${notice.seq} </td>
-                    <td class="text-left"> ${notice.title} </td>
-                    <td> ${notice.regdate} </td>
-                    <td> ${notice.visited} </td>
+            <c:forEach var="dataRoom" items="${dataRoomList}">
+                <tr onclick="javascript: location.href='${path}/dataRoom/detail?articleNo=${dataRoom.articleNo}&page=${curPage}'" style="cursor: pointer">
+                    <td> ${dataRoom.articleNo} </td>
+                    <td class="text-left"> ${dataRoom.title} </td>
+                    <td> ${dataRoom.regdate} </td>
                 </tr>
             </c:forEach>
-            <c:if test="${empty noticeList}">
+            <c:if test="${empty dataRoomList}">
                 <tr class="text-center">
-                    <td colspan="4"> 등록된 공지사항이 없습니다. </td>
+                    <td colspan="3"> 등록된 자료가 없습니다. </td>
                 </tr>
             </c:if>
             </tbody>
@@ -91,7 +89,7 @@
             <ul class="pagination justify-content-center">
                 <c:if test="${curPage > 5}">
                     <li class="page-item">
-                        <a class="page-link" href="${path}/notice/list?page=${page.blockStartNum - 1}" aria-label="Previous">
+                        <a class="page-link" href="${path}/dataRoom/list?page=${page.blockStartNum - 1}" aria-label="Previous">
                             <span aria-hidden="true"><<</span>
                         </a>
                     </li>
@@ -100,19 +98,19 @@
                     <c:choose>
                         <c:when test="${i == curPage}">
                             <li class="page-item active" aria-current="page">
-                                <a class="page-link" href="${path}/notice/list?page=${i}">${i}</a>
+                                <a class="page-link" href="${path}/dataRoom/list?page=${i}">${i}</a>
                             </li>
                         </c:when>
                         <c:otherwise>
                             <li class="page-item">
-                                <a class="page-link" href="${path}/notice/list?page=${i}">${i}</a>
+                                <a class="page-link" href="${path}/dataRoom/list?page=${i}">${i}</a>
                             </li>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
                 <c:if test="${page.blockLastNum < page.totalPageCount}">
                     <li class="page-item">
-                        <a class="page-link" href="${path}/notice/list?page=${page.blockLastNum + 1}" aria-label="Next">
+                        <a class="page-link" href="${path}/dataRoom/list?page=${page.blockLastNum + 1}" aria-label="Next">
                             <span aria-hidden="true">>></span>
                         </a>
                     </li>
@@ -122,7 +120,7 @@
 
         <c:if test="${sid eq 'admin'}">
             <div class="text-right">
-                <a href="${path}/notice/insert" class="btn btn-dark"> 글 작성하기 </a>
+                <a href="${path}/dataRoom/insert" class="btn btn-dark"> 글 작성하기 </a>
             </div>
         </c:if>
     </div>
