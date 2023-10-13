@@ -40,7 +40,7 @@ CREATE TABLE board(
   visited INT DEFAULT 0,
   FOREIGN KEY(cate) REFERENCES category(cate) ON DELETE CASCADE,
   FOREIGN KEY(nickname) REFERENCES user(id) ON DELETE CASCADE);
-DROP TABLE board;
+
 
 -- 커뮤니티 댓글 테이블 생성
 CREATE TABLE COMMENT(
@@ -114,10 +114,6 @@ CREATE TABLE dataRoom (
   content varchar(2000) NOT NULL,
   regdate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
-
-SELECT * FROM dataRoom
-WHERE articleNo < 4 ORDER BY articleNo DESC LIMIT 1;
-
 
 
 -- 업로드 된 파일 정보 테이블 생성

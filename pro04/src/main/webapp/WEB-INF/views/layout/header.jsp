@@ -91,7 +91,7 @@
                                 <a class="nav-link" href="${path}/user/logout">로그아웃</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="${path}/user/admin">관리자페이지</a>
+                                <a class="nav-link" href="${path}/admin/dashboard">관리자페이지</a>
                             </li>
                         </c:if>
                         <c:if test="${not empty sid and sid ne 'admin'}">
