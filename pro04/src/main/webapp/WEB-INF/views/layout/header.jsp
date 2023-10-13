@@ -26,7 +26,7 @@
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.html"> 강의 </a>
+                            <a class="nav-link" href="${path}/lecture/list"> 강의 </a>
                         </li>
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle"

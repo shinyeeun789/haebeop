@@ -1,0 +1,24 @@
+package kr.ed.haebeop.persistence;
+
+import kr.ed.haebeop.domain.Lecture;
+import kr.ed.haebeop.domain.Category;
+import kr.ed.haebeop.domain.LectureVO;
+import kr.ed.haebeop.domain.Subject;
+import kr.ed.haebeop.util.Page;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
+
+@Mapper
+public interface LectureMapper {
+    public List<LectureVO> lectureList(Page page) throws Exception;
+    public LectureVO lectureDetail(String lcode) throws Exception;
+    public void lectureInsert(Lecture dto) throws Exception;
+    public void lectureDelete(String lcode) throws Exception;
+    public void lectureEdit(Lecture dto) throws Exception;
+    public List<Category> categories() throws Exception;
+    public int getCount(Page page) throws Exception;
+    public int lectureCount() throws Exception;
+    public void countUp(String lcode) throws Exception;
+    public List<Subject> subjects() throws Exception;
+}

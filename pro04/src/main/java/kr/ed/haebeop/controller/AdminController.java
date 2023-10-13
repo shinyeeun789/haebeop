@@ -3,6 +3,7 @@ package kr.ed.haebeop.controller;
 import kr.ed.haebeop.domain.*;
 import kr.ed.haebeop.service.*;
 import kr.ed.haebeop.util.FilterPage;
+import kr.ed.haebeop.util.LecturePage;
 import kr.ed.haebeop.util.Page;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -10,13 +11,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/admin/*")
@@ -45,6 +53,12 @@ public class AdminController {
 
     @Autowired
     private WinnerService winnerService;
+
+    @Autowired
+    private LectureService lectureService;
+
+    @Autowired
+    private TeacherService teacherService;
 
     @RequestMapping("dashboard")
     public String dashboard(Model model) throws Exception {
@@ -239,6 +253,96 @@ public class AdminController {
         model.addAttribute("event", event);
 
         return "/admin/insertWinner";
+    }
+
+    @GetMapping("lectureMgmt")
+    public String lectureMgmt(HttpServletRequest request, Model model) throws Exception {
+        int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+        String scode = request.getParameter("scode");
+
+        LecturePage page = new LecturePage();
+        page.setScode(scode);
+        page.setKeyword(request.getParameter("keyword"));       // 검색 키워드 SET
+        page.setType(request.getParameter("type"));             // 검색 타입 SET
+
+        // 페이징에 필요한 데이터 저장
+        int total = lectureService.getCount(page);
+        page.makeBlock(curPage, total);
+        page.makeLastPageNum(total);
+        page.makePostStart(curPage, total);
+
+        // 강의 목록 불러오기
+        List<LectureVO> lectureList = lectureService.lectureList(page);
+        model.addAttribute("lectureList", lectureList);
+
+        // 과목 목록 불러오기
+        List<Subject> subjects = lectureService.subjects();
+        model.addAttribute("subjects", subjects);
+
+        model.addAttribute("curPage", curPage);
+        model.addAttribute("curSubject", scode);
+        model.addAttribute("page", page);
+
+        return "/admin/lectureMgmt";
+    }
+
+    @RequestMapping("lectureInsert")
+    public String lectureInsert(Model model) throws Exception {
+
+        // 과목 목록 불러오기
+        List<Subject> subjects = lectureService.subjects();
+        model.addAttribute("subjects", subjects);
+
+        // 강사 목록 불러오기
+        List<Teacher> teachers = teacherService.teacherList();
+        model.addAttribute("teachers", teachers);
+
+        return "/admin/lectureInsert";
+    }
+
+    @RequestMapping(value="lectureInsert", method=RequestMethod.POST)
+    public String lectureInsertPost(Lecture lecture, Teacher teacher, @RequestParam("upfile") MultipartFile file, HttpServletRequest request, Model model, RedirectAttributes rttr) throws Exception {
+
+        int nextLcode = lectureService.lectureCount() + 1;
+        lecture.setLcode(lecture.getScode() + nextLcode);
+
+        String realPath = request.getSession().getServletContext().getRealPath("/resources/upload/lecture/");           // 업로드 경로 설정
+        String today = new SimpleDateFormat("yyMMdd").format(new Date());
+        String saveFolder = realPath + today;
+        File folder = new File(saveFolder);
+        if(!folder.exists()) {          // 폴더가 존재하지 않으면 폴더 생성
+            folder.mkdirs();
+        }
+
+        String originalFileName = file.getOriginalFilename();       // 첨부파일의 실제 파일명
+        if(!originalFileName.isEmpty()) {
+            String saveFileName = UUID.randomUUID().toString() + originalFileName.substring(originalFileName.lastIndexOf("."));     // 파일 이름을 랜덤으로 설정
+            lecture.setSaveFolder(today);
+            lecture.setOriginFile(originalFileName);
+            lecture.setSaveFile(saveFileName);
+            file.transferTo(new File(folder, saveFileName));        // 파일을 업로드 폴더에 저장
+        }
+
+        lectureService.lectureInsert(lecture);
+
+        return "redirect:/admin/lectureMgmt";
+    }
+
+    @PostMapping("findTeacher")
+    public void findTeacher(@RequestParam String tname, HttpServletResponse response) throws Exception {
+        List<Teacher> teachers = teacherService.findTeacher(tname);
+
+        JSONArray jsonArray = new JSONArray();
+
+        for(Teacher teacher : teachers) {
+            JSONObject obj = new JSONObject();
+            obj.put("tcode", teacher.getTcode());
+            obj.put("tname", teacher.getTname());
+            jsonArray.put(obj);
+        }
+
+        PrintWriter out = response.getWriter();
+        out.println(jsonArray);
     }
 
 }

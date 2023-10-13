@@ -3525,11 +3525,11 @@ input[type=submit].btn-block {
 .input-group>.custom-file,
 .input-group>.custom-select,
 .input-group>.form-control {
-    position: relative;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    width: 1%;
-    margin-bottom: 0
+    position: relative!important;
+    -ms-flex: 1 1 auto!important;
+    flex: 1 1 auto!important;
+    width: 1%!important;
+    margin-bottom: 0!important;
 }
 
 .input-group>.custom-file+.custom-file,
@@ -3541,13 +3541,13 @@ input[type=submit].btn-block {
 .input-group>.form-control+.custom-file,
 .input-group>.form-control+.custom-select,
 .input-group>.form-control+.form-control {
-    margin-left: -1px
+    margin-left: -1px!important;
 }
 
 .input-group>.custom-file .custom-file-input:focus~.custom-file-label,
 .input-group>.custom-select:focus,
 .input-group>.form-control:focus {
-    z-index: 3
+    z-index: 3!important;
 }
 
 .input-group>.custom-file .custom-file-input:focus {
@@ -3556,14 +3556,14 @@ input[type=submit].btn-block {
 
 .input-group>.custom-select:not(:last-child),
 .input-group>.form-control:not(:last-child) {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0
+    border-top-right-radius: 0!important;
+    border-bottom-right-radius: 0!important;
 }
 
 .input-group>.custom-select:not(:first-child),
 .input-group>.form-control:not(:first-child) {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0
+    border-top-left-radius: 0!important;
+    border-bottom-left-radius: 0!important;
 }
 
 .input-group>.custom-file {
@@ -3802,47 +3802,47 @@ input[type=submit].btn-block {
 }
 
 .custom-select {
-    display: inline-block;
-    width: 100%;
-    height: calc(2.25rem + 2px);
-    padding: .375rem 1.75rem .375rem .75rem;
-    line-height: 1.5;
-    color: #495057;
-    vertical-align: middle;
-    background: #fff url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right .75rem center;
-    background-size: 8px 10px;
-    border: 1px solid #ced4da;
-    border-radius: .25rem;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none
+    display: inline-block!important;
+    width: 100%!important;
+    height: calc(2.25rem + 2px)!important;
+    padding: .375rem 1.75rem .375rem .75rem!important;
+    line-height: 1.5!important;
+    color: #495057!important;
+    vertical-align: middle!important;
+    background: #fff url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right .75rem center!important;
+    background-size: 8px 10px!important;
+    border: 1px solid #ced4da!important;
+    border-radius: .25rem!important;
+    -webkit-appearance: none!important;
+    -moz-appearance: none!important;
+    appearance: none!important;
 }
 
 .custom-select:focus {
-    border-color: #80bdff;
-    outline: 0;
-    box-shadow: 0 0 0 .2rem rgba(128, 189, 255, .5)
+    border-color: #80bdff!important;
+    outline: 0!important;
+    box-shadow: 0 0 0 .2rem rgba(128, 189, 255, .5)!important;
 }
 
 .custom-select:focus::-ms-value {
-    color: #495057;
-    background-color: #fff
+    color: #495057!important;
+    background-color: #fff!important;
 }
 
 .custom-select[multiple],
 .custom-select[size]:not([size="1"]) {
-    height: auto;
-    padding-right: .75rem;
-    background-image: none
+    height: auto!important;
+    padding-right: .75rem!important;
+    background-image: none!important;
 }
 
 .custom-select:disabled {
-    color: #6c757d;
-    background-color: #e9ecef
+    color: #6c757d!important;
+    background-color: #e9ecef!important;
 }
 
 .custom-select::-ms-expand {
-    opacity: 0
+    opacity: 0!important;
 }
 
 .custom-select-sm {
@@ -3853,10 +3853,10 @@ input[type=submit].btn-block {
 }
 
 .custom-select-lg {
-    height: calc(2.875rem + 2px);
-    padding-top: .375rem;
-    padding-bottom: .375rem;
-    font-size: 125%
+    height: calc(2.875rem + 2px)!important;
+    padding-top: .375rem!important;
+    padding-bottom: .375rem!important;
+    font-size: 125%!important;
 }
 
 .custom-file {
@@ -4064,14 +4064,14 @@ input[type=submit].btn-block {
 .custom-control-label::before,
 .custom-file-label,
 .custom-select {
-    transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
+    transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out!important;
 }
 
 @media screen and (prefers-reduced-motion:reduce) {
     .custom-control-label::before,
     .custom-file-label,
     .custom-select {
-        transition: none
+        transition: none!important;
     }
 }
 

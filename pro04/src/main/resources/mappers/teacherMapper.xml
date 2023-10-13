@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ed.haebeop.persistence.TeacherMapper">
+
+    <select id="teacherList" resultType="kr.ed.haebeop.domain.Teacher">
+        select * from teacher
+    </select>
+
+    <select id="findTeacher" resultType="kr.ed.haebeop.domain.Teacher">
+        select tcode, tname from teacher where tname like concat('%', #{tname}, '%')
+    </select>
+
+</mapper>

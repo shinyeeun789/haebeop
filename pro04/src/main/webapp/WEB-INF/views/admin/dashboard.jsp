@@ -87,6 +87,26 @@
                     </li>
                     <li class="nav-small-cap">
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                        <span class="hide-menu"> 강의관리 </span>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="${path}/admin/lectureMgmt" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-article"></i>
+                            </span>
+                            <span class="hide-menu"> 강의목록 </span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="${path}/admin/lectureInsert" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-alert-circle"></i>
+                            </span>
+                            <span class="hide-menu"> 강의등록 </span>
+                        </a>
+                    </li>
+                    <li class="nav-small-cap">
+                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                         <span class="hide-menu"> 커뮤니티관리 </span>
                     </li>
                     <li class="sidebar-item">

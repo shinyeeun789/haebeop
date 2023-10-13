@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ed.haebeop.persistence.LectureMapper">
+    <select id="lectureList" resultType="kr.ed.haebeop.domain.LectureVO">
+        SELECT lcode, lname, sname, tname, lcontent, lprice, maxStudent, sdate, edate, stime, state, classroom
+        FROM subject s JOIN lecture l ON (s.scode=l.scode) JOIN teacher t ON (t.tcode=l.tcode)
+        <where>
+            <if test="type != null">
+                <trim prefixOverrides="OR">
+                    <choose>
+                        <when test="type == 'T'.toString()">
+                            lname LIKE concat('%', #{keyword}, '%')
+                        </when>
+                        <when test="type == 'C'.toString()">
+                            lcontent LIKE concat('%', #{keyword}, '%')
+                        </when>
+                        <when test="type == 'W'.toString()">
+                            tname LIKE concat('%', #{keyword}, '%')
+                        </when>
+                    </choose>
+                </trim>
+            </if>
+            <if test="scode != null">
+                AND l.scode = #{scode}
+            </if>
+        </where>
+        order by sdate limit #{postStart}, #{postCount}
+    </select>
+
+    <!-- lecture의 전체 개수 구하기 -->
+    <select id="getCount" resultType="integer">
+        select count(*) from lecture
+        <where>
+            <if test="type != null">
+                <trim prefixOverrides="OR">
+                    <choose>
+                        <when test="type == 'T'.toString()">
+                            lname LIKE concat('%', #{keyword}, '%')
+                        </when>
+                        <when test="type == 'C'.toString()">
+                            lcontent LIKE concat('%', #{keyword}, '%')
+                        </when>
+                        <when test="type == 'W'.toString()">
+                            tname LIKE concat('%', #{keyword}, '%')
+                        </when>
+                    </choose>
+                </trim>
+            </if>
+            <if test="scode != null">
+                AND scode = #{scode}
+            </if>
+        </where>
+    </select>
+    
+    <select id="lectureDetail" resultType="kr.ed.haebeop.domain.LectureVO">
+        select lcode, cateName, title, content, nickname, regdate, visited from lecture b join category c on(b.cate=c.cate) where lcode=#{lcode}
+    </select>
+
+    <select id="lectureCount" resultType="integer">
+        select count(*) from lecture
+    </select>
+
+    <update id="lectureEdit">
+        update lecture set cate=#{cate}, title=#{title}, content=#{content} where lcode=#{lcode}
+    </update>
+
+<!--    강의코드, 강의명, 과목코드, 강사코드, 강의 소개, 강의 단가, 수강인원, 강의 썸네일(saveFolder, originFile, saveFile), 강의 시작일, 강의 종료일,-->
+<!--    (오프라인 시)강의 시작시간, 온오프 여부, 강의실-->
+    <insert id="lectureInsert">
+        insert into lecture
+        values(#{lcode}, #{lname}, #{scode}, #{tcode}, #{lcontent}, #{lprice}, #{maxStudent}, #{saveFolder}, #{originFile}, #{saveFile}, #{sdate}, #{edate}, #{stime}, #{state}, #{classroom})
+    </insert>
+    
+    <delete id="lectureDelete">
+        delete from lecture where lcode=#{lcode}
+    </delete>
+
+    <select id="subjects" resultType="kr.ed.haebeop.domain.Subject">
+        select * from subject
+    </select>
+</mapper>
