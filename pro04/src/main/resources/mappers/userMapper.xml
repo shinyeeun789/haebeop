@@ -50,6 +50,11 @@
         select count(*) from user
     </select>
 
+    <!-- 수강신청 시 포인트 차감 -->
+    <update id="minusPoint" parameterType="hashMap">
+        UPDATE user SET pt=pt-(SELECT lprice FROM lecture WHERE lcode=#{lcode}) WHERE id=#{id};
+    </update>
+
     <!-- 월별 회원 수와 출석체크 수 조회 -->
 <!--    <select id="adminChart" resultType="kr.co.teaspoon.dto.AdminChartVO">-->
 <!--        SELECT if(regMonth IS NULL,attendMonth,regMonth) AS label, if(userCnt IS NULL,0,userCnt) AS userCnt, if(attendCnt IS NULL,0,attendCnt) AS attendCnt FROM userMonth AS m LEFT JOIN attendanceMonth AS a ON m.regMonth = a.attendMonth-->

@@ -1,10 +1,7 @@
 package kr.ed.haebeop.controller;
 
 import kr.ed.haebeop.domain.*;
-import kr.ed.haebeop.service.CurriculumService;
-import kr.ed.haebeop.service.LectureService;
-import kr.ed.haebeop.service.ReviewService;
-import kr.ed.haebeop.service.TeacherService;
+import kr.ed.haebeop.service.*;
 import kr.ed.haebeop.util.LecturePage;
 import org.apache.ibatis.session.SqlSession;
 import org.json.JSONArray;
@@ -15,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -28,18 +26,18 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/lecture/*")
 public class LectureController {
-
     @Autowired
     private LectureService lectureService;
-
     @Autowired
     private TeacherService teacherService;
-
     @Autowired
     private CurriculumService curriculumService;
-
     @Autowired
     private ReviewService reviewService;
+    @Autowired
+    private RegisterService registerService;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("list")
     public String lectureList(HttpServletRequest request, Model model) throws Exception {
@@ -75,6 +73,8 @@ public class LectureController {
     @RequestMapping("detail")
     public String lectureDetail(@RequestParam String lcode, HttpServletRequest request, Model model) throws Exception {
 
+        HttpSession session = request.getSession();
+
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
         LecturePage page = new LecturePage();
         page.setLcode(lcode);
@@ -90,12 +90,14 @@ public class LectureController {
         List<Curriculum> curriculumList = curriculumService.curriculumList(page);
         List<Review> reviewList = reviewService.reviewList("new", lcode);
         int starAvg = reviewService.starAvg(lcode);
+        boolean isReg = registerService.isReg(lcode, (String) session.getAttribute("sid"));
 
         model.addAttribute("lecture", lecture);
         model.addAttribute("teacher", teacher);
         model.addAttribute("curriculumList", curriculumList);
         model.addAttribute("reviewList", reviewList);
         model.addAttribute("starAvg", starAvg);
+        model.addAttribute("isReg", isReg);
         model.addAttribute("page", page);
         model.addAttribute("curPage", curPage);
 
@@ -226,6 +228,26 @@ public class LectureController {
         review.setId((String) session.getAttribute("sid"));
         reviewService.reviewInsert(review);
         return "redirect:/lecture/detail?lcode=" + review.getLcode();
+    }
+
+    @GetMapping("register")
+    public String register(@RequestParam String lcode, HttpServletRequest request, Model model) throws Exception {
+        HttpSession session = request.getSession();
+        User user = userService.getUser((String) session.getAttribute("sid"));
+        LectureVO lecture = lectureService.lectureDetail(lcode);
+        model.addAttribute("lecture", lecture);
+        model.addAttribute("user", user);
+        return "/lecture/registerInsert";
+    }
+    @GetMapping(value="registerInsert")
+    public String registerInsert(@RequestParam String lcode, HttpServletRequest request, RedirectAttributes rttr) throws Exception {
+        HttpSession session = request.getSession();
+        String id = (String) session.getAttribute("sid");
+        String result = registerService.registerInsert(id, lcode);
+
+        rttr.addFlashAttribute("msg", result);
+
+        return "redirect:/lecture/detail?lcode=" + lcode;
     }
 
 }

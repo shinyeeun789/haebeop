@@ -33,6 +33,11 @@
             text-shadow: 0 0 0 #ffbc00;
         }
     </style>
+    <c:if test="${not empty msg}">
+        <script>
+            alert("${msg}");
+        </script>
+    </c:if>
 </head>
 <body>
 <jsp:include page="../layout/header.jsp"></jsp:include>
@@ -149,6 +154,42 @@
                             </ul>
                         </nav>
                     </div>
+                    <c:if test="${lecture.state eq 'off'}">
+                        <h4 class="title"> 위치 </h4>
+                        <div class="content">
+                            <div class="is-center">
+                                <div id="map" style="margin: 0px auto; width: 700px; height: 400px; background: white;"></div>
+                            </div>
+                        </div>
+                        <script type="text/javascript" src="http://dmaps.daum.net/map_js_init/v3.js"></script>
+                        <script type="text/javascript" src="http://s1.daumcdn.net/svc/original/U03/cssjs/jquery/jquery-1.11.0.js"></script>
+                        <script type="text/javascript" src="http://s1.daumcdn.net/svc/original/U0301/cssjs/JSON-js/fc535e9cc8/json2.min.js"></script>
+                        <script>
+                            var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+                                mapOption = {
+                                    center: new daum.maps.LatLng(37.4786713,126.8864968), // 지도의 중심좌표
+                                    level: 2 // 지도의 확대 레벨
+                                };
+                            var map = new daum.maps.Map(mapContainer, mapOption);
+                            // 마커가 표시될 위치입니다
+                            var markerPosition  = new daum.maps.LatLng(37.4786713,126.8864968);
+                            // 마커를 생성합니다
+                            var marker = new daum.maps.Marker({
+                                position: markerPosition
+                            });
+                            // 마커가 지도 위에 표시되도록 설정합니다
+                            marker.setMap(map);
+                            var iwContent = '<div style="padding:5px;">마리오아울렛 2관<br><a href="" style="color:blue;" target="_blank"></a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+                                iwPosition = new daum.maps.LatLng(37.4786713,126.8864968); //인포윈도우 표시 위치입니다
+                            // 인포윈도우를 생성합니다
+                            var infowindow = new daum.maps.InfoWindow({
+                                position : iwPosition,
+                                content : iwContent
+                            });
+                            // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+                            infowindow.open(map, marker);
+                        </script>
+                    </c:if>
                 </div>
             </div>
 
@@ -201,7 +242,12 @@
                         </li>
                     </c:if>
                 </ul>
-                <a href="#" class="primary-btn2 text-uppercase enroll rounded-0 text-white"> 수강신청 </a>
+                <c:if test="${(not empty sid) and isReg}">
+                    <a href="${path}/lecture/register?lcode=${lecture.lcode}" class="primary-btn2 text-uppercase enroll rounded-0 text-white"> 수강신청 </a>
+                </c:if>
+                <c:if test="${(empty sid) or (not isReg)}">
+                    <a href="javascript:alert('로그아웃 상태이거나 이미 수강신청 된 강의입니다.')" class="primary-btn2 text-uppercase enroll rounded-0 text-white" disabled> 수강신청 </a>
+                </c:if>
 
                 <h4 class="title"> 강의 리뷰 </h4>
                 <div class="content">
@@ -220,7 +266,7 @@
                             </div>
                         </div>
                     </div>
-                    <c:if test="${not empty sid}">
+                    <c:if test="${(not empty sid) and (not isReg)}">
                         <div class="feedeback">
                             <h6> Your Feedback </h6>
                             <form action="${path}/lecture/reviewInsert" method="post">
@@ -292,7 +338,6 @@
 
 <jsp:include page="../layout/footer.jsp"/>
 
-
 <script>
     $(document).ready(() => {
         // Ajax를 사용하여 리뷰 목록 정렬
@@ -304,7 +349,6 @@
                 type: "post",
                 dataType: "json",
                 success: function(result) {
-                    console.log(result);
                     $(".comments-area .comment-list").remove();
                     for(let idx in result) {
                         let random = parseInt(Math.random() * 4) + 1;

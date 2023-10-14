@@ -13,9 +13,6 @@ CREATE TABLE user(
   pt INT(11) DEFAULT 0,
   visited INT(11) DEFAULT 0);
 
-SELECT * FROM user;
-
-
 -- 커뮤니티 카테고리 테이블 생성
 CREATE TABLE category(
    cate VARCHAR(5) PRIMARY KEY NOT NULL,
@@ -270,6 +267,9 @@ CREATE TABLE register(
 	completed BOOLEAN DEFAULT FALSE,
 	FOREIGN KEY(id) REFERENCES user(id) ON DELETE CASCADE
 );
+
+SELECT * FROM register WHERE lcode='en2';
+SELECT IF(maxStudent=COUNT(*), FALSE, TRUE) FROM register r JOIN lecture l ON(r.lcode=l.lcode) GROUP BY r.lcode HAVING r.lcode='en2'
 
 
 -- 핵심 기능: 공지사항, 자료실, 회원, 자유게시판, 강의별 댓글,  교재와 시범강의, 결제

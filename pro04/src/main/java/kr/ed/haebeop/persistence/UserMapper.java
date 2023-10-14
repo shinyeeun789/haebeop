@@ -17,5 +17,6 @@ public interface UserMapper {
     public void userDelete(String id);
     public int userCnt();
     public void updatePt(Map<String, Object> data);
+    public void minusPoint(Map<String, String> data);
 
 }

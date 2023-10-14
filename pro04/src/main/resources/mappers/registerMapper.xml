@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ed.haebeop.persistence.RegisterMapper">
+
+    <select id="isReg" resultType="boolean" parameterType="hashMap">
+        SELECT if(COUNT(*)=1, false, true) FROM register WHERE lcode=#{lcode} AND id=#{id}
+    </select>
+
+    <select id="isMaxStudent" resultType="boolean" parameterType="hashMap">
+        SELECT IF(maxStudent=COUNT(*), FALSE, TRUE) FROM register r JOIN lecture l ON (r.lcode=l.lcode) GROUP BY r.lcode HAVING r.lcode=#{lcode}
+        UNION ALL
+        SELECT true AS result FROM DUAL LIMIT 1;
+    </select>
+
+    <insert id="registerInsert" parameterType="hashMap">
+        insert into register values(default, #{lcode}, #{id}, default, default);
+    </insert>
+
+</mapper>
