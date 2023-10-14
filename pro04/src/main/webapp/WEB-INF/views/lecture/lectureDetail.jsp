@@ -110,6 +110,9 @@
                                     </c:if>
                                 </li>
                             </c:forEach>
+                            <c:if test="${empty curriculumList}">
+                                <p class="text-center"> 등록된 커리큘럼이 없습니다. </p>
+                            </c:if>
                         </ul>
 
                         <!-- pagination -->
@@ -217,24 +220,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="feedeback">
-                        <h6> Your Feedback </h6>
-                        <form action="${path}/lecture/reviewInsert" method="post">
-                            <div class="star-wrap">
-                                <span class="my-star on" value="1">⭐</span>
-                                <span class="my-star" value="2">⭐</span>
-                                <span class="my-star" value="3">⭐</span>
-                                <span class="my-star" value="4">⭐</span>
-                                <span class="my-star" value="5">⭐</span>
-                                <input type="hidden" id="star" name="star" value="1">
-                            </div>
-                            <textarea name="content" id="content" class="form-control" cols="10" rows="10" maxlength="900"></textarea>
-                            <input type="hidden" name="lcode" id="lcode" value="${lecture.lcode}">
-                            <div class="mt-10 text-right">
-                                <button type="submit" class="primary-btn2 text-right rounded-0 text-white"> 등록하기 </button>
-                            </div>
-                        </form>
-                    </div>
+                    <c:if test="${not empty sid}">
+                        <div class="feedeback">
+                            <h6> Your Feedback </h6>
+                            <form action="${path}/lecture/reviewInsert" method="post">
+                                <div class="star-wrap">
+                                    <span class="my-star on" value="1">⭐</span>
+                                    <span class="my-star" value="2">⭐</span>
+                                    <span class="my-star" value="3">⭐</span>
+                                    <span class="my-star" value="4">⭐</span>
+                                    <span class="my-star" value="5">⭐</span>
+                                    <input type="hidden" id="star" name="star" value="1">
+                                </div>
+                                <textarea name="content" id="content" class="form-control" cols="10" rows="10" maxlength="900"></textarea>
+                                <input type="hidden" name="lcode" id="lcode" value="${lecture.lcode}">
+                                <div class="mt-10 text-right">
+                                    <button type="submit" class="primary-btn2 text-right rounded-0 text-white"> 등록하기 </button>
+                                </div>
+                            </form>
+                        </div>
+                    </c:if>
                     <c:if test="${not empty reviewList}">
                         <div class="form-group mt-3 p-1">
                             <select name="type" id="type" class="form-select">
