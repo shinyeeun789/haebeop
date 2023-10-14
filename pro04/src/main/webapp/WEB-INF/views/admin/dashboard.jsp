@@ -43,18 +43,15 @@
      data-sidebar-position="fixed" data-header-position="fixed">
     <!-- Sidebar Start -->
     <aside class="left-sidebar p-4">
-        <!-- Sidebar scroll-->
         <div>
             <div class="brand-logo d-flex align-items-center justify-content-end">
                 <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                     <i class="fa-solid fa-x"></i>
                 </div>
             </div>
-            <!-- Sidebar navigation-->
             <nav class="sidebar-nav" data-simplebar="">
                 <ul id="sidebarnav">
                     <li class="nav-small-cap">
-                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                         <span class="hide-menu">Home</span>
                     </li>
                     <li class="sidebar-item">
@@ -66,33 +63,31 @@
                         </a>
                     </li>
                     <li class="nav-small-cap">
-                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                         <span class="hide-menu"> Management </span>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="./ui-buttons.html" aria-expanded="false">
+                        <a class="sidebar-link" href="${path}/admin/userMgmt" aria-expanded="false">
                             <span>
-                                <i class="ti ti-article"></i>
+                                <i class="fa-solid fa-user"></i>
                             </span>
                             <span class="hide-menu"> 회원관리 </span>
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="./ui-alerts.html" aria-expanded="false">
+                        <a class="sidebar-link" href="${path}/admin/qnaMgmt" aria-expanded="false">
                             <span>
-                                <i class="ti ti-alert-circle"></i>
+                                <i class="fa-solid fa-circle-question"></i>
                             </span>
                             <span class="hide-menu"> 고객지원관리 </span>
                         </a>
                     </li>
                     <li class="nav-small-cap">
-                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                         <span class="hide-menu"> 강의관리 </span>
                     </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="${path}/admin/lectureMgmt" aria-expanded="false">
                             <span>
-                                <i class="ti ti-article"></i>
+                                <i class="fa-solid fa-photo-film"></i>
                             </span>
                             <span class="hide-menu"> 강의목록 </span>
                         </a>
@@ -100,61 +95,74 @@
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="${path}/admin/lectureInsert" aria-expanded="false">
                             <span>
-                                <i class="ti ti-alert-circle"></i>
+                                <i class="fa-solid fa-file-video"></i>
                             </span>
                             <span class="hide-menu"> 강의등록 </span>
                         </a>
                     </li>
                     <li class="nav-small-cap">
-                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                        <span class="hide-menu"> 강사관리 </span>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="${path}/admin/teacherMgmt" aria-expanded="false">
+                            <span>
+                                <i class="fa-solid fa-table-list"></i>
+                            </span>
+                            <span class="hide-menu"> 강사목록 </span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="${path}/admin/teacherInsert" aria-expanded="false">
+                            <span>
+                                <i class="fa-solid fa-chalkboard-user"></i>
+                            </span>
+                            <span class="hide-menu"> 강사등록 </span>
+                        </a>
+                    </li>
+                    <li class="nav-small-cap">
                         <span class="hide-menu"> 커뮤니티관리 </span>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="./authentication-login.html" aria-expanded="false">
+                        <a class="sidebar-link" href="${path}/admin/filterMgmt" aria-expanded="false">
                         <span>
-                            <i class="ti ti-login"></i>
+                            <i class="fa-solid fa-filter"></i>
                         </span>
                             <span class="hide-menu"> 필터링 단어 관리 </span>
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="./authentication-register.html" aria-expanded="false">
+                        <a class="sidebar-link" href="${path}/admin/boardMgmt" aria-expanded="false">
                         <span>
-                            <i class="ti ti-user-plus"></i>
+                            <i class="fa-solid fa-ban"></i>
                         </span>
                             <span class="hide-menu"> 규칙 위반 게시글 </span>
                         </a>
                     </li>
                     <li class="nav-small-cap">
-                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                         <span class="hide-menu"> 이벤트 관리 </span>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="./icon-tabler.html" aria-expanded="false">
+                        <a class="sidebar-link" href="${path}/admin/eventMgmt" aria-expanded="false">
                             <span>
-                                <i class="ti ti-mood-happy"></i>
+                                <i class="fa-solid fa-gifts"></i>
                             </span>
                             <span class="hide-menu"> 이벤트 관리 </span>
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="./sample-page.html" aria-expanded="false">
+                        <a class="sidebar-link" href="${path}/admin/winner" aria-expanded="false">
                             <span>
-                                <i class="ti ti-aperture"></i>
+                                <i class="fa-solid fa-star"></i>
                             </span>
                             <span class="hide-menu"> 당첨자 추첨 </span>
                         </a>
                     </li>
                 </ul>
             </nav>
-            <!-- End Sidebar navigation -->
         </div>
-        <!-- End Sidebar scroll-->
     </aside>
     <!--  Sidebar End -->
-    <!--  Main wrapper -->
     <div class="body-wrapper">
-        <!--  Header Start -->
         <header class="app-header">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <ul class="navbar-nav">
@@ -166,9 +174,7 @@
                 </ul>
             </nav>
         </header>
-        <!--  Header End -->
         <div class="container-fluid">
-            <!--  Row 1 -->
             <div class="row">
                 <div class="col-lg-8 d-flex align-items-strech">
                     <div class="card w-100">
@@ -193,7 +199,6 @@
                 <div class="col-lg-4">
                     <div class="row">
                         <div class="col-lg-12">
-                            <!-- Yearly Breakup -->
                             <div class="card overflow-hidden">
                                 <div class="card-body p-4">
                                     <h5 class="card-title mb-9 fw-semibold">Yearly Breakup</h5>
@@ -229,7 +234,6 @@
                             </div>
                         </div>
                         <div class="col-lg-12">
-                            <!-- Monthly Earnings -->
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row alig n-items-start">

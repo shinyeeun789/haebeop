@@ -38,7 +38,6 @@ public class LectureServiceImpl implements LectureService {
     @Override
     @Transactional
     public LectureVO lectureDetail(String lcode) throws Exception {
-        lectureMapper.countUp(lcode);
         return lectureMapper.lectureDetail(lcode);
     }
 

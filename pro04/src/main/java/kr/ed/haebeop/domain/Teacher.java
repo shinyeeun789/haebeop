@@ -13,8 +13,7 @@ public class Teacher {
     private String tname;
     private String ttel;
     private String temail;
-    private String saveFolder;
-    private String originFile;
+    private String tcontent;
     private String saveFile;
 
 }

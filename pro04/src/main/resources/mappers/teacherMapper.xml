@@ -8,8 +8,45 @@
         select * from teacher
     </select>
 
+    <select id="teacherListWithPage" resultType="kr.ed.haebeop.domain.Teacher">
+        SELECT * FROM teacher
+        <where>
+            <if test="keyword != null">
+                tname LIKE concat('%', #{keyword}, '%')
+            </if>
+        </where>
+        ORDER BY tcode LIMIT #{postStart}, #{postCount}
+    </select>
+
     <select id="findTeacher" resultType="kr.ed.haebeop.domain.Teacher">
         select tcode, tname from teacher where tname like concat('%', #{tname}, '%')
+    </select>
+
+    <select id="teacherDetail" resultType="kr.ed.haebeop.domain.Teacher">
+        select * from teacher where tcode = #{tcode}
+    </select>
+
+    <select id="teacherDetailWithname" resultType="kr.ed.haebeop.domain.Teacher">
+        select * from teacher where tname = #{tname}
+    </select>
+
+    <insert id="teacherInsert">
+        insert into teacher
+        values(default, #{tname}, #{ttel}, #{temail}, #{tcontent}, #{saveFile})
+    </insert>
+
+    <update id="teacherEdit">
+        update teacher set tname=#{tname}, ttel=#{ttel}, temail=#{temail}, tcontent=#{tcontent}, saveFile=#{saveFile}
+        where tcode=#{tcode}
+    </update>
+
+    <select id="getCount" resultType="integer">
+        select count(*) FROM teacher
+        <where>
+            <if test="keyword != null">
+                tname LIKE concat('%', #{keyword}, '%')
+            </if>
+        </where>
     </select>
 
 </mapper>

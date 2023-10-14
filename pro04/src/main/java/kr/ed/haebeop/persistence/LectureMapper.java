@@ -19,6 +19,5 @@ public interface LectureMapper {
     public List<Category> categories() throws Exception;
     public int getCount(Page page) throws Exception;
     public int lectureCount() throws Exception;
-    public void countUp(String lcode) throws Exception;
     public List<Subject> subjects() throws Exception;
 }

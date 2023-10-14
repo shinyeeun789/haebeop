@@ -10,8 +10,11 @@ import lombok.NoArgsConstructor;
 public class LectureVO {
 
     private String lcode;
+    private String saveFile;
     private String lname;
+    private String scode;
     private String sname;
+    private int tcode;
     private String tname;
     private String lcontent;
     private int lprice;

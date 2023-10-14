@@ -204,21 +204,21 @@ DROP TABLE lecture;
 DROP TABLE curriculum;
 DROP TABLE register;
 
--- 강사 테이블 (강사코드, 강사명, 연락처, 이메일, 강사 이미지)
+
+-- 강사 테이블 (강사코드, 강사명, 연락처, 이메일, 강사소개, 강사 이미지)
 CREATE TABLE teacher(
 	tcode INT PRIMARY KEY AUTO_INCREMENT,
 	tname VARCHAR(50) NOT NULL,
 	ttel VARCHAR(20) NOT NULL,
 	temail VARCHAR(100) NOT NULL,
-	saveFolder VARCHAR(300) NOT NULL,
-	originFile VARCHAR(300) NOT NULL,
+	tcontent VARCHAR(1000) NOT NULL,
 	saveFile VARCHAR(300) NOT NULL
 );
 
-INSERT INTO teacher
-VALUES(DEFAULT, '이강사', '010-1542-5879', 'teacherLee@edu.com', '','','');
+SELECT * FROM teacher;
 
--- 강의 테이블 (강의코드, 강의명, 과목코드, 강사코드, 강의 소개, 강의 단가, 수강인원, 강의 썸네일(saveFolder, originFile, saveFile), 강의 시작일, 강의 종료일, (오프라인 시)강의 시작시간, 온오프 여부, 강의실)
+
+-- 강의 테이블 (강의코드, 강의명, 과목코드, 강사코드, 강의 소개, 강의 단가, 수강인원, 강의 썸네일(saveFile), 강의 시작일, 강의 종료일, (오프라인 시)강의 시작시간, 온오프 여부, 강의실)
 CREATE TABLE lecture(
 	lcode VARCHAR(50) PRIMARY KEY,
 	lname VARCHAR(500) NOT NULL,
@@ -227,8 +227,6 @@ CREATE TABLE lecture(
 	lcontent VARCHAR(1000) NOT NULL,
 	lprice INT DEFAULT 0,
 	maxStudent INT DEFAULT 0,
-	saveFolder VARCHAR(300) NOT NULL,
-	originFile VARCHAR(300) NOT NULL,
 	saveFile VARCHAR(300) NOT NULL,
 	sdate DATE NOT NULL,
 	edate DATE NOT NULL,
@@ -239,19 +237,19 @@ CREATE TABLE lecture(
 	FOREIGN KEY(tcode) REFERENCES teacher(tcode)
 );
 
-SELECT lcode, lname, sname, tname, lcontent, lprice, maxStudent, sdate, edate, stime, state, classroom 
-FROM subject s JOIN lecture l ON (s.scode=l.scode) JOIN teacher t ON (t.tcode=l.tcode);
+SELECT * FROM lecture;
 
 
 -- 커리큘럼 (커리큘럼코드, 강의코드, 강좌 제목, 강의 파일, 강의 시간)
 CREATE TABLE curriculum(
 	ccode INT PRIMARY KEY AUTO_INCREMENT,
 	lcode VARCHAR(50) NOT NULL,
-	lname VARCHAR(500) NOT NULL,
-	lvideo VARCHAR(500),
-	duration TIME,
+	cname VARCHAR(500) NOT NULL,
+	cvideo VARCHAR(500)
 	FOREIGN KEY(lcode) REFERENCES lecture(lcode) ON DELETE CASCADE
 );
+
+SELECT * FROM curriculum;
 
 -- 수강(수강코드, 강의코드, 학생아이디, 수강총시간, 수강 완료여부)
 CREATE TABLE register(

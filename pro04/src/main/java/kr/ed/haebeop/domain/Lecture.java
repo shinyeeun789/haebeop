@@ -16,8 +16,6 @@ public class Lecture {
     private String lcontent;
     private int lprice;
     private int maxStudent;
-    private String saveFolder;
-    private String originFile;
     private String saveFile;
     private String sdate;
     private String edate;
