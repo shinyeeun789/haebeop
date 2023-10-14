@@ -230,10 +230,8 @@
                                     success: function(result) {
                                         $("#tcode option").remove();
                                         for(idx in result) {
-                                            console.log(result[idx].tcode);
                                             $("#tcode").append("<option value='" + result[idx].tcode + "' class='p-2'>" + result[idx].tname + "</option>");
                                         }
-                                        console.log(result);
                                     },
                                     error: function(res, text) {
                                         alert("문제가 발생하였습니다. 잠시 후 다시 시도해주세요.")

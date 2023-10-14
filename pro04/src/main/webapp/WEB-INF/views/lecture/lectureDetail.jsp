@@ -12,6 +12,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title> 강의 </title>
     <jsp:include page="../layout/head.jsp"></jsp:include>
+    <style>
+        /* 리뷰 작성 시 별점 CSS */
+        .my-star{
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            color: transparent;
+            text-shadow: 0 0 0 #f0f0f0;
+            font-size: 1.8em;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+
+        .my-star:hover {
+            text-shadow: 0 0 0 #ccc;
+        }
+
+        .my-star.on{
+            text-shadow: 0 0 0 #ffbc00;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="../layout/header.jsp"></jsp:include>
@@ -44,6 +65,8 @@
                     <img class="img-fluid" src="${path}/resources/upload/lecture/${lecture.saveFile}" alt="${lecture.lname} 이미지">
                 </div>
                 <div class="content_wrapper">
+                    <h3 class="mt-5"> ${lecture.lname} </h3>
+
                     <h4 class="title"> 강의 소개 </h4>
                     <div class="content">
                         ${lecture.lcontent}
@@ -79,44 +102,49 @@
                     <h4 class="title"> 커리큘럼 </h4>
                     <div class="content">
                         <ul class="course_list">
-                            <li class="justify-content-between d-flex">
-                                <p>Introduction Lesson</p>
-                                <a class="btn primary-btn text-uppercase" href="#">View Details</a>
-                            </li>
-                            <li class="justify-content-between d-flex">
-                                <p>Basics of HTML</p>
-                                <a class="primary-btn text-uppercase" href="#">View Details</a>
-                            </li>
-                            <li class="justify-content-between d-flex">
-                                <p>Getting Know about HTML</p>
-                                <a class="primary-btn text-uppercase" href="#">View Details</a>
-                            </li>
-                            <li class="justify-content-between d-flex">
-                                <p>Tags and Attributes</p>
-                                <a class="primary-btn text-uppercase" href="#">View Details</a>
-                            </li>
-                            <li class="justify-content-between d-flex">
-                                <p>Basics of CSS</p>
-                                <a class="primary-btn text-uppercase" href="#">View Details</a>
-                            </li>
-                            <li class="justify-content-between d-flex">
-                                <p>Getting Familiar with CSS</p>
-                                <a class="primary-btn text-uppercase" href="#">View Details</a>
-                            </li>
-                            <li class="justify-content-between d-flex">
-                                <p>Introduction to Bootstrap</p>
-                                <a class="primary-btn text-uppercase" href="#">View Details</a>
-                            </li>
-                            <li class="justify-content-between d-flex">
-                                <p>Responsive Design</p>
-                                <a class="primary-btn text-uppercase" href="#">View Details</a>
-                            </li>
-                            <li class="justify-content-between d-flex">
-                                <p>Canvas in HTML 5</p>
-                                <a class="primary-btn text-uppercase" href="#">View Details</a>
-                            </li>
-
+                            <c:forEach var="curr" items="${curriculumList}">
+                                <li class="justify-content-between d-flex">
+                                    <p>${curr.cname}</p>
+                                    <c:if test="${lecture.state eq 'on'}">
+                                        <a class="btn primary-btn text-uppercase" href="#"> 강의 듣기 </a>
+                                    </c:if>
+                                </li>
+                            </c:forEach>
                         </ul>
+
+                        <!-- pagination -->
+                        <nav aria-label="Page navigation example" class="mt-25 mb-30">
+                            <ul class="pagination justify-content-center">
+                                <c:if test="${curPage > 5}">
+                                    <li class="page-item">
+                                        <a class="page-link" href="${path}/lecture/detail?page=${page.blockStartNum - 1}" aria-label="Previous">
+                                            <span aria-hidden="true"><<</span>
+                                        </a>
+                                    </li>
+                                </c:if>
+                                <c:forEach var="i" begin="${page.blockStartNum}" end="${page.blockLastNum}">
+                                    <c:choose>
+                                        <c:when test="${i == curPage}">
+                                            <li class="page-item active" aria-current="page">
+                                                <a class="page-link" href="${path}/lecture/detail?page=${i}">${i}</a>
+                                            </li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li class="page-item">
+                                                <a class="page-link" href="${path}/lecture/detail?page=${i}">${i}</a>
+                                            </li>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                                <c:if test="${page.blockLastNum < page.totalPageCount}">
+                                    <li class="page-item">
+                                        <a class="page-link" href="${path}/lecture/detail?page=${page.blockLastNum + 1}" aria-label="Next">
+                                            <span aria-hidden="true">>></span>
+                                        </a>
+                                    </li>
+                                </c:if>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -144,7 +172,12 @@
                     <li>
                         <a class="justify-content-between d-flex">
                             <p> 타입 </p>
-                            <span> ${lecture.state} </span>
+                            <c:if test="${lecture.state eq 'on'}">
+                                <span> 온라인 </span>
+                            </c:if>
+                            <c:if test="${lecture.state eq 'off'}">
+                                <span> 오프라인 </span>
+                            </c:if>
                         </a>
                     </li>
                     <li>
@@ -167,126 +200,84 @@
                 </ul>
                 <a href="#" class="primary-btn2 text-uppercase enroll rounded-0 text-white"> 수강신청 </a>
 
-                <h4 class="title">Reviews</h4>
+                <h4 class="title"> 강의 리뷰 </h4>
                 <div class="content">
                     <div class="review-top row pt-40">
                         <div class="col-lg-12">
-                            <h6 class="mb-15">Provide Your Rating</h6>
                             <div class="d-flex flex-row reviews justify-content-between">
-                                <span>Quality</span>
+                                <span> 강의 총점 </span>
                                 <div class="star">
-                                    <i class="ti-star checked"></i>
-                                    <i class="ti-star checked"></i>
-                                    <i class="ti-star checked"></i>
-                                    <i class="ti-star"></i>
-                                    <i class="ti-star"></i>
+                                    <c:forEach begin="1" end="${starAvg}">
+                                        <i class="fa-solid fa-star" style="color: #FFDD85;"></i>
+                                    </c:forEach>
+                                    <c:forEach begin="1" end="${5 - starAvg}">
+                                        <i class="fa-regular fa-star" style="color: #FFDD85;"></i>
+                                    </c:forEach>
                                 </div>
-                                <span>Outstanding</span>
-                            </div>
-                            <div class="d-flex flex-row reviews justify-content-between">
-                                <span>Puncuality</span>
-                                <div class="star">
-                                    <i class="ti-star checked"></i>
-                                    <i class="ti-star checked"></i>
-                                    <i class="ti-star checked"></i>
-                                    <i class="ti-star"></i>
-                                    <i class="ti-star"></i>
-                                </div>
-                                <span>Outstanding</span>
-                            </div>
-                            <div class="d-flex flex-row reviews justify-content-between">
-                                <span>Quality</span>
-                                <div class="star">
-                                    <i class="ti-star checked"></i>
-                                    <i class="ti-star checked"></i>
-                                    <i class="ti-star checked"></i>
-                                    <i class="ti-star"></i>
-                                    <i class="ti-star"></i>
-                                </div>
-                                <span>Outstanding</span>
                             </div>
                         </div>
                     </div>
                     <div class="feedeback">
-                        <h6>Your Feedback</h6>
-                        <textarea name="feedback" class="form-control" cols="10" rows="10"></textarea>
-                        <div class="mt-10 text-right">
-                            <a href="#" class="primary-btn2 text-right rounded-0 text-white">Submit</a>
-                        </div>
+                        <h6> Your Feedback </h6>
+                        <form action="${path}/lecture/reviewInsert" method="post">
+                            <div class="star-wrap">
+                                <span class="my-star on" value="1">⭐</span>
+                                <span class="my-star" value="2">⭐</span>
+                                <span class="my-star" value="3">⭐</span>
+                                <span class="my-star" value="4">⭐</span>
+                                <span class="my-star" value="5">⭐</span>
+                                <input type="hidden" id="star" name="star" value="1">
+                            </div>
+                            <textarea name="content" id="content" class="form-control" cols="10" rows="10" maxlength="900"></textarea>
+                            <input type="hidden" name="lcode" id="lcode" value="${lecture.lcode}">
+                            <div class="mt-10 text-right">
+                                <button type="submit" class="primary-btn2 text-right rounded-0 text-white"> 등록하기 </button>
+                            </div>
+                        </form>
                     </div>
+                    <c:if test="${not empty reviewList}">
+                        <div class="form-group mt-3 p-1">
+                            <select name="type" id="type" class="form-select">
+                                <option value="new" selected> 최신 순 </option>
+                                <option value="desc"> 별점 높은 순 </option>
+                                <option value="asc"> 별점 낮은 순 </option>
+                            </select>
+                        </div>
+                    </c:if>
+                    <c:if test="${empty reviewList}">
+                        <div class="container-fluid mt-5 text-center">
+                            <p> 등록된 리뷰가 없습니다. </p>
+                        </div>
+                    </c:if>
                     <div class="comments-area mb-30">
-                        <div class="comment-list">
-                            <div class="single-comment single-reviews justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="img/blog/c1.jpg" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <h5><a href="#">Emilly Blunt</a>
-                                            <div class="star">
-                                                <span class="ti-star checked"></span>
-                                                <span class="ti-star checked"></span>
-                                                <span class="ti-star checked"></span>
-                                                <span class="ti-star"></span>
-                                                <span class="ti-star"></span>
-                                            </div>
-                                        </h5>
-                                        <p class="comment">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                            eiusmod tempor incididunt ut labore et dolore.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment-list">
-                            <div class="single-comment single-reviews justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="img/blog/c2.jpg" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <h5><a href="#">Elsie Cunningham</a>
-                                            <div class="star">
-                                                <span class="ti-star checked"></span>
-                                                <span class="ti-star checked"></span>
-                                                <span class="ti-star checked"></span>
-                                                <span class="ti-star"></span>
-                                                <span class="ti-star"></span>
-                                            </div>
-                                        </h5>
-                                        <p class="comment">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                            eiusmod tempor incididunt ut labore et dolore.
-                                        </p>
+                        <c:forEach var="review" items="${reviewList}">
+                            <c:set var="random" value="<%= (int) (java.lang.Math.random() * 4) + 1 %>"/>
+                            <div class="comment-list">
+                                <div class="single-comment single-reviews justify-content-between d-flex">
+                                    <div class="user justify-content-between d-flex">
+                                        <div class="thumb">
+                                            <img src="${path}/resources/img/profile0${random}.png" alt="프로필 이미지"
+                                                 style="width: 60px; height: auto;" class="rounded-circle">
+                                        </div>
+                                        <div class="desc">
+                                            <h5>${review.id}
+                                                <div class="star">
+                                                    <c:forEach begin="1" end="${review.star}">
+                                                        <i class="fa-solid fa-star" style="color: #FFDD85;"></i>
+                                                    </c:forEach>
+                                                    <c:forEach begin="1" end="${5 - review.star}">
+                                                        <i class="fa-regular fa-star" style="color: #FFDD85;"></i>
+                                                    </c:forEach>
+                                                </div>
+                                            </h5>
+                                            <p class="comment">
+                                                ${review.content}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="comment-list">
-                            <div class="single-comment single-reviews justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="img/blog/c3.jpg" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <h5><a href="#">Maria Luna</a>
-                                            <div class="star">
-                                                <span class="ti-star checked"></span>
-                                                <span class="ti-star checked"></span>
-                                                <span class="ti-star checked"></span>
-                                                <span class="ti-star"></span>
-                                                <span class="ti-star"></span>
-                                            </div>
-                                        </h5>
-                                        <p class="comment">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                            eiusmod tempor incididunt ut labore et dolore.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
                 </div>
             </div>
@@ -295,6 +286,53 @@
 </section>
 
 <jsp:include page="../layout/footer.jsp"/>
+
+
+<script>
+    $(document).ready(() => {
+        // Ajax를 사용하여 리뷰 목록 정렬
+        $("#type").change(() => {
+            let data = {"type" : $("#type").val(), "lcode" : "${lecture.lcode}"};
+            $.ajax({
+                url: "${path}/lecture/changeReview",
+                data: data,
+                type: "post",
+                dataType: "json",
+                success: function(result) {
+                    console.log(result);
+                    $(".comments-area .comment-list").remove();
+                    for(let idx in result) {
+                        let random = parseInt(Math.random() * 4) + 1;
+                        let star = result[idx].star;
+                        let tag = '<div class="comment-list"><div class="single-comment single-reviews justify-content-between d-flex"><div class="user justify-content-between d-flex">' +
+                            '<div class="thumb"><img src="${path}/resources/img/profile0' + random + '.png" alt="프로필 이미지" style="width: 60px; height: auto;" class="rounded-circle"></div>'+
+                            '<div class="desc"><h5>'+ result[idx].id + '<div class="star">';
+                        for(let idx = 0; idx < star; idx++) {
+                            tag += '<i class="fa-solid fa-star ml-1" style="color: #FFDD85;"></i>';
+                        }
+                        for(let idx = 0; idx < (5 - star); idx++) {
+                            tag += '<i class="fa-regular fa-star ml-1" style="color: #FFDD85;"></i>';
+                        }
+                        tag += '</div></h5><p class="comment">' + result[idx].content + '</p></div></div></div></div>';
+
+                        $(".comments-area").append(tag);
+                    }
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            })
+        });
+
+        // 리뷰 별점 작성
+        $(".my-star").click(function() {
+            $(this).parent().children('span').removeClass('on');
+            $(this).addClass('on').prevAll('span').addClass('on');
+            $("#star").attr("value", $(this).attr("value"));
+            return false;
+        });
+    });
+</script>
 
 </body>
 </html>

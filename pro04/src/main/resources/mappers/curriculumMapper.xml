@@ -10,20 +10,8 @@
 
     <select id="curriculumListWithPage" resultType="kr.ed.haebeop.domain.Curriculum">
         SELECT * FROM curriculum
-        <where>
-            <if test="keyword != null">
-                tname LIKE concat('%', #{keyword}, '%')
-            </if>
-        </where>
-        ORDER BY tcode LIMIT #{postStart}, #{postCount}
-    </select>
-
-    <select id="curriculumDetail" resultType="kr.ed.haebeop.domain.Curriculum">
-        select * from curriculum where tcode = #{tcode}
-    </select>
-
-    <select id="curriculumDetailWithname" resultType="kr.ed.haebeop.domain.Curriculum">
-        select * from curriculum where tname = #{tname}
+        where lcode = #{lcode}
+        ORDER BY ccode LIMIT #{postStart}, #{postCount}
     </select>
 
     <insert id="curriculumInsert">
@@ -31,18 +19,8 @@
         values(default, #{lcode}, #{cname}, #{cvideo})
     </insert>
 
-    <update id="curriculumEdit">
-        update curriculum set tname=#{tname}, ttel=#{ttel}, temail=#{temail}, tcontent=#{tcontent}, saveFile=#{saveFile}
-        where tcode=#{tcode}
-    </update>
-
     <select id="getCount" resultType="integer">
-        select count(*) FROM curriculum
-        <where>
-            <if test="keyword != null">
-                tname LIKE concat('%', #{keyword}, '%')
-            </if>
-        </where>
+        select count(*) FROM curriculum where lcode = #{lcode}
     </select>
 
 </mapper>

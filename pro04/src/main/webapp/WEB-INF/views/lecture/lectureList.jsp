@@ -84,24 +84,29 @@
             </c:forEach>
         </div>
 
-        <div class="popular_courses section_gap_top">
+        <div class="popular_courses">
             <div class="container">
                 <div class="row">
                     <c:forEach var="lecture" items="${lectureList}">
-                        <div class="col-6">
+                        <div class="col-6 mt-5">
                             <div class="single_course">
                                 <div class="course_head">
                                     <img class="img-fluid" src="${path}/resources/upload/lecture/${lecture.saveFile}" alt="${lecture.lname} 이미지" />
                                 </div>
                                 <div class="course_content">
-                                    <span class="price">${lecture.lprice}pt</span>
-                                    <span class="tag mb-4 d-inline-block">${lecture.sname}</span>
+                                    <span class="price">${lecture.sname}</span>
+                                    <span class="tag mb-4 d-inline-block">
+                                        <c:if test="${lecture.state eq 'on'}">
+                                            온라인
+                                        </c:if>
+                                        <c:if test="${lecture.state eq 'off'}">
+                                            오프라인
+                                        </c:if>
+                                    </span>
                                     <h4 class="mb-3">
                                         <a href="${path}/lecture/detail?lcode=${lecture.lcode}"> ${lecture.lname} </a>
                                     </h4>
-                                    <p>
-                                        ${lecture.lcontent}
-                                    </p>
+                                    <p> ${lecture.lcontent} </p>
                                     <div class="course_meta d-flex justify-content-lg-between align-items-lg-center flex-lg-row flex-column mt-4">
                                         <div class="authr_meta">
                                             <i class="fa-solid fa-chalkboard-user"></i>
@@ -112,8 +117,9 @@
                                                 <i class="fa-regular fa-calendar"></i> ${lecture.sdate} ~ ${lecture.edate}
                                             </span>
                                             <span class="meta_info">
-                                                <i class="fa-solid fa-user"></i> ${lecture.maxStudent}
+                                                <i class="fa-solid fa-money-check-dollar"></i> ${lecture.lprice}pt
                                             </span>
+
                                         </div>
                                     </div>
                                 </div>
@@ -121,7 +127,7 @@
                         </div>
                     </c:forEach>
                     <c:if test="${empty lectureList}">
-                        <div class="col-12 text-center">
+                        <div class="col-12 text-center mt-5">
                             <h4> 해당하는 강의가 없습니다. </h4>
                         </div>
                     </c:if>

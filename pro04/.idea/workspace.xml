@@ -11,48 +11,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a147832c-7786-4925-9520-67c97c968941" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/persistence/CurriculumMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/CurriculumService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/CurriculumServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mappers/curriculumMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/curriculumInsert.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/lectureEdit.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/teacherEdit.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/teacherInsert.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/teacherMgmt.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/lecture/lectureDetail.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/tabler-icons.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/tabler-icons.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/tabler-icons.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/tabler-icons.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/tabler-icons.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/fonts/tabler-icons.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/domain/Review.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/persistence/ReviewMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/ReviewService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/ReviewServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mappers/reviewMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../pro04.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../pro04.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/DataRoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/DataRoomController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/LectureController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/LectureController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/domain/Curriculum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/domain/Curriculum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/domain/Lecture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/domain/Lecture.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/domain/LectureVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/domain/LectureVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/domain/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/domain/Teacher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/persistence/LectureMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/persistence/LectureMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/persistence/TeacherMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/persistence/TeacherMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/LectureServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/LectureServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/TeacherService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/TeacherService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/TeacherServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/TeacherServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/lectureMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/lectureMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/teacherMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/teacherMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/dashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/dashboard.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/persistence/CurriculumMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/persistence/CurriculumMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/CurriculumService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/CurriculumService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/CurriculumServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/service/CurriculumServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/curriculumMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/curriculumMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/lectureInsert.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/lectureInsert.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/lectureMgmt.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/lectureMgmt.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/boardList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/boardList.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/lecture/lectureDetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/lecture/lectureDetail.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/lecture/lectureList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/lecture/lectureList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/admin-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/admin-style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/theme.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/theme.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/vendors/owl-carousel/owl.carousel.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendors/owl-carousel/owl.carousel.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/vendors/nice-select/css/nice-select.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendors/nice-select/css/nice-select.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -239,7 +215,7 @@
       <workItem from="1697155772153" duration="24009000" />
       <workItem from="1697213116440" duration="202000" />
       <workItem from="1697213339643" duration="3588000" />
-      <workItem from="1697253786282" duration="29085000" />
+      <workItem from="1697253786282" duration="39762000" />
     </task>
     <servers />
   </component>
@@ -272,8 +248,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/AdminController.java</url>
-          <line>482</line>
+          <line>479</line>
           <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/kr/ed/haebeop/controller/LectureController.java</url>
+          <line>226</line>
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -1,17 +1,18 @@
 package kr.ed.haebeop.controller;
 
-import kr.ed.haebeop.domain.LectureVO;
-import kr.ed.haebeop.domain.Subject;
-import kr.ed.haebeop.domain.Teacher;
+import kr.ed.haebeop.domain.*;
+import kr.ed.haebeop.service.CurriculumService;
 import kr.ed.haebeop.service.LectureService;
+import kr.ed.haebeop.service.ReviewService;
 import kr.ed.haebeop.service.TeacherService;
 import kr.ed.haebeop.util.LecturePage;
+import org.apache.ibatis.session.SqlSession;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -19,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.List;
 import java.util.UUID;
@@ -32,6 +34,12 @@ public class LectureController {
 
     @Autowired
     private TeacherService teacherService;
+
+    @Autowired
+    private CurriculumService curriculumService;
+
+    @Autowired
+    private ReviewService reviewService;
 
     @RequestMapping("list")
     public String lectureList(HttpServletRequest request, Model model) throws Exception {
@@ -65,14 +73,31 @@ public class LectureController {
     }
 
     @RequestMapping("detail")
-    public String lectureDetail(@RequestParam String lcode, Model model) throws Exception {
+    public String lectureDetail(@RequestParam String lcode, HttpServletRequest request, Model model) throws Exception {
+
+        int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+        LecturePage page = new LecturePage();
+        page.setLcode(lcode);
+
+        // 페이징에 필요한 데이터 저장
+        int total = curriculumService.getCount(page);
+        page.makeBlock(curPage, total);
+        page.makeLastPageNum(total);
+        page.makePostStart(curPage, total);
 
         LectureVO lecture = lectureService.lectureDetail(lcode);
         Teacher teacher = teacherService.teacherDetailWithname(lecture.getTname());
+        List<Curriculum> curriculumList = curriculumService.curriculumList(page);
+        List<Review> reviewList = reviewService.reviewList("new", lcode);
+        int starAvg = reviewService.starAvg(lcode);
 
         model.addAttribute("lecture", lecture);
-        model.addAttribute("lcode", lcode);
         model.addAttribute("teacher", teacher);
+        model.addAttribute("curriculumList", curriculumList);
+        model.addAttribute("reviewList", reviewList);
+        model.addAttribute("starAvg", starAvg);
+        model.addAttribute("page", page);
+        model.addAttribute("curPage", curPage);
 
         return "/lecture/lectureDetail";
     }
@@ -175,6 +200,32 @@ public class LectureController {
                 out.close();
             }
         }
+    }
+
+    @RequestMapping(value="changeReview", method= RequestMethod.POST)
+    @ResponseBody
+    public void changeReview(@RequestParam String type, @RequestParam String lcode, HttpServletResponse response, Model model) throws Exception {
+        List<Review> reviewList = reviewService.reviewList(type, lcode);
+
+        JSONArray jsonArray = new JSONArray();
+        for(Review review : reviewList) {
+            JSONObject obj = new JSONObject();
+            obj.put("id", review.getId());
+            obj.put("star", review.getStar());
+            obj.put("content", review.getContent());
+            jsonArray.put(obj);
+        }
+
+        PrintWriter out = response.getWriter();
+        out.println(jsonArray);
+    }
+
+    @RequestMapping(value="reviewInsert", method=RequestMethod.POST)
+    public String reviewInsert(Review review, HttpServletRequest request, Model model) throws Exception {
+        HttpSession session = request.getSession();
+        review.setId((String) session.getAttribute("sid"));
+        reviewService.reviewInsert(review);
+        return "redirect:/lecture/detail?lcode=" + review.getLcode();
     }
 
 }

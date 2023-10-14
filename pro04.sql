@@ -251,6 +251,16 @@ CREATE TABLE curriculum(
 
 SELECT * FROM curriculum;
 
+-- 강의 리뷰(리뷰코드, 강의코드, 학생아이디, 별점, 리뷰 내용)
+CREATE TABLE review(
+	rcode INT AUTO_INCREMENT PRIMARY KEY,
+	lcode VARCHAR(50) NOT NULL,
+	id VARCHAR(20) NOT NULL,
+	star INT NOT NULL DEFAULT 0,
+	content VARCHAR(1000) NOT NULL,
+	FOREIGN KEY (lcode) REFERENCES lecture(lcode) ON DELETE CASCADE
+);
+
 -- 수강(수강코드, 강의코드, 학생아이디, 수강총시간, 수강 완료여부)
 CREATE TABLE register(
 	rcode INT AUTO_INCREMENT PRIMARY KEY,

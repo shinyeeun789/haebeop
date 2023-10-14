@@ -19,9 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -365,7 +363,6 @@ public class AdminController {
         List<Teacher> teachers = teacherService.findTeacher(tname);
 
         JSONArray jsonArray = new JSONArray();
-
         for(Teacher teacher : teachers) {
             JSONObject obj = new JSONObject();
             obj.put("tcode", teacher.getTcode());
