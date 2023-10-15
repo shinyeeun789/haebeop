@@ -12,7 +12,6 @@ public class Register {
     private int rcode;
     private String lcode;
     private String id;
-    private String courseTime;
     private boolean completed;
 
 }

@@ -1,6 +1,8 @@
 package kr.ed.haebeop.config;
 
+import kr.ed.haebeop.util.AdminInterceptor;
 import kr.ed.haebeop.util.LectureInterceptor;
+import kr.ed.haebeop.util.UserInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -49,6 +51,8 @@ public class ServletContext implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         WebMvcConfigurer.super.addInterceptors(registry);
         registry.addInterceptor(lectureInterceptor()).addPathPatterns("/lecture/player");
+        registry.addInterceptor(new AdminInterceptor()).addPathPatterns("/admin/**");
+        registry.addInterceptor(new UserInterceptor()).addPathPatterns("/board/**");
     }
 
     @Bean

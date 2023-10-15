@@ -240,8 +240,6 @@ CREATE TABLE lecture(
 SELECT * FROM lecture;
 
 
-
-
 -- 커리큘럼 (커리큘럼코드, 강의코드, 강좌 제목, 강의 파일, 강의 시간)
 CREATE TABLE curriculum(
 	ccode INT PRIMARY KEY AUTO_INCREMENT,
@@ -270,7 +268,6 @@ CREATE TABLE register(
 	rcode INT AUTO_INCREMENT PRIMARY KEY,
 	lcode VARCHAR(50) NOT NULL,
 	id VARCHAR(20) NOT NULL,
-	courseTime TIME DEFAULT 0,
 	completed BOOLEAN DEFAULT FALSE,
 	FOREIGN KEY(id) REFERENCES user(id) ON DELETE CASCADE
 );
