@@ -3,11 +3,13 @@ package kr.ed.haebeop.service;
 import kr.ed.haebeop.domain.LectureVO;
 import kr.ed.haebeop.persistence.RegisterMapper;
 import kr.ed.haebeop.persistence.UserMapper;
+import kr.ed.haebeop.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -51,4 +53,11 @@ public class RegisterServiceImpl implements RegisterService {
     public int isPeriod(String lcode) throws Exception {
         return registerMapper.isPeriod(lcode);
     }
+
+    @Override
+    public List<LectureVO> myLectures(Page page) throws Exception {
+        return registerMapper.myLectures(page);
+    }
+
+
 }

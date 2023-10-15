@@ -271,6 +271,7 @@ CREATE TABLE register(
 	completed BOOLEAN DEFAULT FALSE,
 	FOREIGN KEY(id) REFERENCES user(id) ON DELETE CASCADE
 );
+DESC register;
 
 SELECT * FROM register;
 
@@ -286,8 +287,30 @@ CREATE TABLE studyInfo(
 );
 SELECT * FROM studyInfo;
 
+SELECT l.lcode, lname, sname, tname, lcontent, lprice, maxStudent, sdate, edate, stime, l.saveFile as saveFile, state, classroom
+FROM subject s JOIN lecture l ON (s.scode=l.scode) JOIN teacher t ON (t.tcode=l.tcode) JOIN register r ON (r.lcode = l.lcode)
+WHERE id = 'kimname1';
+
+-- 진행률 뷰 생성
+CREATE VIEW progressView AS 
+SELECT a.lcode AS lcode, sname, lname, lcontent, state, lecCnt, stdCnt, (stdCnt/lecCnt)*100 AS progress
+FROM (SELECT lcode, COUNT(*) AS lecCnt FROM curriculum GROUP BY lcode) as a 
+JOIN (SELECT lcode, COUNT(*) AS stdCnt FROM studyInfo s JOIN curriculum c ON (s.ccode = c.ccode) WHERE id='kimname1' AND completed = 1 GROUP BY lcode) AS b ON (a.lcode = b.lcode)
+JOIN lecture l ON (a.lcode = l.lcode)
+JOIN subject s ON (l.scode = s.scode);
+
+
+SELECT a.lcode AS lcode, sname, lname, lcontent, state, lecCnt, stdCnt, (stdCnt/lecCnt)*100 AS progress
+FROM (SELECT lcode, COUNT(*) AS lecCnt FROM curriculum GROUP BY lcode) as a 
+JOIN (SELECT lcode, COUNT(*) AS stdCnt FROM studyInfo s JOIN curriculum c ON (s.ccode = c.ccode) WHERE id='kimname1' AND completed = 1 GROUP BY lcode) AS b ON (a.lcode = b.lcode)
+JOIN lecture l ON (a.lcode = l.lcode)
+JOIN subject s ON (l.scode = s.scode)
+
+
+SELECT l.lcode, sname, lname, lcontent, state
+FROM lecture l JOIN register r ON (l.lcode=r.lcode) JOIN curriculum c ON (l.lcode=c.lcode) JOIN subject s ON (l.scode = s.scode)
+WHERE r.id='kimname1' GROUP BY lcode HAVING COUNT(s.scode) = 0;
+
 
 -- 핵심 기능: 공지사항, 자료실, 회원, 자유게시판, 강의별 댓글,  교재와 시범강의, 결제
 -- 부가 기능: 파일업로드, 채팅, 타계정 또는 SNS 로그인, 수강평, 달력, 가입 시 축하 이메일 보내기, 비밀번호 변경 시 이메일 보내기, 온라인 평가, 진도관리, 학습 스케줄러, 나의 강의실 등
-
--- 강의배정이란?

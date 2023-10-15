@@ -109,7 +109,6 @@ public class LectureController {
         model.addAttribute("isReg", isReg);
         model.addAttribute("page", page);
         model.addAttribute("curPage", curPage);
-        model.addAttribute("warning", request.getParameter("warning"));
 
         return "/lecture/lectureDetail";
     }

@@ -22,4 +22,31 @@
         SELECT COUNT(*) FROM lecture WHERE lcode=#{lcode} AND CURRENT_DATE BETWEEN sdate AND edate
     </select>
 
+    <select id="myLectures" resultType="kr.ed.haebeop.domain.LectureVO">
+        SELECT l.lcode as lcode, lname, sname, tname, lcontent, lprice, maxStudent, sdate, edate, stime, l.saveFile as saveFile, state, classroom
+        FROM subject s JOIN lecture l ON (s.scode=l.scode) JOIN teacher t ON (t.tcode=l.tcode) JOIN register r ON (r.lcode = l.lcode)
+        <where>
+            <if test="type != null">
+                <trim prefixOverrides="OR">
+                    <choose>
+                        <when test="type == 'T'.toString()">
+                            lname LIKE concat('%', #{keyword}, '%')
+                        </when>
+                        <when test="type == 'C'.toString()">
+                            lcontent LIKE concat('%', #{keyword}, '%')
+                        </when>
+                        <when test="type == 'W'.toString()">
+                            tname LIKE concat('%', #{keyword}, '%')
+                        </when>
+                    </choose>
+                </trim>
+            </if>
+            <if test="scode != null">
+                AND l.scode = #{scode}
+            </if>
+            AND id = #{id}
+        </where>
+        order by sdate limit #{postStart}, #{postCount}
+    </select>
+
 </mapper>
