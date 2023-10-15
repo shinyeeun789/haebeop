@@ -3913,6 +3913,25 @@ h6 {
     color: #fdc632;
 }
 
+.disable-primary-btn {
+    display: inline-block;
+    background: #eee;
+    padding: 0px 48px;
+    color: #002347;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 50px;
+    border-radius: 5px;
+    outline: none !important;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+}
+
 .primary-btn2 {
     display: inline-block;
     background: #002347;

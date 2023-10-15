@@ -30,6 +30,11 @@ public class CurriculumServiceImpl implements CurriculumService {
     }
 
     @Override
+    public Curriculum curriculumDetail(int ccode) throws Exception {
+        return curriculumMapper.curriculumDetail(ccode);
+    }
+
+    @Override
     public void curriculumInsert(List<Curriculum> curriculumList) throws Exception {
         for (Curriculum curr : curriculumList) {
             curriculumMapper.curriculumInsert(curr);

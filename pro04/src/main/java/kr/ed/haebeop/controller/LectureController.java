@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,6 +39,8 @@ public class LectureController {
     private RegisterService registerService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private StudyInfoService studyInfoService;
 
     @RequestMapping("list")
     public String lectureList(HttpServletRequest request, Model model) throws Exception {
@@ -74,6 +77,7 @@ public class LectureController {
     public String lectureDetail(@RequestParam String lcode, HttpServletRequest request, Model model) throws Exception {
 
         HttpSession session = request.getSession();
+        String sid = (String) session.getAttribute("sid");
 
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
         LecturePage page = new LecturePage();
@@ -90,7 +94,12 @@ public class LectureController {
         List<Curriculum> curriculumList = curriculumService.curriculumList(page);
         List<Review> reviewList = reviewService.reviewList("new", lcode);
         int starAvg = reviewService.starAvg(lcode);
-        boolean isReg = registerService.isReg(lcode, (String) session.getAttribute("sid"));
+        boolean isReg = registerService.isReg(lcode, sid);
+
+        if(sid != null) {
+            List<Integer> studyInfoList = studyInfoService.getStudyList(sid, lcode);
+            model.addAttribute("studyInfoList", studyInfoList);
+        }
 
         model.addAttribute("lecture", lecture);
         model.addAttribute("teacher", teacher);
@@ -248,6 +257,36 @@ public class LectureController {
         rttr.addFlashAttribute("msg", result);
 
         return "redirect:/lecture/detail?lcode=" + lcode;
+    }
+
+    @GetMapping("player")
+    public String player(@RequestParam int ccode, HttpServletRequest request, Model model) throws Exception {
+
+        Curriculum curriculum = curriculumService.curriculumDetail(ccode);
+        model.addAttribute("curriculum", curriculum);
+
+        HttpSession session = request.getSession();
+        String sid = (String) session.getAttribute("sid");
+        StudyInfo studyInfo = studyInfoService.studyInfoDetail(sid, ccode);
+        model.addAttribute("studyInfo", studyInfo);
+
+        // 동영상 시청 시작
+        userService.updateIsStudy(sid, true);
+
+        return "/lecture/player";
+    }
+
+    @PostMapping("closeLecture")
+    @Transactional
+    public void closeLecture(StudyInfo studyInfo, HttpServletRequest request, Model model) throws Exception {
+
+        // 동영상 시청 종료
+        HttpSession session = request.getSession();
+        userService.updateIsStudy((String) session.getAttribute("sid"), false);
+
+        // 동영상 시청 위치 저장
+        studyInfo.setId((String) session.getAttribute("sid"));
+        studyInfoService.studyInfoInsert(studyInfo);
     }
 
 }

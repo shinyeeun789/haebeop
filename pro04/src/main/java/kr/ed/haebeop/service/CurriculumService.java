@@ -10,6 +10,7 @@ public interface CurriculumService {
     public List<Curriculum> curriculumList(String lcode) throws Exception;
     public List<Curriculum> curriculumList(Page page) throws Exception;
     public int getCount(Page page) throws Exception;
+    public Curriculum curriculumDetail(int ccode) throws Exception;
     public void curriculumInsert(List<Curriculum> curriculumList) throws Exception;
 
 }

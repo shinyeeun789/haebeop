@@ -11,7 +11,10 @@ CREATE TABLE user(
   regdate DATETIME DEFAULT CURRENT_TIMESTAMP(),
   birth DATE,
   pt INT(11) DEFAULT 0,
-  visited INT(11) DEFAULT 0);
+  visited INT(11) DEFAULT 0,
+  isStudy BOOLEAN DEFAULT false);
+  
+SELECT * FROM user;
 
 -- 커뮤니티 카테고리 테이블 생성
 CREATE TABLE category(
@@ -228,7 +231,7 @@ CREATE TABLE lecture(
 	sdate DATE NOT NULL,
 	edate DATE NOT NULL,
 	stime TIME,
-	state VARCHAR(10) CHECK(state IN ('on', 'off')),
+	state VARCHAR(10) CHECK(state IN ('on', 'off', 'close')),
 	classroom VARCHAR(10),
 	FOREIGN KEY(scode) REFERENCES SUBJECT(scode),
 	FOREIGN KEY(tcode) REFERENCES teacher(tcode)
@@ -258,6 +261,9 @@ CREATE TABLE review(
 	FOREIGN KEY (lcode) REFERENCES lecture(lcode) ON DELETE CASCADE
 );
 
+SELECT * FROM review;
+DELETE FROM review WHERE rcode = 8;
+
 -- 수강(수강코드, 강의코드, 학생아이디, 수강총시간, 수강 완료여부)
 CREATE TABLE register(
 	rcode INT AUTO_INCREMENT PRIMARY KEY,
@@ -268,8 +274,23 @@ CREATE TABLE register(
 	FOREIGN KEY(id) REFERENCES user(id) ON DELETE CASCADE
 );
 
-SELECT * FROM register WHERE lcode='en2';
-SELECT IF(maxStudent=COUNT(*), FALSE, TRUE) FROM register r JOIN lecture l ON(r.lcode=l.lcode) GROUP BY r.lcode HAVING r.lcode='en2'
+SELECT * FROM register;
+
+-- 수강생 강의 수강 정보 테이블
+CREATE TABLE studyInfo(
+	scode INT AUTO_INCREMENT PRIMARY KEY,
+	ccode INT NOT NULL,
+	id VARCHAR(20) NOT NULL,
+	studyTime DOUBLE DEFAULT 0,
+	completed BOOLEAN DEFAULT FALSE,
+	FOREIGN KEY(id) REFERENCES user(id) ON DELETE CASCADE,
+	FOREIGN KEY(ccode) REFERENCES curriculum(ccode) ON DELETE CASCADE
+);
+
+SELECT * FROM studyInfo;
+
+INSERT INTO studyInfo
+VALUES(DEFAULT, 4, 'kimname1', 2.35342, 0);
 
 
 -- 핵심 기능: 공지사항, 자료실, 회원, 자유게시판, 강의별 댓글,  교재와 시범강의, 결제

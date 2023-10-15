@@ -102,6 +102,9 @@
                                         <c:if test="${lecture.state eq 'off'}">
                                             오프라인
                                         </c:if>
+                                        <c:if test="${lecture.state eq 'close'}">
+                                            <span> 폐강 </span>
+                                        </c:if>
                                     </span>
                                     <h4 class="mb-3">
                                         <a href="${path}/lecture/detail?lcode=${lecture.lcode}"> ${lecture.lname} </a>

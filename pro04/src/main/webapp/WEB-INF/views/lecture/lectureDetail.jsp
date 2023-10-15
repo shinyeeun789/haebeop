@@ -75,6 +75,9 @@
                     <h4 class="title"> 강의 소개 </h4>
                     <div class="content">
                         ${lecture.lcontent}
+                        <c:if test="${lecture.state eq 'off'}">
+                            <p style="color: red"> <i class="fa-solid fa-triangle-exclamation"></i> 오프라인 강의는 수강신청 인원이 5명 이하일 경우 폐강됩니다. </p>
+                        </c:if>
                     </div>
 
                     <h4 class="title"> 강사 소개 </h4>
@@ -109,9 +112,18 @@
                         <ul class="course_list">
                             <c:forEach var="curr" items="${curriculumList}">
                                 <li class="justify-content-between d-flex">
-                                    <p>${curr.cname}</p>
-                                    <c:if test="${lecture.state eq 'on'}">
-                                        <a class="btn primary-btn text-uppercase" href="#"> 강의 듣기 </a>
+                                    <p class="pt-3"> ${curr.cname}
+                                        <c:if test="${fn:contains(studyInfoList, curr.ccode)}">
+                                            <span class="badge badge-pill badge-warning ml-2"> 수강 완료 </span>
+                                        </c:if>
+                                    </p>
+
+                                    <c:if test="${lecture.state eq 'on' and (empty sid or isReg)}">
+                                        <button class="btn disable-primary-btn text-uppercase" disabled> 강의 듣기 </button>
+                                    </c:if>
+                                    <c:if test="${(lecture.state eq 'on') and (not empty sid) and (not isReg)}">
+                                        <button onclick="openLecture(${curr.ccode})"
+                                                class="btn primary-btn text-uppercase"> 강의 듣기 </button>
                                     </c:if>
                                 </li>
                             </c:forEach>
@@ -221,6 +233,9 @@
                             </c:if>
                             <c:if test="${lecture.state eq 'off'}">
                                 <span> 오프라인 </span>
+                            </c:if>
+                            <c:if test="${lecture.state eq 'close'}">
+                                <span> 폐강 </span>
                             </c:if>
                         </a>
                     </li>
@@ -381,6 +396,27 @@
             return false;
         });
     });
+</script>
+
+<!-- 동영상 플레이어 팝업 열기 -->
+<script>
+    function openLecture(ccode) {
+        let screenSizeWidth,screenSizeHeight;
+        if (self.screen) {
+            screenSizeWidth = screen.width ;
+            screenSizeHeight = screen.height;
+        }
+        let documentURL = "${path}/lecture/player?ccode=" + ccode;    //팝업창에 출력될 페이지 URL
+        let windowname = "강의 플레이어";
+        let intWidth = screenSizeWidth;
+        let intHeight = screenSizeHeight;
+        let intXOffset = 0 ;
+        let intYOffset = 0 ;
+
+        let obwindow = window.open(documentURL,windowname, " toolbar=no, location=no, directories=no, status=no, menubar=no, resizable=no") ;
+        obwindow.resizeTo(intWidth, intHeight) ;
+        obwindow.moveTo(intXOffset, intYOffset);
+    }
 </script>
 
 </body>

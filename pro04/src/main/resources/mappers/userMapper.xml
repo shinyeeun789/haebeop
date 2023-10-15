@@ -15,7 +15,7 @@
     <!-- 회원가입 -->
     <insert id="userInsert">
         insert into user
-        values(#{id},#{pw},#{name},#{email},#{tel},#{addr1},#{addr2},#{postcode},default,#{birth},default,default)
+        values(#{id},#{pw},#{name},#{email},#{tel},#{addr1},#{addr2},#{postcode},default,#{birth},default,default,default)
     </insert>
 
     <!-- 로그인 -->
@@ -53,6 +53,11 @@
     <!-- 수강신청 시 포인트 차감 -->
     <update id="minusPoint" parameterType="hashMap">
         UPDATE user SET pt=pt-(SELECT lprice FROM lecture WHERE lcode=#{lcode}) WHERE id=#{id};
+    </update>
+
+    <!-- 현재 스트리밍 중인지 여부 업데이트 -->
+    <update id="updateIsStudy">
+        UPDATE user SET isStudy = #{isStudy} WHERE id=#{id}
     </update>
 
     <!-- 월별 회원 수와 출석체크 수 조회 -->

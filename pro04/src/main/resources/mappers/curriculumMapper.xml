@@ -23,4 +23,8 @@
         select count(*) FROM curriculum where lcode = #{lcode}
     </select>
 
+    <select id="curriculumDetail" resultType="kr.ed.haebeop.domain.Curriculum">
+        SELECT ccode, l.lcode as lcode, lname, cname, cvideo FROM curriculum c JOIN lecture l ON (c.lcode=l.lcode) WHERE ccode=#{ccode}
+    </select>
+
 </mapper>
