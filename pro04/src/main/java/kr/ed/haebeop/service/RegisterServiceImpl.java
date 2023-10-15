@@ -47,4 +47,8 @@ public class RegisterServiceImpl implements RegisterService {
         return "수강인원이 마감되어 수강신청할 수 없습니다.";
     }
 
+    @Override
+    public int isPeriod(String lcode) throws Exception {
+        return registerMapper.isPeriod(lcode);
+    }
 }

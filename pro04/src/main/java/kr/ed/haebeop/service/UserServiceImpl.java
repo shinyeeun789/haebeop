@@ -73,6 +73,11 @@ public class UserServiceImpl implements UserService {
         userMapper.updateIsStudy(data);
     }
 
+    @Override
+    public boolean getIsStudy(String id) throws Exception {
+        return userMapper.getIsStudy(id);
+    }
+
     //    @Override
 //    public List<AdminChartVO> adminChart() throws Exception {
 //        return userMapper.adminChart();

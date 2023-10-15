@@ -14,5 +14,7 @@ public interface CurriculumMapper {
     public int getCount(Page page) throws Exception;
     public Curriculum curriculumDetail(int ccode) throws Exception;
     public void curriculumInsert(Curriculum curriculum) throws Exception;
+    public String findLcode(int ccode) throws Exception;
+
 
 }

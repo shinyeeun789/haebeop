@@ -240,6 +240,8 @@ CREATE TABLE lecture(
 SELECT * FROM lecture;
 
 
+
+
 -- 커리큘럼 (커리큘럼코드, 강의코드, 강좌 제목, 강의 파일, 강의 시간)
 CREATE TABLE curriculum(
 	ccode INT PRIMARY KEY AUTO_INCREMENT,
@@ -262,7 +264,6 @@ CREATE TABLE review(
 );
 
 SELECT * FROM review;
-DELETE FROM review WHERE rcode = 8;
 
 -- 수강(수강코드, 강의코드, 학생아이디, 수강총시간, 수강 완료여부)
 CREATE TABLE register(
@@ -286,11 +287,7 @@ CREATE TABLE studyInfo(
 	FOREIGN KEY(id) REFERENCES user(id) ON DELETE CASCADE,
 	FOREIGN KEY(ccode) REFERENCES curriculum(ccode) ON DELETE CASCADE
 );
-
 SELECT * FROM studyInfo;
-
-INSERT INTO studyInfo
-VALUES(DEFAULT, 4, 'kimname1', 2.35342, 0);
 
 
 -- 핵심 기능: 공지사항, 자료실, 회원, 자유게시판, 강의별 댓글,  교재와 시범강의, 결제

@@ -15,6 +15,7 @@ public interface UserService {
     public void userDelete(String id) throws Exception;
     public int userCnt() throws Exception;
     public void updateIsStudy(String id, boolean isStudy) throws Exception;
+    public boolean getIsStudy(String id) throws Exception;
 
 //    public List<AdminChartVO> adminChart() throws Exception;
 }

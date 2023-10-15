@@ -33,7 +33,8 @@ public class UserController {
 
     // 로그인 폼 로딩
     @GetMapping("login")
-    public String login(Model model) throws Exception {
+    public String login(HttpServletRequest request, Model model) throws Exception {
+        model.addAttribute("warning", request.getParameter("warning"));
         return "/user/login";
     }
 

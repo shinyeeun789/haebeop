@@ -27,4 +27,8 @@
         SELECT ccode, l.lcode as lcode, lname, cname, cvideo FROM curriculum c JOIN lecture l ON (c.lcode=l.lcode) WHERE ccode=#{ccode}
     </select>
 
+    <select id="findLcode" resultType="String">
+        SELECT lcode FROM curriculum WHERE ccode = #{ccode}
+    </select>
+
 </mapper>

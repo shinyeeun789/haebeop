@@ -40,4 +40,9 @@ public class CurriculumServiceImpl implements CurriculumService {
             curriculumMapper.curriculumInsert(curr);
         }
     }
+
+    @Override
+    public String findLcode(int ccode) throws Exception {
+        return curriculumMapper.findLcode(ccode);
+    }
 }

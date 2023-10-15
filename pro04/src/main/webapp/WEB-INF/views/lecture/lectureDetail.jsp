@@ -33,11 +33,13 @@
             text-shadow: 0 0 0 #ffbc00;
         }
     </style>
-    <c:if test="${not empty msg}">
-        <script>
-            alert("${msg}");
-        </script>
-    </c:if>
+    <script>
+        $(document).ready(() => {
+            <c:if test="${not empty msg}">
+                alert("${msg}");
+            </c:if>
+        });
+    </script>
 </head>
 <body>
 <jsp:include page="../layout/header.jsp"></jsp:include>
@@ -122,7 +124,7 @@
                                         <button class="btn disable-primary-btn text-uppercase" disabled> 강의 듣기 </button>
                                     </c:if>
                                     <c:if test="${(lecture.state eq 'on') and (not empty sid) and (not isReg)}">
-                                        <button onclick="openLecture(${curr.ccode})"
+                                        <button onclick="openLecture(${curr.ccode}, '${curr.lcode}')"
                                                 class="btn primary-btn text-uppercase"> 강의 듣기 </button>
                                     </c:if>
                                 </li>
@@ -400,7 +402,7 @@
 
 <!-- 동영상 플레이어 팝업 열기 -->
 <script>
-    function openLecture(ccode) {
+    function openLecture(ccode, lcode) {
         let screenSizeWidth,screenSizeHeight;
         if (self.screen) {
             screenSizeWidth = screen.width ;

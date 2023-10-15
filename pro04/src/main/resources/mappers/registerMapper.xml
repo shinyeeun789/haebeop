@@ -18,4 +18,8 @@
         insert into register values(default, #{lcode}, #{id}, default, default);
     </insert>
 
+    <select id="isPeriod" resultType="int">
+        SELECT COUNT(*) FROM lecture WHERE lcode=#{lcode} AND CURRENT_DATE BETWEEN sdate AND edate
+    </select>
+
 </mapper>

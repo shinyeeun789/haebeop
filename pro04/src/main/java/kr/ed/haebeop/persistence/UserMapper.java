@@ -19,5 +19,6 @@ public interface UserMapper {
     public void updatePt(Map<String, Object> data) throws Exception;
     public void minusPoint(Map<String, String> data) throws Exception;
     public void updateIsStudy(Map<String, Object> data) throws Exception;
+    public boolean getIsStudy(String id) throws Exception;
 
 }

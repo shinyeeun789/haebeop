@@ -12,5 +12,6 @@ public interface CurriculumService {
     public int getCount(Page page) throws Exception;
     public Curriculum curriculumDetail(int ccode) throws Exception;
     public void curriculumInsert(List<Curriculum> curriculumList) throws Exception;
+    public String findLcode(int ccode) throws Exception;
 
 }

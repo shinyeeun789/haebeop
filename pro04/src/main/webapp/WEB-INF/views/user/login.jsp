@@ -14,11 +14,11 @@
     <title> 로그인 </title>
     <jsp:include page="../layout/head.jsp" />
     <script type="text/javascript">
-        <c:if test="${msg == 0}">
-            $(document).ready(() => {
+        $(document).ready(() => {
+            <c:if test="${msg == 0}">
                 $("#msg").html("<i class='fa-solid fa-circle-exclamation'></i> 아이디 또는 비밀번호가 틀렸습니다");
-            });
-        </c:if>
+            </c:if>
+        });
     </script>
 </head>
 <body>
