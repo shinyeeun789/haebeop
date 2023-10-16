@@ -47,7 +47,7 @@
                 </div>
                 <div class="col ml-3 p-3">
                     <div class="pl-5 pr-5 pt-3">
-                        <h2> <i class="fa-solid fa-video"></i> 나의 강의실 </h2>
+                        <h2> <i class="fa-solid fa-video"></i> &nbsp; 나의 강의실 </h2>
                         <div class="popular_courses pb-2">
                             <div class="row">
                                 <c:forEach var="lecture" items="${lectureList}">

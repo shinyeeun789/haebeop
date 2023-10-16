@@ -12,13 +12,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>회원가입</title>
     <jsp:include page="../layout/head.jsp"></jsp:include>
-    <script type="text/javascript">
-        <c:if test="${msg == 0}">
-        $(document).ready(() => {
-            $("#msg").html("<i class='fa-solid fa-circle-exclamation'></i> 아이디 또는 비밀번호가 틀렸습니다");
-        });
-        </c:if>
-    </script>
 </head>
 <body>
 <jsp:include page="../layout/header.jsp"></jsp:include>

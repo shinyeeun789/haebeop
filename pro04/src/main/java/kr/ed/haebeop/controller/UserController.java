@@ -135,7 +135,7 @@ public class UserController {
             user.setPw(pwEncoder.encode(user.getPw()));
         }
         userService.userEdit(user);
-        return "redirect:mypage";
+        return "redirect:myPage";
     }
 
     @RequestMapping(value="myPage", method=RequestMethod.GET)

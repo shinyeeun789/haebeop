@@ -53,7 +53,7 @@
                 <form action="${path}/user/login" method="post">
                     <div class="form-group mt-3">
                         <label for="id"> ID </label>
-                        <input type="text" name="id" id="id" class="form-control" autocomplete="off" value="${cookie.userID.value}">
+                        <input type="text" name="id" id="id" class="form-control" autocomplete="off" value="${cookie.userID.value}" autofocus>
                     </div>
                     <div class="form-group mt-3">
                         <label for="pw"> Password </label>
