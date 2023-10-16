@@ -78,7 +78,7 @@
                     <div class="content">
                         ${lecture.lcontent}
                         <c:if test="${lecture.state eq 'off'}">
-                            <p style="color: red"> <i class="fa-solid fa-triangle-exclamation"></i> 오프라인 강의는 수강신청 인원이 5명 이하일 경우 폐강됩니다. </p>
+                            <p style="color: red"> <i class="fa-solid fa-triangle-exclamation"></i> 오프라인 강의는 수강신청 인원이 5명 이하일 경우 폐강될 수 있습니다. </p>
                         </c:if>
                     </div>
 
@@ -259,12 +259,7 @@
                         </li>
                     </c:if>
                 </ul>
-                <c:if test="${(not empty sid) and isReg}">
-                    <a href="${path}/lecture/register?lcode=${lecture.lcode}" class="primary-btn2 text-uppercase enroll rounded-0 text-white"> 수강신청 </a>
-                </c:if>
-                <c:if test="${(empty sid) or (not isReg)}">
-                    <a href="javascript:alert('로그아웃 상태이거나 이미 수강신청 된 강의입니다.')" class="primary-btn2 text-uppercase enroll rounded-0 text-white" disabled> 수강신청 </a>
-                </c:if>
+                <a href="${path}/lecture/register?lcode=${lecture.lcode}" class="primary-btn2 text-uppercase enroll rounded-0 text-white"> 수강신청 </a>
 
                 <h4 class="title"> 강의 리뷰 </h4>
                 <div class="content">

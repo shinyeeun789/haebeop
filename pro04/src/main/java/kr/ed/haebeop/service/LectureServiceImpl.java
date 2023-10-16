@@ -1,9 +1,6 @@
 package kr.ed.haebeop.service;
 
-import kr.ed.haebeop.domain.Lecture;
-import kr.ed.haebeop.domain.LectureVO;
-import kr.ed.haebeop.domain.Category;
-import kr.ed.haebeop.domain.Subject;
+import kr.ed.haebeop.domain.*;
 import kr.ed.haebeop.persistence.LectureMapper;
 import kr.ed.haebeop.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +44,20 @@ public class LectureServiceImpl implements LectureService {
     }
 
     @Override
-    public void lectureDelete(String lcode) throws Exception {
-        lectureMapper.lectureDelete(lcode);
+    public List<CloseLecture> closeList(Page page) throws Exception {
+        return lectureMapper.closeList(page);
+    }
+    @Override
+    public int getCloseCount() throws Exception {
+        return lectureMapper.getCloseCount();
+    }
+
+    @Override
+    public void closeLecture(String lcode, String state) throws Exception {
+        Map<String, String> data = new HashMap<>();
+        data.put("lcode", lcode);
+        data.put("state", state);
+        lectureMapper.closeLecture(data);
     }
 
     @Override
@@ -61,4 +70,8 @@ public class LectureServiceImpl implements LectureService {
         return lectureMapper.subjects();
     }
 
+    @Override
+    public boolean comparePeriod(String lcode) throws Exception {
+        return lectureMapper.comparePeriod(lcode);
+    }
 }

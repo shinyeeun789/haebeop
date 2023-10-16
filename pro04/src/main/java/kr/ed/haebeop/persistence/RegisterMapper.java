@@ -1,6 +1,7 @@
 package kr.ed.haebeop.persistence;
 
 import kr.ed.haebeop.domain.LectureVO;
+import kr.ed.haebeop.domain.UserProgress;
 import kr.ed.haebeop.util.Page;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -15,5 +16,6 @@ public interface RegisterMapper {
     public void registerInsert(Map<String, String> data) throws Exception;
     public int isPeriod(String lcode) throws Exception;
     public List<LectureVO> myLectures(Page page) throws Exception;
+    public List<UserProgress> progressList(String id) throws Exception;
 
 }

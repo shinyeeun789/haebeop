@@ -93,6 +93,14 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
+                        <a class="sidebar-link" href="${path}/admin/closeLectureMgmt" aria-expanded="false">
+                            <span>
+                                <i class="fa-solid fa-circle-xmark"></i>
+                            </span>
+                            <span class="hide-menu"> 폐강관리 </span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
                         <a class="sidebar-link" href="${path}/admin/lectureInsert" aria-expanded="false">
                             <span>
                                 <i class="fa-solid fa-file-video"></i>

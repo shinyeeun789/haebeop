@@ -2,7 +2,7 @@ package kr.ed.haebeop.config;
 
 import kr.ed.haebeop.util.AdminInterceptor;
 import kr.ed.haebeop.util.LectureInterceptor;
-import kr.ed.haebeop.util.UserInterceptor;
+import kr.ed.haebeop.util.RegisterInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -51,13 +51,18 @@ public class ServletContext implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         WebMvcConfigurer.super.addInterceptors(registry);
         registry.addInterceptor(lectureInterceptor()).addPathPatterns("/lecture/player");
+        registry.addInterceptor(registerInterceptor()).addPathPatterns("/lecture/register");
         registry.addInterceptor(new AdminInterceptor()).addPathPatterns("/admin/**");
-        registry.addInterceptor(new UserInterceptor()).addPathPatterns("/board/**");
     }
 
     @Bean
     public LectureInterceptor lectureInterceptor() {
         // Interceptor 안에서 Service를 사용하기 위해 스프링에서 관리할 수 있도록 Bean으로 설정
         return new LectureInterceptor();
+    }
+
+    @Bean
+    public RegisterInterceptor registerInterceptor() {
+        return new RegisterInterceptor();
     }
 }

@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,12 +10,17 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> 강사관리 </title>
+    <title> 강의관리 </title>
     <jsp:include page="../layout/head.jsp"></jsp:include>
-
     <!-- 관리자 페이지 CSS 적용 -->
-    <link rel="stylesheet" href="${path}/resources/css/admin-style.css" />
-    <link rel="stylesheet" href="${path}/resources/vendors/simplebar/dist/simplebar.css" />
+    <link rel="stylesheet" href="${path}/resources/css/admin-style.css"/>
+    <link rel="stylesheet" href="${path}/resources/vendors/simplebar/dist/simplebar.css"/>
+
+    <c:if test="${not empty msg}">
+        <script>
+            alert('${msg}');
+        </script>
+    </c:if>
 </head>
 <body>
 <jsp:include page="../layout/header.jsp"></jsp:include>
@@ -27,11 +32,11 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="banner_content text-center">
-                        <h2> teacher </h2>
+                        <h2> Lecture </h2>
                         <div class="page_link">
                             <a href="${path}/"> Home </a>
                             <a href="${path}/admin"> Admin </a>
-                            <a href="${path}/admin/teacherMgmt"> Teacher </a>
+                            <a href="${path}/admin/closeLectureMgmt"> Lecture </a>
                         </div>
                     </div>
                 </div>
@@ -92,7 +97,7 @@
                             <span class="hide-menu"> 강의목록 </span>
                         </a>
                     </li>
-                    <li class="sidebar-item">
+                    <li class="sidebar-item active">
                         <a class="sidebar-link" href="${path}/admin/closeLectureMgmt" aria-expanded="false">
                             <span>
                                 <i class="fa-solid fa-circle-xmark"></i>
@@ -111,7 +116,7 @@
                     <li class="nav-small-cap">
                         <span class="hide-menu"> 강사관리 </span>
                     </li>
-                    <li class="sidebar-item active">
+                    <li class="sidebar-item">
                         <a class="sidebar-link" href="${path}/admin/teacherMgmt" aria-expanded="false">
                             <span>
                                 <i class="fa-solid fa-table-list"></i>
@@ -182,55 +187,53 @@
             </nav>
         </header>
         <div class="container-fluid">
-            <div class="d-flex justify-content-end">
-                <!-- 검색어 입력 부분 -->
-                <form action="${path}/admin/teacherMgmt" method="get" class="w-50 mb-5">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="keyword" name="keyword" placeholder="검색할 강사명을 입력해주세요" autocomplete="off" aria-label="검색어를 입력해주세요" aria-describedby="button-addon2" value="${page.keyword}">
-                        <div class="input-group-append">
-                            <button class="btn btn-dark" type="submit" id="button-addon2"> 검색 </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
             <table class="table table-hover text-center">
                 <thead>
-                    <tr>
-                        <th width="100"> # </th>
-                        <th> 강사명 </th>
-                        <th width="210"> 연락처 </th>
-                        <th width="210"> 이메일 </th>
-                        <th width="150"> 비고 </th>
-                    </tr>
+                <tr>
+                    <th width="100"> 과목명 </th>
+                    <th> 강좌명 </th>
+                    <th width="130"> 시작일 </th>
+                    <th width="130"> 종료일 </th>
+                    <th width="100"> 신청인원 </th>
+                    <th width="190"> 비고 </th>
+                </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="teacher" items="${teacherList}">
-                    <tr>
-                        <td class="align-middle"> ${teacher.tcode} </td>
-                        <td class="align-middle"> ${teacher.tname} </td>
-                        <td class="align-middle"> ${teacher.ttel} </td>
-                        <td class="align-middle"> ${teacher.temail} </td>
-                        <td class="align-middle">
-                            <a href="${path}/admin/teacherEdit?tcode=${teacher.tcode}" class="btn btn-dark"> 수정 </a>
+                <c:forEach var="lecture" items="${closeList}">
+                    <tr onclick="location.href='${path}/lecture/detail?lcode=${lecture.lcode}'"
+                        style="cursor: pointer">
+                        <td class="align-middle"> ${lecture.sname} </td>
+                        <td class="text-left align-middle"> ${lecture.lname} </td>
+                        <td class="align-middle"> ${lecture.sdate} </td>
+                        <td class="align-middle"> ${lecture.edate} </td>
+                        <td class="align-middle"> ${lecture.regCnt} </td>
+                        <td class="align-middle pr-0 pl-0">
+                            <c:if test="${lecture.state eq 'off'}">
+                                <a href="${path}/admin/closeLecture?lcode=${lecture.lcode}&state=close" class="btn btn-danger">
+                                    폐강 </a>
+                            </c:if>
+                            <c:if test="${lecture.state eq 'close'}">
+                                <a href="${path}/admin/closeLecture?lcode=${lecture.lcode}&state=off" class="btn btn-dark">
+                                    폐강 취소 </a>
+                            </c:if>
                         </td>
                     </tr>
                 </c:forEach>
-                <c:if test="${empty teacherList}">
+                <c:if test="${empty closeList}">
                     <tr class="text-center">
-                        <td colspan="5"> 등록된 강사가 없습니다. </td>
+                        <td colspan="6"> 폐강이 필요한 강의가 없습니다.</td>
                     </tr>
                 </c:if>
                 </tbody>
             </table>
-
             <!-- pagination -->
             <nav aria-label="Page navigation example" class="mt-25 mb-30">
                 <ul class="pagination justify-content-center">
                     <c:if test="${curPage > 5}">
                         <li class="page-item">
-                            <a class="page-link" href="${path}/admin/teacherMgmt?page=${page.blockStartNum - 1}" aria-label="Previous">
-                                <span aria-hidden="true"> << </span>
+                            <a class="page-link" href="${path}/admin/lectureMgmt?page=${page.blockStartNum - 1}"
+                               aria-label="Previous">
+                                <span aria-hidden="true"><<</span>
                             </a>
                         </li>
                     </c:if>
@@ -238,20 +241,21 @@
                         <c:choose>
                             <c:when test="${i == curPage}">
                                 <li class="page-item active" aria-current="page">
-                                    <a class="page-link" href="${path}/admin/teacherMgmt?page=${i}">${i}</a>
+                                    <a class="page-link" href="${path}/admin/lectureMgmt?page=${i}">${i}</a>
                                 </li>
                             </c:when>
                             <c:otherwise>
                                 <li class="page-item">
-                                    <a class="page-link" href="${path}/admin/teacherMgmt?page=${i}">${i}</a>
+                                    <a class="page-link" href="${path}/admin/lectureMgmt?page=${i}">${i}</a>
                                 </li>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
                     <c:if test="${page.blockLastNum < page.totalPageCount}">
                         <li class="page-item">
-                            <a class="page-link" href="${path}/admin/teacherMgmt?page=${page.blockLastNum + 1}" aria-label="Next">
-                                <span aria-hidden="true"> >> </span>
+                            <a class="page-link" href="${path}/admin/lectureMgmt?page=${page.blockLastNum + 1}"
+                               aria-label="Next">
+                                <span aria-hidden="true">>></span>
                             </a>
                         </li>
                     </c:if>

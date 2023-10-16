@@ -305,6 +305,40 @@ public class AdminController {
         return "redirect:/admin/lectureMgmt";
     }
 
+    @RequestMapping("closeLectureMgmt")
+    public String closeLectureMgmt(HttpServletRequest request, Model model) throws Exception {
+
+        int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+        LecturePage page = new LecturePage();
+
+        // 페이징에 필요한 데이터 저장
+        int total = lectureService.getCloseCount();
+        page.makeBlock(curPage, total);
+        page.makeLastPageNum(total);
+        page.makePostStart(curPage, total);
+
+        List<CloseLecture> closeList = lectureService.closeList(page);
+        model.addAttribute("closeList", closeList);
+
+        model.addAttribute("curPage", curPage);
+        model.addAttribute("page", page);
+
+        return "/admin/closeLectureMgmt";
+    }
+
+    @RequestMapping("closeLecture")
+    public String closeLecture(@RequestParam String lcode, @RequestParam String state, RedirectAttributes rttr) throws Exception {
+
+        lectureService.closeLecture(lcode, state);
+        if(state.equals("close")) {
+            rttr.addFlashAttribute("msg", "강의가 폐강되었습니다.");
+        } else {
+            rttr.addFlashAttribute("msg", "폐강 취소되었습니다.");
+        }
+
+        return "redirect:/admin/closeLectureMgmt";
+    }
+
     @RequestMapping("lectureEdit")
     public String lectureEditForm(@RequestParam String lcode, HttpServletRequest request, Model model) throws Exception {
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;

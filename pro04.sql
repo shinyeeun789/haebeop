@@ -15,6 +15,8 @@ CREATE TABLE user(
   isStudy BOOLEAN DEFAULT false);
   
 SELECT * FROM user;
+UPDATE user SET pw='$2a$10$KXY.EhEskta7wG/HvMSeZ.CQ4FuGQZOmaHTL2eZPnidD6AUvc.rUS'
+WHERE id='admin';
 
 -- 커뮤니티 카테고리 테이블 생성
 CREATE TABLE category(
@@ -68,7 +70,6 @@ CREATE TABLE notice (
 );
 
 SELECT * FROM notice;
-
 
 -- faq 테이블 생성
 CREATE TABLE faq (
@@ -287,29 +288,16 @@ CREATE TABLE studyInfo(
 );
 SELECT * FROM studyInfo;
 
-SELECT l.lcode, lname, sname, tname, lcontent, lprice, maxStudent, sdate, edate, stime, l.saveFile as saveFile, state, classroom
-FROM subject s JOIN lecture l ON (s.scode=l.scode) JOIN teacher t ON (t.tcode=l.tcode) JOIN register r ON (r.lcode = l.lcode)
-WHERE id = 'kimname1';
+SELECT l.lcode as lcode, sname, lname, sdate, edate, COUNT(*) AS 'regCnt', state FROM lecture l JOIN subject s ON (l.scode=s.scode) left outer JOIN register r ON (r.lcode=l.lcode)
+WHERE sdate BETWEEN CURRENT_DATE AND (CURRENT_DATE + 7) AND state IN ('off','close') GROUP BY r.lcode HAVING COUNT(*) < 5;
 
--- 진행률 뷰 생성
-CREATE VIEW progressView AS 
-SELECT a.lcode AS lcode, sname, lname, lcontent, state, lecCnt, stdCnt, (stdCnt/lecCnt)*100 AS progress
-FROM (SELECT lcode, COUNT(*) AS lecCnt FROM curriculum GROUP BY lcode) as a 
-JOIN (SELECT lcode, COUNT(*) AS stdCnt FROM studyInfo s JOIN curriculum c ON (s.ccode = c.ccode) WHERE id='kimname1' AND completed = 1 GROUP BY lcode) AS b ON (a.lcode = b.lcode)
-JOIN lecture l ON (a.lcode = l.lcode)
-JOIN subject s ON (l.scode = s.scode);
+SELECT COUNT(lcode) FROM (
+SELECT l.lcode, COUNT(*) FROM lecture l left outer JOIN register r ON (r.lcode=l.lcode)
+WHERE sdate BETWEEN CURRENT_DATE AND (CURRENT_DATE + 7) AND state = 'off' GROUP BY r.lcode HAVING COUNT(*) < 5) AS a
 
 
-SELECT a.lcode AS lcode, sname, lname, lcontent, state, lecCnt, stdCnt, (stdCnt/lecCnt)*100 AS progress
-FROM (SELECT lcode, COUNT(*) AS lecCnt FROM curriculum GROUP BY lcode) as a 
-JOIN (SELECT lcode, COUNT(*) AS stdCnt FROM studyInfo s JOIN curriculum c ON (s.ccode = c.ccode) WHERE id='kimname1' AND completed = 1 GROUP BY lcode) AS b ON (a.lcode = b.lcode)
-JOIN lecture l ON (a.lcode = l.lcode)
-JOIN subject s ON (l.scode = s.scode)
+SELECT * FROM lecture;
 
-
-SELECT l.lcode, sname, lname, lcontent, state
-FROM lecture l JOIN register r ON (l.lcode=r.lcode) JOIN curriculum c ON (l.lcode=c.lcode) JOIN subject s ON (l.scode = s.scode)
-WHERE r.id='kimname1' GROUP BY lcode HAVING COUNT(s.scode) = 0;
 
 
 -- 핵심 기능: 공지사항, 자료실, 회원, 자유게시판, 강의별 댓글,  교재와 시범강의, 결제

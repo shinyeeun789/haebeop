@@ -39,19 +39,47 @@
                     <c:set var="random" value="<%= (int) (java.lang.Math.random() * 4) + 1 %>"/>
                     <img src="${path}/resources/img/profile0${random}.png" alt="프로필 이미지"
                          style="width: 60px; height: auto;">
-                    <h3 class="mt-20"> ${user.name} 님 </h3>
-                    <p> <i class="fa-solid fa-envelope"></i> ${user.email} </p>
-                    <p> <i class="fa-solid fa-phone"></i> ${user.tel} </p>
-                    <p> <i class="fa-solid fa-cake-candles"></i> ${user.birth} </p>
+                    <h3 class="mt-20 mb-4"> ${user.name} 님 </h3>
+                    <hr>
+                    <h4 class="d-flex justify-content-between mt-4 text-warning"> <i class="fa-solid fa-sack-dollar"></i> <span> ${user.pt} 포인트 </span></h4>
+                    <hr>
+                    <p class="d-flex justify-content-between mt-4"> <i class="fa-solid fa-envelope"></i> ${user.email} </p>
+                    <p class="d-flex justify-content-between"> <i class="fa-solid fa-phone"></i> ${user.tel} </p>
+                    <p class="d-flex justify-content-between"> <i class="fa-solid fa-cake-candles"></i> ${user.birth} </p>
+                    <p class="d-flex justify-content-between"> <i class="fa-solid fa-location-dot"></i> ${user.addr1} </p>
+                    <p class="d-flex justify-content-end"> ${user.addr2} </p>
                     <a href="${path}/user/edit" class="btn btn-dark"> 개인정보 변경 </a>
                 </div>
                 <div class="col ml-3 p-3">
                     <div class="pl-5 pr-5 pt-3">
+                        <h2> <i class="fa-solid fa-pen"></i> &nbsp; 최근 학습한 강의 </h2>
+                        <div class="row">
+                            <c:forEach var="progress" items="${progressList}">
+                                <div class="col-6 mt-3">
+                                    <div class="bg-light p-4 border-bottom">
+                                        <h4> 강의명 </h4>
+                                        <a href="${path}/lecture/detail?lcode=${progress.lcode}"
+                                           class="btn btn-link p-0"> ${progress.lname} </a>
+                                        <p class="mt-3"> ${progress.lcontent} </p>
+                                        <div class="progress mt-3">
+                                            <div class="progress-bar color-1" role="progressbar" style="width: ${progress.progress}%" aria-valuenow="${progress.progress}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <p class="badge pl-0"> 진도율: ${progress.stdCnt}강 / ${progress.lecCnt}강 (${progress.progress}%) </p>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                            <c:if test="${empty progressList}">
+                                <p class="text-center p-3"> 최근에 학습한 강의가 없습니다. </p>
+                            </c:if>
+                        </div>
+                    </div>
+
+                    <div class="pl-5 pr-5 pt-3 mt-5">
                         <h2> <i class="fa-solid fa-video"></i> &nbsp; 나의 강의실 </h2>
                         <div class="popular_courses pb-2">
                             <div class="row">
                                 <c:forEach var="lecture" items="${lectureList}">
-                                    <div class="col-6 mt-5">
+                                    <div class="col-6 mt-3">
                                         <div class="single_course">
                                             <div class="course_head">
                                                 <img class="img-fluid" src="${path}/resources/upload/lecture/${lecture.saveFile}" alt="${lecture.lname} 이미지" />
@@ -130,14 +158,6 @@
                             </ul>
                         </nav>
                     </div>
-
-                    <div class="pl-5 pr-5 pt-3">
-
-                    </div>
-
-                    최근 학습 강의
-
-                    출석율
                 </div>
             </div>
         </div>

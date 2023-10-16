@@ -3,6 +3,7 @@ package kr.ed.haebeop.controller;
 import kr.ed.haebeop.domain.Lecture;
 import kr.ed.haebeop.domain.LectureVO;
 import kr.ed.haebeop.domain.User;
+import kr.ed.haebeop.domain.UserProgress;
 import kr.ed.haebeop.service.LectureService;
 import kr.ed.haebeop.service.RegisterService;
 import kr.ed.haebeop.service.UserService;
@@ -162,6 +163,10 @@ public class UserController {
         // 수강신청 목록 불러오기
         List<LectureVO> myLecture = registerService.myLectures(page);
         model.addAttribute("lectureList", myLecture);
+
+        // 최근 학습 목록 불러오기
+        List<UserProgress> progressList = registerService.progressList(id);
+        model.addAttribute("progressList", progressList);
 
         model.addAttribute("curPage", curPage);
         model.addAttribute("page", page);

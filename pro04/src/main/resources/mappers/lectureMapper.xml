@@ -25,6 +25,7 @@
             <if test="scode != null">
                 AND l.scode = #{scode}
             </if>
+            AND state != 'close'
         </where>
         order by sdate limit #{postStart}, #{postCount}
     </select>
@@ -75,12 +76,36 @@
         insert into lecture
         values(#{lcode}, #{lname}, #{scode}, #{tcode}, #{lcontent}, #{lprice}, #{maxStudent}, #{saveFile}, #{sdate}, #{edate}, #{stime}, #{state}, #{classroom})
     </insert>
-    
-    <delete id="lectureDelete">
-        delete from lecture where lcode=#{lcode}
-    </delete>
+
+    <!-- 폐강 위기 과목 목록 -->
+    <select id="closeList" resultType="kr.ed.haebeop.domain.CloseLecture">
+        <![CDATA[
+        SELECT l.lcode as lcode, sname, lname, sdate, edate, COUNT(*) AS 'regCnt', state FROM lecture l JOIN subject s ON (l.scode=s.scode) left outer JOIN register r ON (r.lcode=l.lcode)
+        WHERE sdate BETWEEN CURRENT_DATE AND (CURRENT_DATE + 7) AND state IN ('off','close') GROUP BY r.lcode HAVING COUNT(*) < 5
+            ORDER BY sdate limit #{postStart}, #{postCount}
+        ]]>
+    </select>
+
+    <select id="getCloseCount" resultType="int">
+        <![CDATA[
+        SELECT COUNT(lcode) FROM (
+        SELECT l.lcode, COUNT(*) FROM lecture l left outer JOIN register r ON (r.lcode=l.lcode)
+        WHERE sdate BETWEEN CURRENT_DATE AND (CURRENT_DATE + 7) AND state IN ('off','close') GROUP BY r.lcode HAVING COUNT(*) < 5) AS a
+        ]]>
+    </select>
+
+    <update id="closeLecture">
+        UPDATE lecture SET state=#{state} where lcode=#{lcode}
+    </update>
 
     <select id="subjects" resultType="kr.ed.haebeop.domain.Subject">
         select * from subject order by sname
     </select>
+
+    <select id="comparePeriod" resultType="boolean">
+        <![CDATA[
+            SELECT (sdate < CURRENT_DATE) FROM lecture WHERE lcode=#{lcode}
+        ]]>
+    </select>
+
 </mapper>
