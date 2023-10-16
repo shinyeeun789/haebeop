@@ -55,9 +55,6 @@ CREATE TABLE COMMENT(
    FOREIGN KEY(nickname) REFERENCES user(id) ON DELETE CASCADE
 );
 
-SELECT * FROM comment;
-
-
 
 -- 공지사항 테이블 생성
 CREATE TABLE notice (
@@ -69,7 +66,6 @@ CREATE TABLE notice (
    visited INT DEFAULT 0
 );
 
-SELECT * FROM notice;
 
 -- faq 테이블 생성
 CREATE TABLE faq (
@@ -102,7 +98,6 @@ CREATE TABLE qna(
   lev INT DEFAULT 0, 									-- 질문(0), 답변(1)
   par INT DEFAULT 0,													-- 질문(자신 레코드의 qno), 답변(질문의 글번호)
   FOREIGN KEY(author) REFERENCES user(id) ON DELETE CASCADE);
-
 
 
 -- 자료실 테이블 생성
@@ -139,9 +134,6 @@ CREATE TABLE event (
    cnt INT DEFAULT 0 NOT NULL
 );
 
--- 이벤트 더미데이터 생성
-SELECT * FROM EVENT;
-
 
 -- 회원의 이벤트 접수
 create table apply(
@@ -153,6 +145,7 @@ create table apply(
    foreign key(eno) references event(eno) on delete cascade,
    FOREIGN KEY(id) references user(id) on delete CASCADE);
 
+
 -- 당첨자 리스트
 create table winnerList(
    appno int auto_increment primary key not null,			
@@ -162,8 +155,6 @@ create table winnerList(
    tel varchar(13),													
    foreign key(eno) references event(eno) on delete cascade,
    FOREIGN key(id) references user(id) on delete cascade);
-
-SELECT * FROM winnerList;
 
 
 --당첨자 발표 글
@@ -176,17 +167,20 @@ create table winner(
    resdate datetime default CURRENT_TIMESTAMP,	/* 작성일 */
    FOREIGN key(eno) references event(eno));
 
+
 -- 출석체크 테이블
 CREATE TABLE attendance (
    ano INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
    id VARCHAR(20),
    attend DATE DEFAULT current_date);
 	
+	
 -- 과목 테이블 (과목코드, 과목명)
 CREATE TABLE subject(
 	scode VARCHAR(10) PRIMARY KEY,
 	sname VARCHAR(200) NOT NULL
 );
+
 
 -- 과목 테이블 더미데이터
 INSERT INTO SUBJECT
@@ -200,11 +194,6 @@ VALUES('so', '사회');
 INSERT INTO SUBJECT
 VALUES('sc', '과학');
 
-DROP TABLE teacher;
-DROP TABLE lecture;
-DROP TABLE curriculum;
-DROP TABLE register;
-
 
 -- 강사 테이블 (강사코드, 강사명, 연락처, 이메일, 강사소개, 강사 이미지)
 CREATE TABLE teacher(
@@ -215,8 +204,6 @@ CREATE TABLE teacher(
 	tcontent VARCHAR(1000) NOT NULL,
 	saveFile VARCHAR(300) NOT NULL
 );
-
-SELECT * FROM teacher;
 
 
 -- 강의 테이블 (강의코드, 강의명, 과목코드, 강사코드, 강의 소개, 강의 단가, 수강인원, 강의 썸네일(saveFile), 강의 시작일, 강의 종료일, (오프라인 시)강의 시작시간, 온오프 여부, 강의실)
@@ -238,8 +225,6 @@ CREATE TABLE lecture(
 	FOREIGN KEY(tcode) REFERENCES teacher(tcode)
 );
 
-SELECT * FROM lecture;
-
 
 -- 커리큘럼 (커리큘럼코드, 강의코드, 강좌 제목, 강의 파일, 강의 시간)
 CREATE TABLE curriculum(
@@ -249,8 +234,6 @@ CREATE TABLE curriculum(
 	cvideo VARCHAR(500)
 	FOREIGN KEY(lcode) REFERENCES lecture(lcode) ON DELETE CASCADE
 );
-
-SELECT * FROM curriculum;
 
 -- 강의 리뷰(리뷰코드, 강의코드, 학생아이디, 별점, 리뷰 내용)
 CREATE TABLE review(
@@ -262,8 +245,6 @@ CREATE TABLE review(
 	FOREIGN KEY (lcode) REFERENCES lecture(lcode) ON DELETE CASCADE
 );
 
-SELECT * FROM review;
-
 -- 수강(수강코드, 강의코드, 학생아이디, 수강총시간, 수강 완료여부)
 CREATE TABLE register(
 	rcode INT AUTO_INCREMENT PRIMARY KEY,
@@ -272,9 +253,6 @@ CREATE TABLE register(
 	completed BOOLEAN DEFAULT FALSE,
 	FOREIGN KEY(id) REFERENCES user(id) ON DELETE CASCADE
 );
-DESC register;
-
-SELECT * FROM register;
 
 -- 수강생 강의 수강 정보 테이블
 CREATE TABLE studyInfo(
@@ -286,17 +264,6 @@ CREATE TABLE studyInfo(
 	FOREIGN KEY(id) REFERENCES user(id) ON DELETE CASCADE,
 	FOREIGN KEY(ccode) REFERENCES curriculum(ccode) ON DELETE CASCADE
 );
-SELECT * FROM studyInfo;
-
-SELECT l.lcode as lcode, sname, lname, sdate, edate, COUNT(*) AS 'regCnt', state FROM lecture l JOIN subject s ON (l.scode=s.scode) left outer JOIN register r ON (r.lcode=l.lcode)
-WHERE sdate BETWEEN CURRENT_DATE AND (CURRENT_DATE + 7) AND state IN ('off','close') GROUP BY r.lcode HAVING COUNT(*) < 5;
-
-SELECT COUNT(lcode) FROM (
-SELECT l.lcode, COUNT(*) FROM lecture l left outer JOIN register r ON (r.lcode=l.lcode)
-WHERE sdate BETWEEN CURRENT_DATE AND (CURRENT_DATE + 7) AND state = 'off' GROUP BY r.lcode HAVING COUNT(*) < 5) AS a
-
-
-SELECT * FROM lecture;
 
 
 
