@@ -74,7 +74,7 @@
 
                         <label for="tel" class="label mt-3"> 전화번호 </label>
                         <input type="tel" class="form-control" id="tel" name="tel" placeholder="000-0000-0000 형식으로 입력해주세요" autocomplete="off"
-                               pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" required>
+                               pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" maxlength="13" required>
 
                         <label for="addr2" class="label mt-3"> 주소 </label>
                         <input type="text" class="form-control" id="addr1" name="addr1" placeholder="기본 주소를 입력해주세요" autocomplete="off" readonly>
@@ -90,6 +90,7 @@
 
                         <label for="tel" class="label mt-3"> 생년월일 </label>
                         <input type="date" class="form-control" max="${maxDate}" id="birth" name="birth" placeholder="생년월일을 입력해주세요" autocomplete="off" required>
+                        <input type="hidden" id="userType" name="userType" value="${userType}">
 
                         <div class="text-right mt-4">
                             <button type="submit" class="btn btn-primary btn-lg" style="width: 100%"> 회원가입 </button>

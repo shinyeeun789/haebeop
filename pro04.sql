@@ -10,9 +10,13 @@ CREATE TABLE user(
   postcode VARCHAR(10),
   regdate DATETIME DEFAULT CURRENT_TIMESTAMP(),
   birth DATE,
+  userType VARCHAR(100), 
   pt INT(11) DEFAULT 0,
   visited INT(11) DEFAULT 0,
   isStudy BOOLEAN DEFAULT false);
+
+SELECT * FROM user;
+
   
 SELECT * FROM user;
 UPDATE user SET pw='$2a$10$KXY.EhEskta7wG/HvMSeZ.CQ4FuGQZOmaHTL2eZPnidD6AUvc.rUS'
@@ -242,8 +246,10 @@ CREATE TABLE review(
 	id VARCHAR(20) NOT NULL,
 	star INT NOT NULL DEFAULT 0,
 	content VARCHAR(1000) NOT NULL,
+	regdate DATE DEFAULT CURRENT_DATE,
 	FOREIGN KEY (lcode) REFERENCES lecture(lcode) ON DELETE CASCADE
 );
+
 
 -- 수강(수강코드, 강의코드, 학생아이디, 수강총시간, 수강 완료여부)
 CREATE TABLE register(

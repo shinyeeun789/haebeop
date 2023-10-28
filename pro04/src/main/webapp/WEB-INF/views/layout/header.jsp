@@ -83,7 +83,7 @@
                                 <a class="nav-link" href="${path}/user/login">로그인</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="${path}/user/term">회원가입</a>
+                                <a class="nav-link" href="${path}/user/joinType">회원가입</a>
                             </li>
                         </c:if>
                         <c:if test="${not empty sid and sid eq 'admin'}">

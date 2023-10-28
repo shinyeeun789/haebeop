@@ -14,5 +14,6 @@ public class Review {
     private String id;
     private int star;
     private String content;
+    private String regdate;
 
 }

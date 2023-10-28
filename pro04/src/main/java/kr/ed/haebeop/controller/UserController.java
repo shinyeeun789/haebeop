@@ -80,21 +80,29 @@ public class UserController {
         return "redirect:/";
     }
 
+    // 회원 타입 선택 화면 로딩
+    @GetMapping("joinType")
+    public String joinType(Model model) throws Exception {
+        return "/user/joinType";
+    }
+
     // 회원약관 화면 로딩
     @GetMapping("term")
-    public String term(Model model) throws Exception {
+    public String term(@RequestParam String userType, Model model) throws Exception {
+        model.addAttribute("userType", userType);
         return "/user/term";
     }
 
     // 회원가입 폼 로딩
     @GetMapping("join")
-    public String join(Model model) throws Exception {
+    public String join(@RequestParam String userType, Model model) throws Exception {
+        model.addAttribute("userType", userType);
         return "/user/join";
     }
 
     // 회원가입
     @RequestMapping(value="join", method= RequestMethod.POST)
-    public String joinPro(User user, ServletRequest request, ServletResponse response, Model model) throws Exception {
+    public String joinPro(User user, Model model) throws Exception {
         user.setPw(pwEncoder.encode(user.getPw()));
         userService.userInsert(user);
 

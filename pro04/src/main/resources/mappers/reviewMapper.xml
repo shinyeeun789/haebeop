@@ -23,7 +23,7 @@
     </select>
 
     <insert id="reviewInsert">
-        INSERT INTO review VALUES(DEFAULT, #{lcode}, #{id}, #{star}, #{content})
+        INSERT INTO review VALUES(DEFAULT, #{lcode}, #{id}, #{star}, #{content}, DEFAULT)
     </insert>
 
 </mapper>

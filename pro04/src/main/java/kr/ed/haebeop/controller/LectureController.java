@@ -224,6 +224,7 @@ public class LectureController {
             obj.put("id", review.getId());
             obj.put("star", review.getStar());
             obj.put("content", review.getContent());
+            obj.put("regdate", review.getRegdate());
             jsonArray.put(obj);
         }
 

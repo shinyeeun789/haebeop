@@ -964,10 +964,27 @@
     let ck_item1 = document.getElementById("ck_item1");
     let ck_item2 = document.getElementById("ck_item2");
     let in_btn1 = document.getElementById("in_btn1");
-    let chk = false;
+
+    ck_item1.addEventListener("click", () => {
+        if(!ck_item1.checked) {
+            $("#ck_item_all").prop("checked", false);
+        }
+        if(ck_item1.checked && ck_item2.checked) {
+            $("#ck_item_all").prop("checked", true);
+        }
+    });
+    ck_item2.addEventListener("click", () => {
+        if(!ck_item2.checked) {
+            $("#ck_item_all").prop("checked", false);
+        }
+        if(ck_item1.checked && ck_item2.checked) {
+            $("#ck_item_all").prop("checked", true);
+        }
+    });
+
     in_btn1.addEventListener("click", () => {
         if(ck_item1.checked && ck_item2.checked) {
-            location.href = "${path}/user/join";
+            location.href = "${path}/user/join?userType=${userType}";
         } else {
             alert("약관 및 개인정보처리 방침에 동의해주세요 :)");
             return;
@@ -975,7 +992,7 @@
     });
 
     function protocol() {
-        chk = !chk;
+        let chk = !(ck_item1.checked && ck_item2.checked);
         ck_item1.checked = chk;
         ck_item2.checked = chk;
     }

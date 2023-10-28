@@ -15,7 +15,7 @@
     <!-- 회원가입 -->
     <insert id="userInsert">
         insert into user
-        values(#{id},#{pw},#{name},#{email},#{tel},#{addr1},#{addr2},#{postcode},default,#{birth},default,default,default)
+        values(#{id},#{pw},#{name},#{email},#{tel},#{addr1},#{addr2},#{postcode},default,#{birth},#{userType},default,default,default)
     </insert>
 
     <!-- 로그인 -->

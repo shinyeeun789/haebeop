@@ -317,22 +317,24 @@
                             <c:set var="random" value="<%= (int) (java.lang.Math.random() * 4) + 1 %>"/>
                             <div class="comment-list">
                                 <div class="single-comment single-reviews justify-content-between d-flex">
-                                    <div class="user justify-content-between d-flex">
+                                    <div class="user justify-content-between d-flex w-100">
                                         <div class="thumb">
                                             <img src="${path}/resources/img/profile0${random}.png" alt="프로필 이미지"
                                                  style="width: 60px; height: auto;" class="rounded-circle">
                                         </div>
-                                        <div class="desc">
-                                            <h5>${review.id}
-                                                <div class="star">
-                                                    <c:forEach begin="1" end="${review.star}">
-                                                        <i class="fa-solid fa-star" style="color: #FFDD85;"></i>
-                                                    </c:forEach>
-                                                    <c:forEach begin="1" end="${5 - review.star}">
-                                                        <i class="fa-regular fa-star" style="color: #FFDD85;"></i>
-                                                    </c:forEach>
-                                                </div>
-                                            </h5>
+                                        <div class="desc w-100">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h5>${review.id}</h5>
+                                                <p class="mb-0">${review.regdate}</p>
+                                            </div>
+                                            <div class="star ml-0">
+                                                <c:forEach begin="1" end="${review.star}">
+                                                    <i class="fa-solid fa-star" style="color: #FFDD85;"></i>
+                                                </c:forEach>
+                                                <c:forEach begin="1" end="${5 - review.star}">
+                                                    <i class="fa-regular fa-star" style="color: #FFDD85;"></i>
+                                                </c:forEach>
+                                            </div>
                                             <p class="comment">
                                                 ${review.content}
                                             </p>
@@ -365,9 +367,10 @@
                     for(let idx in result) {
                         let random = parseInt(Math.random() * 4) + 1;
                         let star = result[idx].star;
-                        let tag = '<div class="comment-list"><div class="single-comment single-reviews justify-content-between d-flex"><div class="user justify-content-between d-flex">' +
+                        let tag = '<div class="comment-list"><div class="single-comment single-reviews justify-content-between d-flex"><div class="user justify-content-between d-flex w-100">' +
                             '<div class="thumb"><img src="${path}/resources/img/profile0' + random + '.png" alt="프로필 이미지" style="width: 60px; height: auto;" class="rounded-circle"></div>'+
-                            '<div class="desc"><h5>'+ result[idx].id + '<div class="star">';
+                            '<div class="desc w-100">';
+                        tag += '<div class="d-flex justify-content-between align-items-center"><h5>' + result[idx].id + '</h5><p class="mb-0">' + result[idx].regdate + '</p></div><div class="star ml-0">';
                         for(let idx = 0; idx < star; idx++) {
                             tag += '<i class="fa-solid fa-star ml-1" style="color: #FFDD85;"></i>';
                         }
