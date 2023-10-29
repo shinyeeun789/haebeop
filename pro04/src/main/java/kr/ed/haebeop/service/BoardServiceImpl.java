@@ -30,9 +30,12 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    @Transactional
-    public BoardVO boardDetail(int seq) throws Exception {
+    public void updateVisitedCount(int seq) throws Exception {
         boardMapper.countUp(seq);
+    }
+
+    @Override
+    public BoardVO boardDetail(int seq) throws Exception {
         return boardMapper.boardDetail(seq);
     }
 

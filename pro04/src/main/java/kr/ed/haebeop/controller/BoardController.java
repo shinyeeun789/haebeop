@@ -6,6 +6,7 @@ import kr.ed.haebeop.domain.Category;
 import kr.ed.haebeop.domain.Comment;
 import kr.ed.haebeop.service.BoardService;
 import kr.ed.haebeop.service.CommentService;
+import kr.ed.haebeop.util.BadWordFilter;
 import kr.ed.haebeop.util.BoardPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -65,8 +68,29 @@ public class BoardController {
     }
 
     @GetMapping("detail")	//board/detail?seq=1
-    public String getBoardDetail(HttpServletRequest request, Model model) throws Exception {
-        BoardVO detail = boardService.boardDetail(Integer.parseInt(request.getParameter("seq")));
+    public String getBoardDetail(@RequestParam int seq, HttpServletRequest request, Model model) throws Exception {
+        HttpSession session = request.getSession();
+        Cookie[] cookieFromRequest = request.getCookies();
+        String cookieValue = null;
+        for(int i=0; i<cookieFromRequest.length; i++) {
+            // 요청 정보로부터 쿠키 가져오기
+            cookieValue = cookieFromRequest[0].getValue();
+        }
+        // 쿠키 세션 입력
+        if(session.getAttribute(seq + ":cookie") == null) {
+            session.setAttribute(seq + ":cookie", seq + ":" + cookieValue);
+        } else {
+            session.setAttribute(seq + ":cookie ex", session.getAttribute(seq + ":cookie"));
+            if(!session.getAttribute(seq + ":cookie").equals(seq + ":" + cookieValue)) {
+                session.setAttribute(seq + ":cookie", seq + ":" + cookieValue);
+            }
+        }
+
+        // 쿠키와 세션이 없는 경우 조회수 카운트
+        if(!session.getAttribute(seq + ":cookie").equals(session.getAttribute(seq + ":cookie ex"))) {
+            boardService.updateVisitedCount(seq);
+        }
+        BoardVO detail = boardService.boardDetail(seq);
 
         BoardVO prev = boardService.boardRef(detail.getSeq(), "prev");
         BoardVO next = boardService.boardRef(detail.getSeq(), "next");
@@ -107,11 +131,27 @@ public class BoardController {
     }
 
     @PostMapping("insert")
-    public String boardInsert(Board board, HttpServletRequest request, Model model) throws Exception {
-        HttpSession session = request.getSession();
-        board.setNickname((String) session.getAttribute("sid"));
-        boardService.boardInsert(board);
-        return "redirect:list";
+    public String boardInsert(Board board, HttpServletRequest request, RedirectAttributes rttr) throws Exception {
+        String title = board.getTitle();
+        String content = board.getContent();
+        BadWordFilter filter = new BadWordFilter();
+        Boolean titlePass = filter.check(title);
+        Boolean contentPass = filter.check(content);
+        String msg = "";
+        if(titlePass) {
+            msg = filter.messagePrint(title);
+            rttr.addFlashAttribute("msg", msg);
+            return "redirect:" + request.getHeader("Referer");
+        } else if(contentPass) {
+            msg = filter.messagePrint(content);
+            rttr.addFlashAttribute("msg", msg);
+            return "redirect:" + request.getHeader("Referer");
+        } else {
+            HttpSession session = request.getSession();
+            board.setNickname((String) session.getAttribute("sid"));
+            boardService.boardInsert(board);
+            return "redirect:list";
+        }
     }
 
     @GetMapping("delete")

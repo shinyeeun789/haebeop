@@ -13,6 +13,11 @@
     <title> 커뮤니티 </title>
     <jsp:include page="../layout/head.jsp"></jsp:include>
     <script type="text/javascript" src="${path}/resources/ckeditor/ckeditor.js"></script>
+    <c:if test="${not empty msg}">
+        <script>
+            alert("${msg}");
+        </script>
+    </c:if>
 </head>
 <body>
 <jsp:include page="../layout/header.jsp"></jsp:include>
