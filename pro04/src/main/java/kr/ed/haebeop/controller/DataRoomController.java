@@ -123,8 +123,6 @@ public class DataRoomController {
     public String editForm(HttpServletRequest request, Model model) throws Exception {
         int articleNo = request.getParameter("articleNo") != null ? Integer.parseInt(request.getParameter("articleNo")) : 0;
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
-        String type = request.getParameter("type");
-        String keyword = request.getParameter("keyword");
 
         DataRoom dataRoom = dataRoomService.dataRoomDetail(articleNo);
         dataRoom.setFileInfoList(fileInfoService.fileInfoList(articleNo));

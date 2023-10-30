@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,12 +22,12 @@ public class UserServiceImpl implements UserService {
     public List<User> userList() throws Exception {return userMapper.userList(); }
 
     @Override
-    public User getUser(String id) {
+    public User getUser(String id) throws Exception {
         return userMapper.getUser(id);
     }
 
     @Override
-    public boolean idCheck(String id) {
+    public boolean idCheck(String id) throws Exception {
         return userMapper.getUser(id) == null ? true : false;
     }
 
@@ -35,7 +37,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void userInsert(User user) {
+    public void userInsert(User user) throws Exception {
         userMapper.userInsert(user);
     }
 
@@ -63,7 +65,20 @@ public class UserServiceImpl implements UserService {
         return userMapper.userCnt();
     }
 
-//    @Override
+    @Override
+    public void updateIsStudy(String id, boolean isStudy) throws Exception {
+        Map<String, Object> data = new HashMap<>();
+        data.put("id", id);
+        data.put("isStudy", isStudy);
+        userMapper.updateIsStudy(data);
+    }
+
+    @Override
+    public boolean getIsStudy(String id) throws Exception {
+        return userMapper.getIsStudy(id);
+    }
+
+    //    @Override
 //    public List<AdminChartVO> adminChart() throws Exception {
 //        return userMapper.adminChart();
 //    }

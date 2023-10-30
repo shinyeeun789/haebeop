@@ -10,11 +10,17 @@ CREATE TABLE user(
   postcode VARCHAR(10),
   regdate DATETIME DEFAULT CURRENT_TIMESTAMP(),
   birth DATE,
+  userType VARCHAR(100), 
   pt INT(11) DEFAULT 0,
-  visited INT(11) DEFAULT 0);
+  visited INT(11) DEFAULT 0,
+  isStudy BOOLEAN DEFAULT false);
 
 SELECT * FROM user;
 
+  
+SELECT * FROM user;
+UPDATE user SET pw='$2a$10$KXY.EhEskta7wG/HvMSeZ.CQ4FuGQZOmaHTL2eZPnidD6AUvc.rUS'
+WHERE id='admin';
 
 -- 커뮤니티 카테고리 테이블 생성
 CREATE TABLE category(
@@ -53,9 +59,6 @@ CREATE TABLE COMMENT(
    FOREIGN KEY(nickname) REFERENCES user(id) ON DELETE CASCADE
 );
 
-SELECT * FROM comment;
-
-
 
 -- 공지사항 테이블 생성
 CREATE TABLE notice (
@@ -66,8 +69,6 @@ CREATE TABLE notice (
    regdate DATETIME DEFAULT CURRENT_TIMESTAMP(),
    visited INT DEFAULT 0
 );
-
-SELECT * FROM notice;
 
 
 -- faq 테이블 생성
@@ -101,7 +102,6 @@ CREATE TABLE qna(
   lev INT DEFAULT 0, 									-- 질문(0), 답변(1)
   par INT DEFAULT 0,													-- 질문(자신 레코드의 qno), 답변(질문의 글번호)
   FOREIGN KEY(author) REFERENCES user(id) ON DELETE CASCADE);
-
 
 
 -- 자료실 테이블 생성
@@ -138,9 +138,6 @@ CREATE TABLE event (
    cnt INT DEFAULT 0 NOT NULL
 );
 
--- 이벤트 더미데이터 생성
-SELECT * FROM EVENT;
-
 
 -- 회원의 이벤트 접수
 create table apply(
@@ -152,6 +149,7 @@ create table apply(
    foreign key(eno) references event(eno) on delete cascade,
    FOREIGN KEY(id) references user(id) on delete CASCADE);
 
+
 -- 당첨자 리스트
 create table winnerList(
    appno int auto_increment primary key not null,			
@@ -161,8 +159,6 @@ create table winnerList(
    tel varchar(13),													
    foreign key(eno) references event(eno) on delete cascade,
    FOREIGN key(id) references user(id) on delete cascade);
-
-SELECT * FROM winnerList;
 
 
 --당첨자 발표 글
@@ -175,17 +171,20 @@ create table winner(
    resdate datetime default CURRENT_TIMESTAMP,	/* 작성일 */
    FOREIGN key(eno) references event(eno));
 
+
 -- 출석체크 테이블
 CREATE TABLE attendance (
    ano INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
    id VARCHAR(20),
    attend DATE DEFAULT current_date);
 	
+	
 -- 과목 테이블 (과목코드, 과목명)
 CREATE TABLE subject(
 	scode VARCHAR(10) PRIMARY KEY,
 	sname VARCHAR(200) NOT NULL
 );
+
 
 -- 과목 테이블 더미데이터
 INSERT INTO SUBJECT
@@ -199,26 +198,19 @@ VALUES('so', '사회');
 INSERT INTO SUBJECT
 VALUES('sc', '과학');
 
-DROP TABLE teacher;
-DROP TABLE lecture;
-DROP TABLE curriculum;
-DROP TABLE register;
 
--- 강사 테이블 (강사코드, 강사명, 연락처, 이메일, 강사 이미지)
+-- 강사 테이블 (강사코드, 강사명, 연락처, 이메일, 강사소개, 강사 이미지)
 CREATE TABLE teacher(
 	tcode INT PRIMARY KEY AUTO_INCREMENT,
 	tname VARCHAR(50) NOT NULL,
 	ttel VARCHAR(20) NOT NULL,
 	temail VARCHAR(100) NOT NULL,
-	saveFolder VARCHAR(300) NOT NULL,
-	originFile VARCHAR(300) NOT NULL,
+	tcontent VARCHAR(1000) NOT NULL,
 	saveFile VARCHAR(300) NOT NULL
 );
 
-INSERT INTO teacher
-VALUES(DEFAULT, '이강사', '010-1542-5879', 'teacherLee@edu.com', '','','');
 
--- 강의 테이블 (강의코드, 강의명, 과목코드, 강사코드, 강의 소개, 강의 단가, 수강인원, 강의 썸네일(saveFolder, originFile, saveFile), 강의 시작일, 강의 종료일, (오프라인 시)강의 시작시간, 온오프 여부, 강의실)
+-- 강의 테이블 (강의코드, 강의명, 과목코드, 강사코드, 강의 소개, 강의 단가, 수강인원, 강의 썸네일(saveFile), 강의 시작일, 강의 종료일, (오프라인 시)강의 시작시간, 온오프 여부, 강의실)
 CREATE TABLE lecture(
 	lcode VARCHAR(50) PRIMARY KEY,
 	lname VARCHAR(500) NOT NULL,
@@ -227,44 +219,59 @@ CREATE TABLE lecture(
 	lcontent VARCHAR(1000) NOT NULL,
 	lprice INT DEFAULT 0,
 	maxStudent INT DEFAULT 0,
-	saveFolder VARCHAR(300) NOT NULL,
-	originFile VARCHAR(300) NOT NULL,
 	saveFile VARCHAR(300) NOT NULL,
 	sdate DATE NOT NULL,
 	edate DATE NOT NULL,
 	stime TIME,
-	state VARCHAR(10) CHECK(state IN ('on', 'off')),
+	state VARCHAR(10) CHECK(state IN ('on', 'off', 'close')),
 	classroom VARCHAR(10),
 	FOREIGN KEY(scode) REFERENCES SUBJECT(scode),
 	FOREIGN KEY(tcode) REFERENCES teacher(tcode)
 );
-
-SELECT lcode, lname, sname, tname, lcontent, lprice, maxStudent, sdate, edate, stime, state, classroom 
-FROM subject s JOIN lecture l ON (s.scode=l.scode) JOIN teacher t ON (t.tcode=l.tcode);
 
 
 -- 커리큘럼 (커리큘럼코드, 강의코드, 강좌 제목, 강의 파일, 강의 시간)
 CREATE TABLE curriculum(
 	ccode INT PRIMARY KEY AUTO_INCREMENT,
 	lcode VARCHAR(50) NOT NULL,
-	lname VARCHAR(500) NOT NULL,
-	lvideo VARCHAR(500),
-	duration TIME,
+	cname VARCHAR(500) NOT NULL,
+	cvideo VARCHAR(500)
 	FOREIGN KEY(lcode) REFERENCES lecture(lcode) ON DELETE CASCADE
 );
+
+-- 강의 리뷰(리뷰코드, 강의코드, 학생아이디, 별점, 리뷰 내용)
+CREATE TABLE review(
+	rcode INT AUTO_INCREMENT PRIMARY KEY,
+	lcode VARCHAR(50) NOT NULL,
+	id VARCHAR(20) NOT NULL,
+	star INT NOT NULL DEFAULT 0,
+	content VARCHAR(1000) NOT NULL,
+	regdate DATE DEFAULT CURRENT_DATE,
+	FOREIGN KEY (lcode) REFERENCES lecture(lcode) ON DELETE CASCADE
+);
+
 
 -- 수강(수강코드, 강의코드, 학생아이디, 수강총시간, 수강 완료여부)
 CREATE TABLE register(
 	rcode INT AUTO_INCREMENT PRIMARY KEY,
 	lcode VARCHAR(50) NOT NULL,
 	id VARCHAR(20) NOT NULL,
-	courseTime TIME DEFAULT 0,
 	completed BOOLEAN DEFAULT FALSE,
 	FOREIGN KEY(id) REFERENCES user(id) ON DELETE CASCADE
 );
 
+-- 수강생 강의 수강 정보 테이블
+CREATE TABLE studyInfo(
+	scode INT AUTO_INCREMENT PRIMARY KEY,
+	ccode INT NOT NULL,
+	id VARCHAR(20) NOT NULL,
+	studyTime DOUBLE DEFAULT 0,
+	completed BOOLEAN DEFAULT FALSE,
+	FOREIGN KEY(id) REFERENCES user(id) ON DELETE CASCADE,
+	FOREIGN KEY(ccode) REFERENCES curriculum(ccode) ON DELETE CASCADE
+);
+
+
 
 -- 핵심 기능: 공지사항, 자료실, 회원, 자유게시판, 강의별 댓글,  교재와 시범강의, 결제
 -- 부가 기능: 파일업로드, 채팅, 타계정 또는 SNS 로그인, 수강평, 달력, 가입 시 축하 이메일 보내기, 비밀번호 변경 시 이메일 보내기, 온라인 평가, 진도관리, 학습 스케줄러, 나의 강의실 등
-
--- 강의배정이란?

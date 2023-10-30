@@ -1,7 +1,13 @@
 package kr.ed.haebeop.controller;
 
+import kr.ed.haebeop.domain.Lecture;
+import kr.ed.haebeop.domain.LectureVO;
 import kr.ed.haebeop.domain.User;
+import kr.ed.haebeop.domain.UserProgress;
+import kr.ed.haebeop.service.LectureService;
+import kr.ed.haebeop.service.RegisterService;
 import kr.ed.haebeop.service.UserService;
+import kr.ed.haebeop.util.LecturePage;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,15 +31,19 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
     @Autowired
-    HttpSession session;
+    private LectureService lectureService;
+    @Autowired
+    private RegisterService registerService;
+    @Autowired
+    private HttpSession session;
 
     private BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
 
     // 로그인 폼 로딩
     @GetMapping("login")
-    public String login(Model model) throws Exception {
+    public String login(HttpServletRequest request, Model model) throws Exception {
+        model.addAttribute("warning", request.getParameter("warning"));
         return "/user/login";
     }
 
@@ -70,21 +80,29 @@ public class UserController {
         return "redirect:/";
     }
 
+    // 회원 타입 선택 화면 로딩
+    @GetMapping("joinType")
+    public String joinType(Model model) throws Exception {
+        return "/user/joinType";
+    }
+
     // 회원약관 화면 로딩
     @GetMapping("term")
-    public String term(Model model) throws Exception {
+    public String term(@RequestParam String userType, Model model) throws Exception {
+        model.addAttribute("userType", userType);
         return "/user/term";
     }
 
     // 회원가입 폼 로딩
     @GetMapping("join")
-    public String join(Model model) throws Exception {
+    public String join(@RequestParam String userType, Model model) throws Exception {
+        model.addAttribute("userType", userType);
         return "/user/join";
     }
 
     // 회원가입
     @RequestMapping(value="join", method= RequestMethod.POST)
-    public String joinPro(User user, ServletRequest request, ServletResponse response, Model model) throws Exception {
+    public String joinPro(User user, Model model) throws Exception {
         user.setPw(pwEncoder.encode(user.getPw()));
         userService.userInsert(user);
 
@@ -126,15 +144,42 @@ public class UserController {
             user.setPw(pwEncoder.encode(user.getPw()));
         }
         userService.userEdit(user);
-        return "redirect:mypage";
+        return "redirect:myPage";
     }
 
-    @RequestMapping(value="mypage", method=RequestMethod.GET)
-    public String myPage(Model model) throws Exception {
+    @RequestMapping(value="myPage", method=RequestMethod.GET)
+    public String myPage(HttpServletRequest request, Model model) throws Exception {
         String id = (String) session.getAttribute("sid");
+
+        // 사용자 정보 가져오기
         User user = userService.getUser(id);
         model.addAttribute("user", user);
-        return "/user/mypage";
+
+        int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+
+        LecturePage page = new LecturePage();
+        page.setKeyword(request.getParameter("keyword"));       // 검색 키워드 SET
+        page.setType(request.getParameter("type"));             // 검색 타입 SET
+        page.setId(id);
+
+        // 페이징에 필요한 데이터 저장
+        int total = lectureService.getCount(page);
+        page.makeBlock(curPage, total);
+        page.makeLastPageNum(total);
+        page.makePostStart(curPage, total);
+
+        // 수강신청 목록 불러오기
+        List<LectureVO> myLecture = registerService.myLectures(page);
+        model.addAttribute("lectureList", myLecture);
+
+        // 최근 학습 목록 불러오기
+        List<UserProgress> progressList = registerService.progressList(id);
+        model.addAttribute("progressList", progressList);
+
+        model.addAttribute("curPage", curPage);
+        model.addAttribute("page", page);
+
+        return "/user/myPage";
     }
 
 }

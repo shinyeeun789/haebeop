@@ -8,4 +8,5 @@ import lombok.Setter;
 public class LecturePage extends Page {
     private String scode;
     private String lcode;
+    private String id;
 }

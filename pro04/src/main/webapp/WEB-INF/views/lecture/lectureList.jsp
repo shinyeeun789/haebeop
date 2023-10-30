@@ -62,61 +62,79 @@
                 </div>
             </form>
         </div>
+        <!-- 과목 목록 -->
+        <div class="list-group list-group-horizontal text-center">
+            <c:if test="${empty curSubject}">
+                <a href="${path}/lecture/list" class="list-group-item list-group-item-action active" aria-current="true">
+                    전체
+                </a>
+            </c:if>
+            <c:if test="${not empty curSubject}">
+                <a href="${path}/lecture/list" class="list-group-item list-group-item-action"> 전체 </a>
+            </c:if>
+            <c:forEach var="subject" items="${subjects}">
+                <c:if test="${subject.scode eq curSubject}">
+                    <a href="${path}/lecture/list?scode=${subject.scode}" class="list-group-item list-group-item-action active" aria-current="true">
+                            ${subject.sname}
+                    </a>
+                </c:if>
+                <c:if test="${subject.scode ne curSubject}">
+                    <a href="${path}/lecture/list?scode=${subject.scode}" class="list-group-item list-group-item-action"> ${subject.sname} </a>
+                </c:if>
+            </c:forEach>
+        </div>
 
-        <div class="row">
-            <div class="col-2">
-                <div class="list-group">
-                    <c:if test="${empty curSubject}">
-                        <a href="${path}/lecture/list" class="list-group-item list-group-item-action active" aria-current="true">
-                            전체
-                        </a>
-                    </c:if>
-                    <c:if test="${not empty curSubject}">
-                        <a href="${path}/lecture/list" class="list-group-item list-group-item-action"> 전체 </a>
-                    </c:if>
-                    <c:forEach var="subject" items="${subjects}">
-                        <c:if test="${subject.scode eq curSubject}">
-                            <a href="${path}/lecture/list?scode=${subject.scode}" class="list-group-item list-group-item-action active" aria-current="true">
-                                    ${subject.sname}
-                            </a>
-                        </c:if>
-                        <c:if test="${subject.scode ne curSubject}">
-                            <a href="${path}/lecture/list?scode=${subject.scode}" class="list-group-item list-group-item-action"> ${subject.sname} </a>
-                        </c:if>
-                    </c:forEach>
-                </div>
-            </div>
-            <div class="col">
-                <table class="table table-hover text-center">
-                    <thead>
-                    <tr>
-                        <th width="100"> 과목명 </th>
-                        <th> 강좌명 </th>
-                        <th width="120"> 강사명 </th>
-                        <th width="180"> 시작일 </th>
-                        <th width="180"> 종료일 </th>
-                        <th width="100"> 분류 </th>
-                    </tr>
-                    </thead>
-                    <tbody>
+        <div class="popular_courses">
+            <div class="container">
+                <div class="row">
                     <c:forEach var="lecture" items="${lectureList}">
-                        <tr onclick="javascript: location.href='${path}/lecture/detail?lcode=${lecture.lcode}&page=${curPage}'" style="cursor: pointer">
-                            <td> ${lecture.sname} </td>
-                            <td class="text-left"> ${lecture.lname} </td>
-                            <td> ${lecture.tname} </td>
-                            <td> ${lecture.sdate} </td>
-                            <td> ${lecture.edate} </td>
-                            <td> ${lecture.maxStudent} </td>
-                            <td> ${lecture.state} </td>
-                        </tr>
+                        <div class="col-6 mt-5">
+                            <div class="single_course">
+                                <div class="course_head">
+                                    <img class="img-fluid" src="${path}/resources/upload/lecture/${lecture.saveFile}" alt="${lecture.lname} 이미지" />
+                                </div>
+                                <div class="course_content">
+                                    <span class="price">${lecture.sname}</span>
+                                    <span class="tag mb-4 d-inline-block">
+                                        <c:if test="${lecture.state eq 'on'}">
+                                            온라인
+                                        </c:if>
+                                        <c:if test="${lecture.state eq 'off'}">
+                                            오프라인
+                                        </c:if>
+                                        <c:if test="${lecture.state eq 'close'}">
+                                            <span> 폐강 </span>
+                                        </c:if>
+                                    </span>
+                                    <h4 class="mb-3">
+                                        <a href="${path}/lecture/detail?lcode=${lecture.lcode}"> ${lecture.lname} </a>
+                                    </h4>
+                                    <p> ${lecture.lcontent} </p>
+                                    <div class="course_meta d-flex justify-content-lg-between align-items-lg-center flex-lg-row flex-column mt-4">
+                                        <div class="authr_meta">
+                                            <i class="fa-solid fa-chalkboard-user"></i>
+                                            <span class="d-inline-block ml-2"> ${lecture.tname} </span>
+                                        </div>
+                                        <div class="mt-lg-0 mt-3">
+                                            <span class="meta_info mr-4">
+                                                <i class="fa-regular fa-calendar"></i> ${lecture.sdate} ~ ${lecture.edate}
+                                            </span>
+                                            <span class="meta_info">
+                                                <i class="fa-solid fa-money-check-dollar"></i> ${lecture.lprice}pt
+                                            </span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </c:forEach>
                     <c:if test="${empty lectureList}">
-                        <tr class="text-center">
-                            <td colspan="6"> 등록된 강의가 없습니다. </td>
-                        </tr>
+                        <div class="col-12 text-center mt-5">
+                            <h4> 해당하는 강의가 없습니다. </h4>
+                        </div>
                     </c:if>
-                    </tbody>
-                </table>
+                </div>
             </div>
         </div>
 
@@ -125,7 +143,7 @@
             <ul class="pagination justify-content-center">
                 <c:if test="${curPage > 5}">
                     <li class="page-item">
-                        <a class="page-link" href="${path}/lecture/list?page=${page.blockStartNum - 1}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>" aria-label="Previous">
+                        <a class="page-link" href="${path}/lecture/list?page=${page.blockStartNum - 1}" aria-label="Previous">
                             <span aria-hidden="true"><<</span>
                         </a>
                     </li>
@@ -134,31 +152,25 @@
                     <c:choose>
                         <c:when test="${i == curPage}">
                             <li class="page-item active" aria-current="page">
-                                <a class="page-link" href="${path}/lecture/list?page=${i}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>">${i}</a>
+                                <a class="page-link" href="${path}/lecture/list?page=${i}">${i}</a>
                             </li>
                         </c:when>
                         <c:otherwise>
                             <li class="page-item">
-                                <a class="page-link" href="${path}/lecture/list?page=${i}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>">${i}</a>
+                                <a class="page-link" href="${path}/lecture/list?page=${i}">${i}</a>
                             </li>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
                 <c:if test="${page.blockLastNum < page.totalPageCount}">
                     <li class="page-item">
-                        <a class="page-link" href="${path}/lecture/list?page=${page.blockLastNum + 1}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>" aria-label="Next">
+                        <a class="page-link" href="${path}/lecture/list?page=${page.blockLastNum + 1}" aria-label="Next">
                             <span aria-hidden="true">>></span>
                         </a>
                     </li>
                 </c:if>
             </ul>
         </nav>
-
-        <c:if test="${not empty sid}">
-            <div class="text-right">
-                <a href="${path}/lecture/insert" class="btn btn-dark"> 글 작성하기 </a>
-            </div>
-        </c:if>
     </div>
 </section>
 

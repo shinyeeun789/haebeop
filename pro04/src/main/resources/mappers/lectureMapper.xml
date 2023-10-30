@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.ed.haebeop.persistence.LectureMapper">
     <select id="lectureList" resultType="kr.ed.haebeop.domain.LectureVO">
-        SELECT lcode, lname, sname, tname, lcontent, lprice, maxStudent, sdate, edate, stime, state, classroom
+        SELECT lcode, lname, sname, tname, lcontent, lprice, maxStudent, sdate, edate, stime, l.saveFile as saveFile, state, classroom
         FROM subject s JOIN lecture l ON (s.scode=l.scode) JOIN teacher t ON (t.tcode=l.tcode)
         <where>
             <if test="type != null">
@@ -25,13 +25,14 @@
             <if test="scode != null">
                 AND l.scode = #{scode}
             </if>
+            AND state != 'close'
         </where>
         order by sdate limit #{postStart}, #{postCount}
     </select>
 
     <!-- lecture의 전체 개수 구하기 -->
     <select id="getCount" resultType="integer">
-        select count(*) from lecture
+        select count(*) FROM subject s JOIN lecture l ON (s.scode=l.scode) JOIN teacher t ON (t.tcode=l.tcode)
         <where>
             <if test="type != null">
                 <trim prefixOverrides="OR">
@@ -49,13 +50,15 @@
                 </trim>
             </if>
             <if test="scode != null">
-                AND scode = #{scode}
+                AND l.scode = #{scode}
             </if>
         </where>
     </select>
     
     <select id="lectureDetail" resultType="kr.ed.haebeop.domain.LectureVO">
-        select lcode, cateName, title, content, nickname, regdate, visited from lecture b join category c on(b.cate=c.cate) where lcode=#{lcode}
+        SELECT lcode, lname, l.scode as scode, sname, l.tcode as tcode, tname, lcontent, lprice, maxStudent, sdate, edate, stime, l.saveFile as saveFile, state, classroom
+        FROM subject s JOIN lecture l ON (s.scode=l.scode) JOIN teacher t ON (t.tcode=l.tcode)
+        WHERE lcode = #{lcode}
     </select>
 
     <select id="lectureCount" resultType="integer">
@@ -63,21 +66,46 @@
     </select>
 
     <update id="lectureEdit">
-        update lecture set cate=#{cate}, title=#{title}, content=#{content} where lcode=#{lcode}
+        update lecture set lname=#{lname}, scode=#{scode}, tcode=#{tcode}, lcontent=#{lcontent}, lprice=#{lprice}, maxStudent=#{maxStudent}, sdate=#{sdate}, edate=#{edate}, stime=#{stime}, saveFile=#{saveFile}, state=#{state}, classroom=#{classroom}
+        where lcode=#{lcode}
     </update>
 
 <!--    강의코드, 강의명, 과목코드, 강사코드, 강의 소개, 강의 단가, 수강인원, 강의 썸네일(saveFolder, originFile, saveFile), 강의 시작일, 강의 종료일,-->
 <!--    (오프라인 시)강의 시작시간, 온오프 여부, 강의실-->
     <insert id="lectureInsert">
         insert into lecture
-        values(#{lcode}, #{lname}, #{scode}, #{tcode}, #{lcontent}, #{lprice}, #{maxStudent}, #{saveFolder}, #{originFile}, #{saveFile}, #{sdate}, #{edate}, #{stime}, #{state}, #{classroom})
+        values(#{lcode}, #{lname}, #{scode}, #{tcode}, #{lcontent}, #{lprice}, #{maxStudent}, #{saveFile}, #{sdate}, #{edate}, #{stime}, #{state}, #{classroom})
     </insert>
-    
-    <delete id="lectureDelete">
-        delete from lecture where lcode=#{lcode}
-    </delete>
+
+    <!-- 폐강 위기 과목 목록 -->
+    <select id="closeList" resultType="kr.ed.haebeop.domain.CloseLecture">
+        <![CDATA[
+        SELECT l.lcode as lcode, sname, lname, sdate, edate, COUNT(*) AS 'regCnt', state FROM lecture l JOIN subject s ON (l.scode=s.scode) left outer JOIN register r ON (r.lcode=l.lcode)
+        WHERE sdate BETWEEN CURRENT_DATE AND (CURRENT_DATE + 7) AND state IN ('off','close') GROUP BY r.lcode HAVING COUNT(*) < 5
+            ORDER BY sdate limit #{postStart}, #{postCount}
+        ]]>
+    </select>
+
+    <select id="getCloseCount" resultType="int">
+        <![CDATA[
+        SELECT COUNT(lcode) FROM (
+        SELECT l.lcode, COUNT(*) FROM lecture l left outer JOIN register r ON (r.lcode=l.lcode)
+        WHERE sdate BETWEEN CURRENT_DATE AND (CURRENT_DATE + 7) AND state IN ('off','close') GROUP BY r.lcode HAVING COUNT(*) < 5) AS a
+        ]]>
+    </select>
+
+    <update id="closeLecture">
+        UPDATE lecture SET state=#{state} where lcode=#{lcode}
+    </update>
 
     <select id="subjects" resultType="kr.ed.haebeop.domain.Subject">
-        select * from subject
+        select * from subject order by sname
     </select>
+
+    <select id="comparePeriod" resultType="boolean">
+        <![CDATA[
+            SELECT (sdate < CURRENT_DATE) FROM lecture WHERE lcode=#{lcode}
+        ]]>
+    </select>
+
 </mapper>

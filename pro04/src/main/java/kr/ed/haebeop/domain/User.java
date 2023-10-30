@@ -15,7 +15,9 @@ public class User {
     private String postcode;
     private String regdate;
     private String birth;
+    private String userType;
     private int pt;
     private int visited;
+    private boolean isStudy;
 
 }
