@@ -74,4 +74,16 @@ public class LectureServiceImpl implements LectureService {
     public boolean comparePeriod(String lcode) throws Exception {
         return lectureMapper.comparePeriod(lcode);
     }
+
+    // 인기 강의 목록 6개를 가져오는 메서드
+    @Override
+    public List<LectureVO> popularLectureList() throws Exception {
+        return lectureMapper.popularLectureList();
+    }
+
+    // 오프라인 강의 목록 6개를 가져오는 메서드 (랜덤으로)
+    @Override
+    public List<LectureVO> stateLectureList(String state) throws Exception {
+        return lectureMapper.stateLectureList(state);
+    }
 }

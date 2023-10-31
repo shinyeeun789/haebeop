@@ -86,4 +86,9 @@
         GROUP BY reg.lcode ORDER BY COUNT(reg.lcode) DESC LIMIT 6
     </select>
 
+    <select id="ongoingMyLecture" resultType="kr.ed.haebeop.domain.LectureVO">
+        SELECT l.lcode AS lcode, lname, stime, classroom, state FROM lecture l JOIN register r ON (l.lcode=r.lcode)
+        WHERE id=#{id} AND CURRENT_DATE BETWEEN sdate AND edate
+    </select>
+
 </mapper>

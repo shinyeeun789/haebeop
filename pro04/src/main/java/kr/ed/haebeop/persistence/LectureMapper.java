@@ -21,4 +21,6 @@ public interface LectureMapper {
     public int lectureCount() throws Exception;
     public List<Subject> subjects() throws Exception;
     public boolean comparePeriod(String lcode) throws Exception;
+    public List<LectureVO> popularLectureList() throws Exception;
+    public List<LectureVO> stateLectureList(String state) throws Exception;
 }

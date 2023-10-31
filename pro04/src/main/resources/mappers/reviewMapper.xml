@@ -26,4 +26,10 @@
         INSERT INTO review VALUES(DEFAULT, #{lcode}, #{id}, #{star}, #{content}, DEFAULT)
     </insert>
 
+    <select id="randomReview" resultType="kr.ed.haebeop.domain.ReviewVO">
+        SELECT l.lcode AS lcode, lname, id, star, content
+        FROM review r JOIN lecture l ON (r.lcode=l.lcode)
+        ORDER BY star, RAND() LIMIT 5
+    </select>
+
 </mapper>

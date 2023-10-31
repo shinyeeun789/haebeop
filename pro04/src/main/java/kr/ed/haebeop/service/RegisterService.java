@@ -20,5 +20,6 @@ public interface RegisterService {
     public List<Map<String, Integer>> yearProfit() throws Exception;
     public List<Map<String, Integer>> payProfit() throws Exception;
     public List<PopularLecture> popularLectures() throws Exception;
+    public List<LectureVO> ongoingMyLecture(String id) throws Exception;
 
 }

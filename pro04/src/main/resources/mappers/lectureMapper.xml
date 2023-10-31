@@ -70,8 +70,6 @@
         where lcode=#{lcode}
     </update>
 
-<!--    강의코드, 강의명, 과목코드, 강사코드, 강의 소개, 강의 단가, 수강인원, 강의 썸네일(saveFolder, originFile, saveFile), 강의 시작일, 강의 종료일,-->
-<!--    (오프라인 시)강의 시작시간, 온오프 여부, 강의실-->
     <insert id="lectureInsert">
         insert into lecture
         values(#{lcode}, #{lname}, #{scode}, #{tcode}, #{lcontent}, #{lprice}, #{maxStudent}, #{saveFile}, #{sdate}, #{edate}, #{stime}, #{state}, #{classroom})
@@ -106,6 +104,17 @@
         <![CDATA[
             SELECT (sdate < CURRENT_DATE) FROM lecture WHERE lcode=#{lcode}
         ]]>
+    </select>
+
+    <select id="popularLectureList" resultType="kr.ed.haebeop.domain.LectureVO">
+        SELECT l.lcode AS lcode, lname, tname, l.saveFile AS saveFile
+        FROM lecture l JOIN register r ON (l.lcode=r.lcode) JOIN teacher t ON (l.tcode=t.tcode) GROUP BY l.lcode
+        ORDER BY COUNT(*) DESC LIMIT 6
+    </select>
+
+    <select id="stateLectureList" resultType="kr.ed.haebeop.domain.LectureVO">
+        SELECT l.lcode AS lcode, lname, tname, l.saveFile AS saveFile FROM lecture l JOIN teacher t ON (l.tcode=t.tcode)
+        WHERE state=#{state} ORDER BY RAND() LIMIT 6
     </select>
 
 </mapper>

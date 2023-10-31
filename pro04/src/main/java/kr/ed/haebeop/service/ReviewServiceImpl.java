@@ -1,6 +1,7 @@
 package kr.ed.haebeop.service;
 
 import kr.ed.haebeop.domain.Review;
+import kr.ed.haebeop.domain.ReviewVO;
 import kr.ed.haebeop.persistence.ReviewMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,5 +32,10 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public void reviewInsert(Review review) throws Exception {
         reviewMapper.reviewInsert(review);
+    }
+
+    @Override
+    public List<ReviewVO> randomReview() throws Exception {
+        return reviewMapper.randomReview();
     }
 }

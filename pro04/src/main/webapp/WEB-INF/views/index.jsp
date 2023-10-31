@@ -11,392 +11,199 @@
     <link rel="icon" href="${path}/resources/img/favicon.png" type="image/png"/>
     <title> 해법 </title>
     <jsp:include page="layout/head.jsp"/>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+    <style>
+        .swiper {
+            z-index: 2;
+        }
+    </style>
 </head>
 
 <body>
 <jsp:include page="layout/header.jsp"/>
-<section class="home_banner_area">
-    <div class="banner_inner">
+<section id="slideBanner">
+    <!-- Swiper -->
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="${path}/resources/img/banner01.jpg" alt="메인페이지 배너1" style="width: 100vw">
+            </div>
+            <div class="swiper-slide">
+                <img src="${path}/resources/img/banner02.jpg" alt="메인페이지 배너2" style="width: 100vw">
+            </div>
+        </div>
+        <div class="swiper-button-next" style="color: white"></div>
+        <div class="swiper-button-prev" style="color: white"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+    </script>
+</section>
+
+<c:if test="${not empty sid and not empty myLectureList}">
+    <section class="feature_area section_gap_top" style="background-color: #eee">
         <div class="container">
+            <div class="section-heading style-2 text-center">
+                <p> ${sid}님, 오늘도 해법과 함께해요 </p>
+                <h2 class="mb-3"> 출석체크 </h2>
+            </div>
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="banner_content text-center">
-                        <p class="text-uppercase">
-                            Best online education service In the world
-                        </p>
-                        <h2 class="text-uppercase mt-4 mb-5">
-                            One Step Ahead This Season
-                        </h2>
-                        <div>
-                            <a href="#" class="primary-btn2 mb-3 mb-sm-0">learn more</a>
-                            <a href="#" class="primary-btn ml-sm-3 ml-0">see course</a>
+                <c:forEach var="lecture" items="${myLectureList}">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single_feature">
+                            <div class="icon"><span class="flaticon-student"></span></div>
+                            <div class="desc">
+                                <h4 class="mt-3 mb-2"> ${lecture.lname} </h4>
+                                <p> 강의 시작 시간 &nbsp; ${lecture.stime} <br>
+                                    강의실 &nbsp; ${lecture.classroom} </p>
+                                <div class="d-flex justify-content-end">
+                                    <a href="${path}/lectureAttend/studentAttend?lcode=${lecture.lcode}" class="btn btn-primary"> 출석체크하기 </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </c:forEach>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</c:if>
 
-<section class="feature_area section_gap_top">
+<!-- ##### Popular Lecture Area Start ##### -->
+<section class="mt-5 mb-5 pt-5 pb-5 text-center" id="offline">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-5">
-                <div class="main_title">
-                    <h2 class="mb-3">Awesome Feature</h2>
-                    <p>
-                        Replenish man have thing gathering lights yielding shall you
-                    </p>
-                </div>
-            </div>
+        <div class="section-heading style-2">
+            <p> 수강생들이 추천하는 </p>
+            <h2 class="mb-5"> 인기 강의 </h2>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="single_feature">
-                    <div class="icon"><span class="flaticon-student"></span></div>
-                    <div class="desc">
-                        <h4 class="mt-3 mb-2">Scholarship Facility</h4>
-                        <p>
-                            One make creepeth, man bearing theira firmament won't great
-                            heaven
-                        </p>
-                    </div>
+            <c:forEach var="lecture" items="${popularLectures}">
+                <div class="col-4 text-center">
+                    <a href="${path}/lecture/detail?lcode=${lecture.lcode}">
+                        <img src="${path}/resources/upload/lecture/${lecture.saveFile}" alt="${lecture.lname} 커버 이미지" class="w-100">
+                        <h5 class="mt-4 text-center">${lecture.lname}</h5>
+                        <p class="text-center">${lecture.tname} 선생님</p>
+                    </a>
                 </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="single_feature">
-                    <div class="icon"><span class="flaticon-book"></span></div>
-                    <div class="desc">
-                        <h4 class="mt-3 mb-2">Sell Online Course</h4>
-                        <p>
-                            One make creepeth, man bearing theira firmament won't great
-                            heaven
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="single_feature">
-                    <div class="icon"><span class="flaticon-earth"></span></div>
-                    <div class="desc">
-                        <h4 class="mt-3 mb-2">Global Certification</h4>
-                        <p>
-                            One make creepeth, man bearing theira firmament won't great
-                            heaven
-                        </p>
-                    </div>
-                </div>
-            </div>
+            </c:forEach>
         </div>
     </div>
 </section>
-<!--================ End Feature Area =================-->
+<!-- ##### Popular Lecture Area End ##### -->
 
-<!--================ Start Popular Courses Area =================-->
-<div class="popular_courses">
+<!-- ##### Offline Lecture Area Start ##### -->
+<section class="mt-5 mb-5 pt-5 pb-5 text-center" id="offline" style="background-color: #eee">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-5">
-                <div class="main_title">
-                    <h2 class="mb-3">Our Popular Courses</h2>
-                    <p>
-                        Replenish man have thing gathering lights yielding shall you
-                    </p>
-                </div>
-            </div>
+        <div class="section-heading style-2">
+            <p> 실시간 대면을 통한 최고의 학습 경험 </p>
+            <h2 class="mb-5"> 오프라인 강의 </h2>
         </div>
         <div class="row">
-            <!-- single course -->
-            <div class="col-lg-12">
-                <div class="owl-carousel active_course">
-                    <div class="single_course">
-                        <div class="course_head">
-                            <img class="img-fluid" src="img/courses/c1.jpg" alt=""/>
-                        </div>
-                        <div class="course_content">
-                            <span class="price">$25</span>
-                            <span class="tag mb-4 d-inline-block">design</span>
-                            <h4 class="mb-3">
-                                <a href="course-details.html">Custom Product Design</a>
-                            </h4>
-                            <p>
-                                One make creepeth man bearing their one firmament won't fowl
-                                meat over sea
-                            </p>
-                            <div
-                                    class="course_meta d-flex justify-content-lg-between align-items-lg-center flex-lg-row flex-column mt-4"
-                            >
-                                <div class="authr_meta">
-                                    <img src="img/courses/author1.png" alt=""/>
-                                    <span class="d-inline-block ml-2">Cameron</span>
-                                </div>
-                                <div class="mt-lg-0 mt-3">
-                      <span class="meta_info mr-4">
-                        <a href="#"> <i class="ti-user mr-2"></i>25 </a>
-                      </span>
-                                    <span class="meta_info"
-                                    ><a href="#"> <i class="ti-heart mr-2"></i>35 </a></span
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="single_course">
-                        <div class="course_head">
-                            <img class="img-fluid" src="img/courses/c2.jpg" alt=""/>
-                        </div>
-                        <div class="course_content">
-                            <span class="price">$25</span>
-                            <span class="tag mb-4 d-inline-block">design</span>
-                            <h4 class="mb-3">
-                                <a href="course-details.html">Social Media Network</a>
-                            </h4>
-                            <p>
-                                One make creepeth man bearing their one firmament won't fowl
-                                meat over sea
-                            </p>
-                            <div
-                                    class="course_meta d-flex justify-content-lg-between align-items-lg-center flex-lg-row flex-column mt-4"
-                            >
-                                <div class="authr_meta">
-                                    <img src="img/courses/author2.png" alt=""/>
-                                    <span class="d-inline-block ml-2">Cameron</span>
-                                </div>
-                                <div class="mt-lg-0 mt-3">
-                      <span class="meta_info mr-4">
-                        <a href="#"> <i class="ti-user mr-2"></i>25 </a>
-                      </span>
-                                    <span class="meta_info"
-                                    ><a href="#"> <i class="ti-heart mr-2"></i>35 </a></span
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="single_course">
-                        <div class="course_head">
-                            <img class="img-fluid" src="img/courses/c3.jpg" alt=""/>
-                        </div>
-                        <div class="course_content">
-                            <span class="price">$25</span>
-                            <span class="tag mb-4 d-inline-block">design</span>
-                            <h4 class="mb-3">
-                                <a href="course-details.html">Computer Engineering</a>
-                            </h4>
-                            <p>
-                                One make creepeth man bearing their one firmament won't fowl
-                                meat over sea
-                            </p>
-                            <div
-                                    class="course_meta d-flex justify-content-lg-between align-items-lg-center flex-lg-row flex-column mt-4"
-                            >
-                                <div class="authr_meta">
-                                    <img src="img/courses/author3.png" alt=""/>
-                                    <span class="d-inline-block ml-2">Cameron</span>
-                                </div>
-                                <div class="mt-lg-0 mt-3">
-                      <span class="meta_info mr-4">
-                        <a href="#"> <i class="ti-user mr-2"></i>25 </a>
-                      </span>
-                                    <span class="meta_info"
-                                    ><a href="#"> <i class="ti-heart mr-2"></i>35 </a></span
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <c:forEach var="lecture" items="${offLectures}">
+                <div class="col-4 text-center">
+                    <a href="${path}/lecture/detail?lcode=${lecture.lcode}">
+                        <img src="${path}/resources/upload/lecture/${lecture.saveFile}" alt="${lecture.lname} 커버 이미지" class="w-100">
+                        <h5 class="mt-4 text-center">${lecture.lname}</h5>
+                        <p class="text-center">${lecture.tname} 선생님</p>
+                    </a>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--================ End Popular Courses Area =================-->
-
-<!--================ Start Registration Area =================-->
-<div class="section_gap registration_area">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-7">
-                <div class="row clock_sec clockdiv" id="clockdiv">
-                    <div class="col-lg-12">
-                        <h1 class="mb-3">Register Now</h1>
-                        <p>
-                            There is a moment in the life of any aspiring astronomer that
-                            it is time to buy that first telescope. It’s exciting to think
-                            about setting up your own viewing station.
-                        </p>
-                    </div>
-                    <div class="col clockinner1 clockinner">
-                        <h1 class="days">150</h1>
-                        <span class="smalltext">Days</span>
-                    </div>
-                    <div class="col clockinner clockinner1">
-                        <h1 class="hours">23</h1>
-                        <span class="smalltext">Hours</span>
-                    </div>
-                    <div class="col clockinner clockinner1">
-                        <h1 class="minutes">47</h1>
-                        <span class="smalltext">Mins</span>
-                    </div>
-                    <div class="col clockinner clockinner1">
-                        <h1 class="seconds">59</h1>
-                        <span class="smalltext">Secs</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 offset-lg-1">
-                <div class="register_form">
-                    <h3>Courses for Free</h3>
-                    <p>It is high time for learning</p>
-                    <form
-                            class="form_area"
-                            id="myForm"
-                            action="mail.html"
-                            method="post"
-                    >
-                        <div class="row">
-                            <div class="col-lg-12 form_group">
-                                <input
-                                        name="name"
-                                        placeholder="Your Name"
-                                        required=""
-                                        type="text"
-                                />
-                                <input
-                                        name="name"
-                                        placeholder="Your Phone Number"
-                                        required=""
-                                        type="tel"
-                                />
-                                <input
-                                        name="email"
-                                        placeholder="Your Email Address"
-                                        pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
-                                        required=""
-                                        type="email"
-                                />
-                            </div>
-                            <div class="col-lg-12 text-center">
-                                <button class="primary-btn">Submit</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--================ End Registration Area =================-->
-
-<!--================ Start Trainers Area =================-->
-<section class="trainer_area section_gap_top">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-5">
-                <div class="main_title">
-                    <h2 class="mb-3">Our Expert Trainers</h2>
-                    <p>
-                        Replenish man have thing gathering lights yielding shall you
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-center d-flex align-items-center">
-            <div class="col-lg-3 col-md-6 col-sm-12 single-trainer">
-                <div class="thumb d-flex justify-content-sm-center">
-                    <img class="img-fluid" src="img/trainer/t1.jpg" alt=""/>
-                </div>
-                <div class="meta-text text-sm-center">
-                    <h4>Mated Nithan</h4>
-                    <p class="designation">Sr. web designer</p>
-                    <div class="mb-4">
-                        <p>
-                            If you are looking at blank cassettes on the web, you may be
-                            very confused at the.
-                        </p>
-                    </div>
-                    <div class="align-items-center justify-content-center d-flex">
-                        <a href="#"><i class="ti-facebook"></i></a>
-                        <a href="#"><i class="ti-twitter"></i></a>
-                        <a href="#"><i class="ti-linkedin"></i></a>
-                        <a href="#"><i class="ti-pinterest"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-sm-12 single-trainer">
-                <div class="thumb d-flex justify-content-sm-center">
-                    <img class="img-fluid" src="img/trainer/t2.jpg" alt=""/>
-                </div>
-                <div class="meta-text text-sm-center">
-                    <h4>David Cameron</h4>
-                    <p class="designation">Sr. web designer</p>
-                    <div class="mb-4">
-                        <p>
-                            If you are looking at blank cassettes on the web, you may be
-                            very confused at the.
-                        </p>
-                    </div>
-                    <div class="align-items-center justify-content-center d-flex">
-                        <a href="#"><i class="ti-facebook"></i></a>
-                        <a href="#"><i class="ti-twitter"></i></a>
-                        <a href="#"><i class="ti-linkedin"></i></a>
-                        <a href="#"><i class="ti-pinterest"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-sm-12 single-trainer">
-                <div class="thumb d-flex justify-content-sm-center">
-                    <img class="img-fluid" src="img/trainer/t3.jpg" alt=""/>
-                </div>
-                <div class="meta-text text-sm-center">
-                    <h4>Jain Redmel</h4>
-                    <p class="designation">Sr. Faculty Data Science</p>
-                    <div class="mb-4">
-                        <p>
-                            If you are looking at blank cassettes on the web, you may be
-                            very confused at the.
-                        </p>
-                    </div>
-                    <div class="align-items-center justify-content-center d-flex">
-                        <a href="#"><i class="ti-facebook"></i></a>
-                        <a href="#"><i class="ti-twitter"></i></a>
-                        <a href="#"><i class="ti-linkedin"></i></a>
-                        <a href="#"><i class="ti-pinterest"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-sm-12 single-trainer">
-                <div class="thumb d-flex justify-content-sm-center">
-                    <img class="img-fluid" src="img/trainer/t4.jpg" alt=""/>
-                </div>
-                <div class="meta-text text-sm-center">
-                    <h4>Nathan Macken</h4>
-                    <p class="designation">Sr. web designer</p>
-                    <div class="mb-4">
-                        <p>
-                            If you are looking at blank cassettes on the web, you may be
-                            very confused at the.
-                        </p>
-                    </div>
-                    <div class="align-items-center justify-content-center d-flex">
-                        <a href="#"><i class="ti-facebook"></i></a>
-                        <a href="#"><i class="ti-twitter"></i></a>
-                        <a href="#"><i class="ti-linkedin"></i></a>
-                        <a href="#"><i class="ti-pinterest"></i></a>
-                    </div>
-                </div>
-            </div>
+            </c:forEach>
         </div>
     </div>
 </section>
-<!--================ End Trainers Area =================-->
+<!-- ##### Offline Lecture Area End ##### -->
+
+<!-- ##### Online Lecture Area Start ##### -->
+<section class="mt-5 mb-5 pt-5 pb-5 text-center" id="online">
+    <div class="container">
+        <div class="section-heading style-2">
+            <p> 언제 어디서든 해법과 함께 </p>
+            <h2 class="mb-5"> 온라인 강의 </h2>
+        </div>
+        <div class="row">
+            <c:forEach var="lecture" items="${onLectures}">
+                <div class="col-4 text-center">
+                    <img src="${path}/resources/upload/lecture/${lecture.saveFile}" alt="${lecture.lname} 커버 이미지" class="w-100">
+                    <a href="${path}/lecture/detail?lcode=${lecture.lcode}">
+                        <h5 class="mt-4 text-center">${lecture.lname}</h5>
+                    </a>
+                    <p class="text-center">${lecture.tname} 선생님</p>
+                </div>
+            </c:forEach>
+        </div>
+    </div>
+</section>
+
+<!-- ##### Online Lecture Area End ##### -->
+<section class="mt-5 mb-5 pt-5 pb-5" id="location">
+    <div class="content">
+        <div class="text-center">
+            <div id="map" style="margin: 0px auto; width: 100%; height: 600px; background: white;"></div>
+        </div>
+        <div class="container">
+            <h3 class="mt-5"> 해법 </h3>
+            <div class="row mt-30">
+                <div class="col-2">
+                    <h5> 오시는 길 </h5>
+                </div>
+                <div class="col">
+                    <h5> 서울시 금천구 디지털로 9길 23 </h5>
+                    <p class="mb-0"> 지하철 &nbsp; 1호선 7호선 가산디지털단지역 </p>
+                    <p> 버스 &nbsp; 가산로데오거리, 한신IT타워, 이앤씨드림타워7차 정류장 하차 </p>
+                </div>
+            </div>
+            <div class="row mt-15">
+                <div class="col-2">
+                    <h5> 상담운영 </h5>
+                </div>
+                <div class="col">
+                    <h5> 02-1234-5678 </h5>
+                    <p> 방문시 사전 전화예약 부탁드립니다. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${naverMapKey}"></script>
+    <script>
+        let mapOptions = {
+            center: new naver.maps.LatLng(37.4786713,126.8864968),
+            zoom: 17,
+            draggable: false,
+            keyboardShortcuts: false,
+            logoControl: false,
+            mapDataControlOptions: false,
+            scrollWheel: false
+        };
+
+        let map = new naver.maps.Map('map', mapOptions);
+
+        let marker = new naver.maps.Marker({
+            position: new naver.maps.LatLng(37.4786713,126.8864968),
+            map: map
+        });
+    </script>
+</section>
 
 <jsp:include page="layout/footer.jsp" />
 

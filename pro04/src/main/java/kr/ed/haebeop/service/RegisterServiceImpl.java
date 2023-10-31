@@ -87,4 +87,9 @@ public class RegisterServiceImpl implements RegisterService {
     public List<PopularLecture> popularLectures() throws Exception {
         return registerMapper.popularLectures();
     }
+
+    @Override
+    public List<LectureVO> ongoingMyLecture(String id) throws Exception {
+        return registerMapper.ongoingMyLecture(id);
+    }
 }
