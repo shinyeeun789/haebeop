@@ -128,7 +128,7 @@
                             <span>
                                 <i class="fa-solid fa-chalkboard-user"></i>
                             </span>
-                            <span class="hide-menu"> 강사정보등록 </span>
+                            <span class="hide-menu"> 강사정보 등록 </span>
                         </a>
                     </li>
                     <li class="nav-small-cap">
@@ -285,8 +285,7 @@
 
         // 입력창 삭제 버튼 클릭 시
         $("#removeInput").on("click", function() {
-            console.log($("#curriculum-wrap .curriculum").length);
-            if($("#curriculum-wrap .curriculum").length > 1) {
+            if($("#curriculum-wrap .curriculum").length > ${fn:length(curriculumList) + 1}) {
                 $("#curriculum-wrap .curriculum").last().remove();
             }
         });

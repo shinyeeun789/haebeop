@@ -217,6 +217,12 @@
                     </li>
                     <li>
                         <a class="justify-content-between d-flex">
+                            <p> 기본 결제금액 </p>
+                            <span> 5000 원 </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="justify-content-between d-flex">
                             <p> 가격 </p>
                             <span> ${lecture.lprice} 포인트 </span>
                         </a>

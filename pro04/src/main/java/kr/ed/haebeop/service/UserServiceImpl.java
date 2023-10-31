@@ -2,6 +2,7 @@ package kr.ed.haebeop.service;
 
 import kr.ed.haebeop.domain.User;
 import kr.ed.haebeop.persistence.UserMapper;
+import kr.ed.haebeop.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,9 @@ public class UserServiceImpl implements UserService {
     BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
 
     @Override
-    public List<User> userList() throws Exception {return userMapper.userList(); }
+    public List<User> userList(Page page) throws Exception {
+        return userMapper.userList(page);
+    }
 
     @Override
     public User getUser(String id) throws Exception {
@@ -61,8 +64,8 @@ public class UserServiceImpl implements UserService {
     public void userDelete(String id) throws Exception { userMapper.userDelete(id);}
 
     @Override
-    public int userCnt() throws Exception {
-        return userMapper.userCnt();
+    public int userCnt(Page page) throws Exception {
+        return userMapper.userCnt(page);
     }
 
     @Override
@@ -78,8 +81,19 @@ public class UserServiceImpl implements UserService {
         return userMapper.getIsStudy(id);
     }
 
-    //    @Override
-//    public List<AdminChartVO> adminChart() throws Exception {
-//        return userMapper.adminChart();
-//    }
+    @Override
+    public List<User> teacherInfoList() throws Exception {
+        return userMapper.teacherInfoList();
+    }
+
+    @Override
+    public List<User> findID(String keyword) throws Exception {
+        return userMapper.findID(keyword);
+    }
+
+    @Override
+    public List<Map<String, Integer>> userCntList() throws Exception {
+        return userMapper.userCntList();
+    }
+
 }

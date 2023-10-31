@@ -64,6 +64,7 @@ public class UserController {
 
         if(ps){
             session.setAttribute("sid", id);
+            session.setAttribute("userType", userService.getUser(id).getUserType());
             userService.updateVisited(id);
             rttr.addFlashAttribute("msg", 1);
             return "redirect:/";

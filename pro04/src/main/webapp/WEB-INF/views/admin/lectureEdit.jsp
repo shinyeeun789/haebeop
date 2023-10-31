@@ -128,7 +128,7 @@
                             <span>
                                 <i class="fa-solid fa-chalkboard-user"></i>
                             </span>
-                            <span class="hide-menu"> 강사정보등록 </span>
+                            <span class="hide-menu"> 강사정보 등록 </span>
                         </a>
                     </li>
                     <li class="nav-small-cap">

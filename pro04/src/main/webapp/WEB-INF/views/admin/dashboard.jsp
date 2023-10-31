@@ -10,7 +10,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> Admin Dashboard </title>
+    <title> Dashboard </title>
     <jsp:include page="../layout/head.jsp"></jsp:include>
 
     <!-- 관리자 페이지 CSS 적용 -->
@@ -124,7 +124,7 @@
                             <span>
                                 <i class="fa-solid fa-chalkboard-user"></i>
                             </span>
-                            <span class="hide-menu"> 강사정보등록 </span>
+                            <span class="hide-menu"> 강사정보 등록 </span>
                         </a>
                     </li>
                     <li class="nav-small-cap">
@@ -168,17 +168,9 @@
                 <div class="col-lg-8 d-flex align-items-strech">
                     <div class="card w-100">
                         <div class="card-body">
-                            <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                            <div class="d-block mb-9">
                                 <div class="mb-3 mb-sm-0">
-                                    <h5 class="card-title fw-semibold">Sales Overview</h5>
-                                </div>
-                                <div>
-                                    <select class="form-select">
-                                        <option value="1">March 2023</option>
-                                        <option value="2">April 2023</option>
-                                        <option value="3">May 2023</option>
-                                        <option value="4">June 2023</option>
-                                    </select>
+                                    <h5 class="card-title fw-semibold"> 월별 회원수 추이 </h5>
                                 </div>
                             </div>
                             <div id="chart"></div>
@@ -190,26 +182,26 @@
                         <div class="col-lg-12">
                             <div class="card overflow-hidden">
                                 <div class="card-body p-4">
-                                    <h5 class="card-title mb-9 fw-semibold">Yearly Breakup</h5>
+                                    <h5 class="card-title mb-9 fw-semibold">Yearly Earnings</h5>
                                     <div class="row align-items-center">
                                         <div class="col-8">
-                                            <h4 class="fw-semibold mb-3">$36,358</h4>
+                                            <h4 class="fw-semibold mb-3" id="profit"></h4>
                                             <div class="d-flex align-items-center mb-3">
                           <span
                                   class="me-1 rounded-circle bg-light-success round-20 d-flex align-items-center justify-content-center">
                             <i class="ti ti-arrow-up-left text-success"></i>
                           </span>
-                                                <p class="text-dark me-1 fs-3 mb-0">+9%</p>
+                                                <p class="text-dark me-1 fs-3 mb-0" id="profitDiff"></p>
                                                 <p class="fs-3 mb-0">last year</p>
                                             </div>
                                             <div class="d-flex align-items-center">
                                                 <div class="me-4">
                                                     <span class="round-8 bg-primary rounded-circle me-2 d-inline-block"></span>
-                                                    <span class="fs-2">2023</span>
+                                                    <span class="fs-2 profitYear"></span>
                                                 </div>
                                                 <div>
                                                     <span class="round-8 bg-light-primary rounded-circle me-2 d-inline-block"></span>
-                                                    <span class="fs-2">2023</span>
+                                                    <span class="fs-2 profitYear"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -508,6 +500,180 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(() => {
+        $.ajax({
+            url: "${path}/admin/userCntList",
+            type: "post",
+            dataType: "json",
+            success: function(data) {
+                const labelList = [];
+                const teaCnt = [];
+                const stuCnt = [];
+                for(let i=0; i<data.length; i++) {
+                    let temp = data[i];
+                    labelList[i] = temp.label;
+                    teaCnt[i] = temp.teaCnt;
+                    stuCnt[i] = temp.stuCnt;
+                }
+                let chart = {
+                    series: [
+                        { name: "월별 회원가입한 학생 수", data: stuCnt },
+                        { name: "월별 회원가입한 선생님 수", data: teaCnt },
+                    ],
+                    chart: {
+                        type: "bar",
+                        height: 345,
+                        offsetX: -15,
+                        toolbar: { show: true },
+                        foreColor: "#adb0bb",
+                        fontFamily: 'inherit',
+                        sparkline: { enabled: false },
+                    },
+                    colors: ["#5D87FF", "#49BEFF"],
+                    plotOptions: {
+                        bar: {
+                            horizontal: false,
+                            columnWidth: "35%",
+                            borderRadius: [6],
+                            borderRadiusApplication: 'end',
+                            borderRadiusWhenStacked: 'all'
+                        },
+                    },
+                    markers: { size: 0 },
+                    dataLabels: {
+                        enabled: false,
+                    },
+                    legend: {
+                        show: false,
+                    },
+                    grid: {
+                        borderColor: "rgba(0,0,0,0.1)",
+                        strokeDashArray: 3,
+                        xaxis: {
+                            lines: {
+                                show: false,
+                            },
+                        },
+                    },
+                    xaxis: {
+                        type: "category",
+                        categories: labelList,
+                        labels: {
+                            style: { cssClass: "grey--text lighten-2--text fill-color" },
+                        },
+                    },
+                    yaxis: {
+                        show: true,
+                        min: 0,
+                        max: 10,
+                        tickAmount: 4,
+                        labels: {
+                            style: {
+                                cssClass: "grey--text lighten-2--text fill-color",
+                            },
+                        },
+                    },
+                    stroke: {
+                        show: true,
+                        width: 3,
+                        lineCap: "butt",
+                        colors: ["transparent"],
+                    },
+                    tooltip: { theme: "light" },
+                    responsive: [
+                        {
+                            breakpoint: 600,
+                            options: {
+                                plotOptions: {
+                                    bar: {
+                                        borderRadius: 3,
+                                    }
+                                },
+                            }
+                        }
+                    ]
+                };
+                let chartTag = new ApexCharts(document.querySelector("#chart"), chart);
+                chartTag.render();
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+        $.ajax({
+            url: "${path}/admin/profitYearReport",
+            type: "post",
+            dataType: "json",
+            success: function(data) {
+                const labelList = [];
+                const profitList = [];
+                for(let i=0; i<data.length; i++) {
+                    let temp = data[i];
+                    labelList[i] = temp.label;
+                    profitList[i] = temp.profit;
+                    $(".profitYear").eq(i).text(labelList[i]);
+                }
+                $("#profit").text(profitList[1] + " 원");
+                let result = (profitList[1] - profitList[0]) / profitList[1] * 100;
+                $("#profitDiff").text(result + "%");
+                var breakup = {
+                    color: "#5D87FF",
+                    series: profitList,
+                    labels: labelList,
+                    chart: {
+                        width: 180,
+                        type: "donut",
+                        fontFamily: "Plus Jakarta Sans', sans-serif",
+                        foreColor: "#5D87FF",
+                    },
+                    plotOptions: {
+                        pie: {
+                            startAngle: 0,
+                            endAngle: 360,
+                            donut: {
+                                size: '75%',
+                            },
+                        },
+                    },
+                    stroke: {
+                        show: false,
+                    },
+
+                    dataLabels: {
+                        enabled: false,
+                    },
+
+                    legend: {
+                        show: false,
+                    },
+                    colors: ["#5D87FF", "#ecf2ff", "#F9F9FD"],
+
+                    responsive: [
+                        {
+                            breakpoint: 991,
+                            options: {
+                                chart: {
+                                    width: 150,
+                                },
+                            },
+                        },
+                    ],
+                    tooltip: {
+                        theme: "dark",
+                        fillSeriesColor: false,
+                    },
+                };
+
+                var chart = new ApexCharts(document.querySelector("#breakup"), breakup);
+                chart.render();
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    });
+</script>
 
 <jsp:include page="../layout/footer.jsp"/>
 

@@ -18,7 +18,6 @@
 
     <!-- 관리자 페이지 CSS 적용 -->
     <link rel="stylesheet" href="${path}/resources/css/admin-style.css" />
-    <link rel="stylesheet" href="${path}/resources/vendors/simplebar/dist/simplebar.css" />
 </head>
 <body>
 <jsp:include page="../layout/header.jsp"></jsp:include>
@@ -128,7 +127,7 @@
                             <span>
                                 <i class="fa-solid fa-chalkboard-user"></i>
                             </span>
-                            <span class="hide-menu"> 강사정보등록 </span>
+                            <span class="hide-menu"> 강사정보 등록 </span>
                         </a>
                     </li>
                     <li class="nav-small-cap">

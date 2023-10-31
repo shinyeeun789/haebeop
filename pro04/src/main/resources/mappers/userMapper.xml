@@ -3,7 +3,23 @@
 <mapper namespace="kr.ed.haebeop.persistence.UserMapper">
     <!-- 회원 목록 -->
     <select id="userList" resultType="kr.ed.haebeop.domain.User">
-        select * from user WHERE NOT id IN ('admin') order by regdate desc
+        select * from user
+        <where>
+            <if test="type != null">
+                <trim prefixOverrides="OR">
+                    <choose>
+                        <when test="type == 'I'.toString()">
+                            id LIKE concat('%', #{keyword}, '%')
+                        </when>
+                        <when test="type == 'N'.toString()">
+                            name LIKE concat('%', #{keyword}, '%')
+                        </when>
+                    </choose>
+                </trim>
+            </if>
+            AND id != 'admin'
+        </where>
+        order by regdate desc limit #{postStart}, #{postCount}
     </select>
 
     <!-- 회원정보 조회 -->
@@ -48,6 +64,21 @@
     <!-- 회원 수 조회 -->
     <select id="userCnt" resultType="integer">
         select count(*) from user
+        <where>
+            <if test="type != null">
+                <trim prefixOverrides="OR">
+                    <choose>
+                        <when test="type == 'I'.toString()">
+                            id LIKE concat('%', #{keyword}, '%')
+                        </when>
+                        <when test="type == 'N'.toString()">
+                            name LIKE concat('%', #{keyword}, '%')
+                        </when>
+                    </choose>
+                </trim>
+            </if>
+            AND id != 'admin'
+        </where>
     </select>
 
     <!-- 수강신청 시 포인트 차감 -->
@@ -65,10 +96,22 @@
         SELECT isStudy FROM user WHERE id = #{id}
     </select>
 
-    <!-- 월별 회원 수와 출석체크 수 조회 -->
-<!--    <select id="adminChart" resultType="kr.co.teaspoon.dto.AdminChartVO">-->
-<!--        SELECT if(regMonth IS NULL,attendMonth,regMonth) AS label, if(userCnt IS NULL,0,userCnt) AS userCnt, if(attendCnt IS NULL,0,attendCnt) AS attendCnt FROM userMonth AS m LEFT JOIN attendanceMonth AS a ON m.regMonth = a.attendMonth-->
-<!--        UNION-->
-<!--        SELECT if(regMonth IS NULL,attendMonth,regMonth) AS label, if(userCnt IS NULL,0,userCnt) AS userCnt, if(attendCnt IS NULL,0,attendCnt) AS attendCnt FROM userMonth AS m RIGHT JOIN attendanceMonth AS a ON m.regMonth = a.attendMonth-->
-<!--    </select>-->
+    <!-- 선생님으로 가입한 아이디 리스트 불러오기 -->
+    <select id="teacherInfoList" resultType="kr.ed.haebeop.domain.User">
+        SELECT * FROM user WHERE userType = 'teacher' AND id NOT IN (SELECT tid FROM teacher)
+    </select>
+
+    <!-- 아이디 또는 이름으로 검색한 선생님 리스트 불러오기 -->
+    <select id="findID" resultType="kr.ed.haebeop.domain.User">
+        SELECT * FROM user WHERE userType = 'teacher' AND id NOT IN (SELECT tid FROM teacher) AND (id LIKE concat('%', #{keyword}, '%') OR name LIKE concat('%', #{keyword}, '%'))
+    </select>
+
+    <!-- 월별 회원가입한 학생 및 선생님 수 조회 -->
+    <select id="userCntList" resultType="java.util.Map">
+        SELECT a.label, teaCnt, stuCnt
+        FROM (SELECT DATE_FORMAT(regdate, '%Y-%m') AS label, COUNT(*) AS teaCnt FROM user WHERE regdate >= DATE_ADD(NOW(), INTERVAL -1 YEAR) AND userType='teacher' GROUP BY label) a
+                 JOIN (SELECT DATE_FORMAT(regdate, '%Y-%m') AS label, COUNT(*) AS stuCnt FROM user WHERE regdate >= DATE_ADD(NOW(), INTERVAL -1 YEAR) AND userType='student' GROUP BY label) b
+                      ON (a.label = b.label)
+    </select>
+
 </mapper>

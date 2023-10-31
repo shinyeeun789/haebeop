@@ -202,12 +202,21 @@ VALUES('sc', '과학');
 -- 강사 테이블 (강사코드, 강사명, 연락처, 이메일, 강사소개, 강사 이미지)
 CREATE TABLE teacher(
 	tcode INT PRIMARY KEY AUTO_INCREMENT,
+	tid VARCHAR(20) NOT NULL,
 	tname VARCHAR(50) NOT NULL,
 	ttel VARCHAR(20) NOT NULL,
 	temail VARCHAR(100) NOT NULL,
 	tcontent VARCHAR(1000) NOT NULL,
 	saveFile VARCHAR(300) NOT NULL
 );
+
+SELECT label, FORMAT(SUM(profit), 0) AS profit FROM 
+(SELECT DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 YEAR), '%Y-%m') AS label, 0 AS profit FROM dual
+UNION ALL
+SELECT DATE_FORMAT(sdate, '%Y-%m') AS label, SUM(lprice) AS profit FROM lecture l JOIN register r ON (l.lcode=r.lcode) 
+WHERE sdate >= DATE_ADD(NOW(), INTERVAL -1 YEAR)
+GROUP BY DATE_FORMAT(sdate, '%Y-%m')) a
+GROUP BY label;
 
 
 -- 강의 테이블 (강의코드, 강의명, 과목코드, 강사코드, 강의 소개, 강의 단가, 수강인원, 강의 썸네일(saveFile), 강의 시작일, 강의 종료일, (오프라인 시)강의 시작시간, 온오프 여부, 강의실)
@@ -271,6 +280,39 @@ CREATE TABLE studyInfo(
 	FOREIGN KEY(ccode) REFERENCES curriculum(ccode) ON DELETE CASCADE
 );
 
+-- 오프라인 강의 출석 번호 저장 테이블
+CREATE TABLE saveAttendCode(
+	lcode VARCHAR(50) PRIMARY KEY,	/* 과목코드 */
+	attendCode INT NOT NULL				/* 과목코드별 출석코드 */
+);
+
+
+-- 오프라인 강의 출석체크 테이블
+CREATE TABLE lectureAttend(
+	id VARCHAR(20) NOT NULL,
+	lcode VARCHAR(50) NOT NULL,
+	adate DATE DEFAULT CURRENT_DATE,
+	atime TIME DEFAULT CURRENT_TIME,
+	atype VARCHAR(10) NOT NULL,
+	CONSTRAINT lectureattend_PK PRIMARY KEY (id, lcode, adate),
+	FOREIGN KEY(id) REFERENCES user(id) ON DELETE CASCADE,
+	FOREIGN KEY(lcode) REFERENCES lecture(lcode) ON DELETE CASCADE
+);
+
+
+-- 결제 정보 테이블
+CREATE TABLE payment(
+   pno INT PRIMARY KEY AUTO_INCREMENT,
+	lcode VARCHAR(50) NOT NULL,
+   id VARCHAR(20) NOT NULL,
+	impUid VARCHAR(100) NOT NULL,
+	merchantUid VARCHAR(100) NOT NULL,
+	amount INT NOT NULL,
+	applyNum VARCHAR(100) NOT NULL,
+   resdate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   FOREIGN KEY (lcode) REFERENCES lecture (lcode) ON DELETE CASCADE,
+	FOREIGN KEY (id) REFERENCES user (id) ON DELETE CASCADE
+);
 
 
 -- 핵심 기능: 공지사항, 자료실, 회원, 자유게시판, 강의별 댓글,  교재와 시범강의, 결제

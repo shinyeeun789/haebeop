@@ -8,12 +8,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Teacher {
-
     private String tcode;
+    private String tid;
     private String tname;
     private String ttel;
     private String temail;
     private String tcontent;
     private String saveFile;
-
 }

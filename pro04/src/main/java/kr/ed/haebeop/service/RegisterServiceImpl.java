@@ -1,7 +1,9 @@
 package kr.ed.haebeop.service;
 
 import kr.ed.haebeop.domain.LectureVO;
+import kr.ed.haebeop.domain.Payment;
 import kr.ed.haebeop.domain.UserProgress;
+import kr.ed.haebeop.persistence.PaymentMapper;
 import kr.ed.haebeop.persistence.RegisterMapper;
 import kr.ed.haebeop.persistence.UserMapper;
 import kr.ed.haebeop.util.Page;
@@ -19,9 +21,9 @@ public class RegisterServiceImpl implements RegisterService {
     @Autowired
     private RegisterMapper registerMapper;
     @Autowired
-    private UserMapper userMapper;
+    private PaymentMapper paymentMapper;
     @Autowired
-    private LectureService lectureService;
+    private UserMapper userMapper;
 
     @Override
     public boolean isReg(String lcode, String id) throws Exception {
@@ -33,10 +35,13 @@ public class RegisterServiceImpl implements RegisterService {
 
     @Override
     @Transactional
-    public String registerInsert(String id, String lcode) throws Exception {
+    public String registerInsert(String id, String lcode, Payment payment) throws Exception {
+        // Mapper에 전달할 데이터 세팅
         Map<String, String> data = new HashMap<>();
         data.put("lcode", lcode);
         data.put("id", id);
+
+        payment.setId(id);
 
         // 만약 인원이 찼다면 수강신청할 수 없도록 처리
         boolean isMaxStudent = registerMapper.isMaxStudent(lcode);
@@ -45,6 +50,8 @@ public class RegisterServiceImpl implements RegisterService {
             userMapper.minusPoint(data);
             // 2. 수강신청 테이블 INSERT
             registerMapper.registerInsert(data);
+            // 3. 결제 테이블 INSERT
+            paymentMapper.paymentInsert(payment);
             return "수강신청에 성공했습니다.";
         }
         return "수강인원이 마감되어 수강신청할 수 없습니다.";
@@ -63,5 +70,15 @@ public class RegisterServiceImpl implements RegisterService {
     @Override
     public List<UserProgress> progressList(String id) throws Exception {
         return registerMapper.progressList(id);
+    }
+
+    @Override
+    public List<Map<String, Integer>> yearProfit() throws Exception {
+        return registerMapper.yearProfit();
+    }
+
+    @Override
+    public List<Map<String, Integer>> monthProfit() throws Exception {
+        return registerMapper.monthProfit();
     }
 }

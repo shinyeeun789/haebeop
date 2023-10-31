@@ -128,7 +128,7 @@
                             <span>
                                 <i class="fa-solid fa-chalkboard-user"></i>
                             </span>
-                            <span class="hide-menu"> 강사정보등록 </span>
+                            <span class="hide-menu"> 강사정보 등록 </span>
                         </a>
                     </li>
                     <li class="nav-small-cap">
@@ -171,17 +171,18 @@
                 <h1> 강사 등록하기 <i class="fa-solid fa-pencil"></i> </h1>
                 <form action="${path}/admin/teacherEdit" method="post" enctype="multipart/form-data">
                     <div class="form-group mt-3">
-                        <label for="tname"> 강사명 </label>
-                        <input type="text" name="tname" id="tname" class="form-control" value="${detail.tname}" autocomplete="off" required>
+                        <label for="tname"> 강사 이름 </label>
+                        <input type="text" name="tname" id="tname" class="form-control" value="${detail.tname}" autocomplete="off" required readonly>
                         <input type="hidden" name="tcode" id="tcode" value="${detail.tcode}">
+                        <input type="hidden" name="tid" id="tid" value="${detail.tid}">
                     </div>
                     <div class="form-group mt-3">
                         <label for="ttel"> 강사 연락처 </label>
-                        <input type="text" name="ttel" id="ttel" class="form-control" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" value="${detail.ttel}" autocomplete="off" required>
+                        <input type="text" name="ttel" id="ttel" class="form-control" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" value="${detail.ttel}" autocomplete="off" required readonly>
                     </div>
                     <div class="form-group mt-3">
                         <label for="temail"> 강사 이메일 </label>
-                        <input type="email" name="temail" id="temail" class="form-control" value="${detail.temail}" autocomplete="off" required>
+                        <input type="email" name="temail" id="temail" class="form-control" value="${detail.temail}" autocomplete="off" required readonly>
                     </div>
                     <div class="form-group mt-3">
                         <label for="tcontent"> 강사 소개 </label>
@@ -202,16 +203,25 @@
 
 <script>
     $(document).ready(() => {
-        // 파일 선택 시 파일 이름이 나오도록 처리
-        $("#customFile").on("change", () => {
-            let fileName = '';
-            let fileLength = $("#customFile")[0].files.length;
-            if(fileLength > 1) {
-                fileName = fileLength + "개의 파일";
-            } else {
-                fileName = $("#customFile").val().split("\\").pop();
-            }
-            $("#file-label").text("선택한 파일 : " + fileName);
+        // 템플릿과 부트스트랩 간의 충돌 해결
+        $(".nice-select.custom-select").addClass("d-none");
+
+        $("#tid").on("change", () => {
+            let data = {"keyword": $("#tid option:selected").val()}
+            $.ajax({
+                url: "${path}/admin/findID",
+                data: data,
+                type: "post",
+                dataType: "json",
+                success: function(result) {
+                    $("#tname").val(result[0].name);
+                    $("#ttel").val(result[0].tel);
+                    $("#temail").val(result[0].email);
+                },
+                error: function(res, text) {
+                    alert("문제가 발생하였습니다. 잠시 후 다시 시도해주세요.");
+                }
+            });
         });
     });
 </script>
@@ -228,6 +238,15 @@
             let parent_Obj = obj.parentNode
             let node = parent_Obj.replaceChild(obj.cloneNode(true),obj);
             return false;
+        } else {
+            let fileName = '';
+            let fileLength = $("#customFile")[0].files.length;
+            if(fileLength > 1) {
+                fileName = fileLength + "개의 파일";
+            } else {
+                fileName = $("#customFile").val().split("\\").pop();
+            }
+            $("#file-label").text("선택한 파일 : " + fileName);
         }
     }
 </script>

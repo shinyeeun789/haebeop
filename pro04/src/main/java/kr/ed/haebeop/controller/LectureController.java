@@ -249,11 +249,11 @@ public class LectureController {
         model.addAttribute("user", user);
         return "/lecture/registerInsert";
     }
-    @GetMapping(value="registerInsert")
-    public String registerInsert(@RequestParam String lcode, HttpServletRequest request, RedirectAttributes rttr) throws Exception {
+    @PostMapping("registerInsert")
+    public String registerInsert(@RequestParam String lcode, Payment payment, HttpServletRequest request, RedirectAttributes rttr) throws Exception {
         HttpSession session = request.getSession();
         String id = (String) session.getAttribute("sid");
-        String result = registerService.registerInsert(id, lcode);
+        String result = registerService.registerInsert(id, lcode, payment);
 
         rttr.addFlashAttribute("msg", result);
 

@@ -32,7 +32,7 @@
 
     <insert id="teacherInsert">
         insert into teacher
-        values(default, #{tname}, #{ttel}, #{temail}, #{tcontent}, #{saveFile})
+        values(default, #{tid}, #{tname}, #{ttel}, #{temail}, #{tcontent}, #{saveFile})
     </insert>
 
     <update id="teacherEdit">

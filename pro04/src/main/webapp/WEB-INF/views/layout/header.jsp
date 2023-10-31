@@ -25,6 +25,13 @@
                 </button>
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto">
+                        <c:if test="${userType eq 'teacher'}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="${path}/lectureAttend/teacherLecture">
+                                    <i class="fa-solid fa-chalkboard fa-lg mr-3"></i>
+                                </a>
+                            </li>
+                        </c:if>
                         <li class="nav-item">
                             <a class="nav-link" href="${path}/lecture/list"> 강의 </a>
                         </li>

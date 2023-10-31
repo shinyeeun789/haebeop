@@ -129,7 +129,7 @@
                             <span>
                                 <i class="fa-solid fa-chalkboard-user"></i>
                             </span>
-                            <span class="hide-menu"> 강사정보등록 </span>
+                            <span class="hide-menu"> 강사정보 등록 </span>
                         </a>
                     </li>
                     <li class="nav-small-cap">
@@ -202,7 +202,7 @@
                 </c:forEach>
                 <c:if test="${empty closeList}">
                     <tr class="text-center">
-                        <td colspan="6"> 폐강이 필요한 강의가 없습니다.</td>
+                        <td colspan="6"> 폐강 고려 대상 강의가 없습니다. </td>
                     </tr>
                 </c:if>
                 </tbody>

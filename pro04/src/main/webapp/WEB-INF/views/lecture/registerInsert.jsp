@@ -12,6 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title> 강의 </title>
     <jsp:include page="../layout/head.jsp"></jsp:include>
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <body>
 <jsp:include page="../layout/header.jsp"></jsp:include>
@@ -48,6 +49,10 @@
                 </tr>
                 </thead>
                 <tbody>
+                <tr>
+                    <td> 기본 결제금액 </td>
+                    <td> 5000 원 </td>
+                </tr>
                 <tr height="250">
                     <td> ${lecture.lname} </td>
                     <td> ${lecture.lprice} 포인트 </td>
@@ -71,16 +76,53 @@
                 </tbody>
             </table>
             <div class="form-group">
-                <c:if test="${lecture.lprice lt user.pt}">
-                    <button class="btn btn-outline-dark btn-lg py-3 btn-block" onclick="window.location='${path}/lecture/registerInsert?lcode=${lecture.lcode}'"> 수강신청하기 </button>
-                </c:if>
-                <c:if test="${lecture.lprice gt user.pt}">
-                    <button class="btn btn-outline-dark btn-lg py-3 btn-block" onclick="javascript: alert('보유한 포인트가 부족합니다.')" disabled> 수강신청하기 </button>
-                </c:if>
+                <form action="${path}/lecture/registerInsert" method="post">
+                    <input type="hidden" id="lcode" name="lcode" value="${lecture.lcode}">
+                    <input type="hidden" id="impUid" name="impUid">
+                    <input type="hidden" id="merchantUid" name="merchantUid">
+                    <input type="hidden" id="amount" name="amount">
+                    <input type="hidden" id="applyNum" name="applyNum">
+                    <c:if test="${lecture.lprice lt user.pt}">
+                        <button type="button" class="btn btn-outline-dark btn-lg py-3 btn-block" id="pay"> 수강신청하기 </button>
+                    </c:if>
+                    <c:if test="${lecture.lprice gt user.pt}">
+                        <button type="button" class="btn btn-outline-dark btn-lg py-3 btn-block" onclick="javascript: alert('보유한 포인트가 부족합니다.')" disabled> 수강신청하기 </button>
+                    </c:if>
+                </form>
             </div>
         </div>
     </div>
 </section>
+
+<script>
+    $(document).ready(() => {
+        $("#pay").on("click", function() {
+            let d = new Date();
+            let date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
+            let IMP = window.IMP;               // 생략가능
+            IMP.init('imp73810516');            // 결제 API를 사용하기 위한 코드 입력!
+            IMP.request_pay({		            //결제 요청
+                pg: 'kicc',
+                merchant_uid : '${lecture.lname}_' + date, //상점 거래 ID
+                name :"${lecture.lname}",				    // 결제 명
+                amount : 5000,				        // 결제금액
+                buyer_email : "${user.email}",  // 구매자 email
+                buyer_name : "${user.name}",		// 구매자 이름
+                buyer_tel : "${user.tel}"		// 구매자 전화번호
+            }, function(rsp){
+                if(rsp.success){
+                    $("#impUid").val(rsp.imp_uid);
+                    $("#merchantUid").val(rsp.merchant_uid);
+                    $("#amount").val(rsp.paid_amount);
+                    $("#applyNum").val(rsp.apply_num);
+                    document.forms[0].submit();
+                } else{
+                    alert('결제에 실패했습니다. 에러 내용: ' + rsp.error_msg);
+                }
+            });
+        });
+    });
+</script>
 
 <jsp:include page="../layout/footer.jsp"/>
 </body>

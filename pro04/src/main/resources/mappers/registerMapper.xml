@@ -57,4 +57,22 @@
         ORDER BY scode DESC LIMIT 4
     </select>
 
+    <select id="regStudentCnt" resultType="int">
+        select count(*) from register where lcode=#{lcode}
+    </select>
+
+    <select id="yearProfit" resultType="hashMap">
+        SELECT label, FORMAT(SUM(profit), 0) AS profit FROM
+            (SELECT DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 YEAR), '%Y') AS label, 0 AS profit FROM dual
+             UNION ALL
+             SELECT DATE_FORMAT(sdate, '%Y') AS label, SUM(lprice) AS profit FROM lecture l JOIN register r ON (l.lcode=r.lcode)
+             WHERE sdate >= DATE_ADD(NOW(), INTERVAL -1 YEAR)
+             GROUP BY DATE_FORMAT(sdate, '%Y')) a
+        GROUP BY label
+    </select>
+
+    <select id="monthProfit" resultType="hashMap">
+
+    </select>
+
 </mapper>

@@ -10,11 +10,17 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> 강사관리 </title>
+    <title> 회원관리 </title>
     <jsp:include page="../layout/head.jsp"></jsp:include>
 
     <!-- 관리자 페이지 CSS 적용 -->
     <link rel="stylesheet" href="${path}/resources/css/admin-style.css" />
+
+    <c:if test="${not empty msg}">
+        <script>
+            alert("${msg} 회원을 강제 탈퇴시켰습니다.");
+        </script>
+    </c:if>
 </head>
 <body>
 <jsp:include page="../layout/header.jsp"></jsp:include>
@@ -30,7 +36,7 @@
                         <div class="page_link">
                             <a href="${path}/"> Home </a>
                             <a href="${path}/admin"> Admin </a>
-                            <a href="${path}/admin/teacherMgmt"> Teacher </a>
+                            <a href="${path}/admin/userMgmt"> User </a>
                         </div>
                     </div>
                 </div>
@@ -65,7 +71,7 @@
                         <span class="hide-menu"> Management </span>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="${path}/admin/userMgmt" aria-expanded="false">
+                        <a class="sidebar-link active" href="${path}/admin/userMgmt" aria-expanded="false">
                             <span>
                                 <i class="fa-solid fa-user"></i>
                             </span>
@@ -110,7 +116,7 @@
                     <li class="nav-small-cap">
                         <span class="hide-menu"> 강사관리 </span>
                     </li>
-                    <li class="sidebar-item active">
+                    <li class="sidebar-item">
                         <a class="sidebar-link" href="${path}/admin/teacherMgmt" aria-expanded="false">
                             <span>
                                 <i class="fa-solid fa-table-list"></i>
@@ -164,9 +170,9 @@
         <div class="container-fluid">
             <div class="d-flex justify-content-end">
                 <!-- 검색어 입력 부분 -->
-                <form action="${path}/admin/teacherMgmt" method="get" class="w-50 mb-5">
+                <form action="${path}/admin/userMgmt" method="get" class="w-50 mb-5">
                     <div class="input-group">
-                        <input type="text" class="form-control" id="keyword" name="keyword" placeholder="검색할 강사명을 입력해주세요" autocomplete="off" aria-label="검색어를 입력해주세요" aria-describedby="button-addon2" value="${page.keyword}">
+                        <input type="text" class="form-control" id="keyword" name="keyword" placeholder="검색어를 입력해주세요" autocomplete="off" aria-label="검색어를 입력해주세요" aria-describedby="button-addon2" value="${page.keyword}">
                         <div class="input-group-append">
                             <button class="btn btn-dark" type="submit" id="button-addon2"> 검색 </button>
                         </div>
@@ -176,29 +182,38 @@
 
             <table class="table table-hover text-center">
                 <thead>
-                    <tr>
-                        <th width="100"> # </th>
-                        <th> 강사명 </th>
-                        <th width="210"> 연락처 </th>
-                        <th width="210"> 이메일 </th>
-                        <th width="150"> 비고 </th>
-                    </tr>
+                <tr>
+                    <th> 아이디 </th>
+                    <th width="150"> 이름 </th>
+                    <th width="180"> 연락처 </th>
+                    <th width="180"> 이메일 </th>
+                    <th width="210"> 가입일 </th>
+                    <th width="150"> 접속횟수 </th>
+                    <th width="130"> 보유포인트 </th>
+                    <th width="150"> 비고 </th>
+                </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="teacher" items="${teacherList}">
+                <c:forEach var="user" items="${userList}">
                     <tr>
-                        <td class="align-middle"> ${teacher.tcode} </td>
-                        <td class="align-middle"> ${teacher.tname} </td>
-                        <td class="align-middle"> ${teacher.ttel} </td>
-                        <td class="align-middle"> ${teacher.temail} </td>
+                        <td class="align-middle"> ${user.id} </td>
+                        <td class="align-middle"> ${user.name} </td>
+                        <td class="align-middle"> ${user.tel} </td>
+                        <td class="align-middle"> ${user.email} </td>
                         <td class="align-middle">
-                            <a href="${path}/admin/teacherEdit?tcode=${teacher.tcode}" class="btn btn-dark"> 수정 </a>
+                            <fmt:parseDate value="${user.regdate}" var="regdate" pattern="yyyy-MM-dd HH:mm:ss"/>
+                            <fmt:formatDate value="${regdate}" pattern="yyyy-MM-dd"/>
+                        </td>
+                        <td class="align-middle"> ${user.visited} 회 </td>
+                        <td class="align-middle"> ${user.pt} pt </td>
+                        <td class="align-middle p-0">
+                            <a href="${path}/admin/userDelete?id=${user.id}" class="btn btn-danger"> 강제탈퇴 </a>
                         </td>
                     </tr>
                 </c:forEach>
-                <c:if test="${empty teacherList}">
+                <c:if test="${empty userList}">
                     <tr class="text-center">
-                        <td colspan="5"> 등록된 강사가 없습니다. </td>
+                        <td colspan="8"> 가입된 회원이 없습니다. </td>
                     </tr>
                 </c:if>
                 </tbody>
@@ -209,8 +224,8 @@
                 <ul class="pagination justify-content-center">
                     <c:if test="${curPage > 5}">
                         <li class="page-item">
-                            <a class="page-link" href="${path}/admin/teacherMgmt?page=${page.blockStartNum - 1}" aria-label="Previous">
-                                <span aria-hidden="true"> << </span>
+                            <a class="page-link" href="${path}/admin/userMgmt?page=${page.blockStartNum - 1}" aria-label="Previous">
+                                <span aria-hidden="true"><<</span>
                             </a>
                         </li>
                     </c:if>
@@ -218,20 +233,20 @@
                         <c:choose>
                             <c:when test="${i == curPage}">
                                 <li class="page-item active" aria-current="page">
-                                    <a class="page-link" href="${path}/admin/teacherMgmt?page=${i}">${i}</a>
+                                    <a class="page-link" href="${path}/admin/userMgmt?page=${i}">${i}</a>
                                 </li>
                             </c:when>
                             <c:otherwise>
                                 <li class="page-item">
-                                    <a class="page-link" href="${path}/admin/teacherMgmt?page=${i}">${i}</a>
+                                    <a class="page-link" href="${path}/admin/userMgmt?page=${i}">${i}</a>
                                 </li>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
                     <c:if test="${page.blockLastNum < page.totalPageCount}">
                         <li class="page-item">
-                            <a class="page-link" href="${path}/admin/teacherMgmt?page=${page.blockLastNum + 1}" aria-label="Next">
-                                <span aria-hidden="true"> >> </span>
+                            <a class="page-link" href="${path}/admin/userMgmt?page=${page.blockLastNum + 1}" aria-label="Next">
+                                <span aria-hidden="true">>></span>
                             </a>
                         </li>
                     </c:if>
@@ -241,10 +256,11 @@
     </div>
 </div>
 
-<jsp:include page="../layout/footer.jsp"/>
+<jsp:include page="../layout/footer.jsp" />
 
 <script src="${path}/resources/js/sidebarmenu.js"></script>
 <script src="${path}/resources/js/app.min.js"></script>
 <script src="${path}/resources/js/dashboard.js"></script>
+
 </body>
 </html>
