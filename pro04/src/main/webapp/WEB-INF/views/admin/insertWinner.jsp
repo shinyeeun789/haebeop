@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,15 +10,12 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> 강사관리 </title>
+    <title> 당첨자 추첨 </title>
     <jsp:include page="../layout/head.jsp"></jsp:include>
-
-    <!-- ckEditor 적용 -->
     <script type="text/javascript" src="${path}/resources/ckeditor/ckeditor.js"></script>
-
     <!-- 관리자 페이지 CSS 적용 -->
-    <link rel="stylesheet" href="${path}/resources/css/admin-style.css" />
-    <link rel="stylesheet" href="${path}/resources/vendors/simplebar/dist/simplebar.css" />
+    <link rel="stylesheet" href="${path}/resources/css/admin-style.css"/>
+    <link rel="stylesheet" href="${path}/resources/vendors/simplebar/dist/simplebar.css"/>
 </head>
 <body>
 <jsp:include page="../layout/header.jsp"></jsp:include>
@@ -30,12 +27,11 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="banner_content text-center">
-                        <h2> Teacher </h2>
+                        <h2> Event </h2>
                         <div class="page_link">
                             <a href="${path}/"> Home </a>
                             <a href="${path}/admin/dashboard"> Admin </a>
-                            <a href="${path}/admin/teacherMgmt"> Teacher </a>
-                            <a href="${path}/admin/teacherEdit"> Edit </a>
+                            <a href="${path}/admin/eventMgmt"> Event </a>
                         </div>
                     </div>
                 </div>
@@ -104,7 +100,7 @@
                             <span class="hide-menu"> 폐강관리 </span>
                         </a>
                     </li>
-                    <li class="sidebar-item active">
+                    <li class="sidebar-item">
                         <a class="sidebar-link" href="${path}/admin/lectureInsert" aria-expanded="false">
                             <span>
                                 <i class="fa-solid fa-file-video"></i>
@@ -135,7 +131,7 @@
                         <span class="hide-menu"> 이벤트 관리 </span>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="${path}/admin/eventMgmt" aria-expanded="false">
+                        <a class="sidebar-link active" href="${path}/admin/eventMgmt" aria-expanded="false">
                             <span>
                                 <i class="fa-solid fa-gifts"></i>
                             </span>
@@ -160,94 +156,44 @@
         </header>
         <div class="container-fluid">
             <div class="container shadow mb-30 p-5">
-                <h1> 강사 등록하기 <i class="fa-solid fa-pencil"></i> </h1>
-                <form action="${path}/admin/teacherEdit" method="post" enctype="multipart/form-data">
+                <h1> 글 작성하기 <i class="fa-solid fa-pencil"></i> </h1>
+                <form action="${path}/winner/insert" method="post">
                     <div class="form-group mt-3">
-                        <label for="tname"> 강사 이름 </label>
-                        <input type="text" name="tname" id="tname" class="form-control" value="${detail.tname}" autocomplete="off" required readonly>
-                        <input type="hidden" name="tcode" id="tcode" value="${detail.tcode}">
-                        <input type="hidden" name="tid" id="tid" value="${detail.tid}">
-                    </div>
-                    <div class="form-group mt-3">
-                        <label for="ttel"> 강사 연락처 </label>
-                        <input type="text" name="ttel" id="ttel" class="form-control" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" value="${detail.ttel}" autocomplete="off" required readonly>
+                        <label for="title"> 제목 </label>
+                        <input type="text" name="title" id="title" class="form-control" autocomplete="off" value="${event.title} 당첨자 발표" required>
+                        <input type="hidden" value="${event.eno}" id="eno" name="eno">
                     </div>
                     <div class="form-group mt-3">
-                        <label for="temail"> 강사 이메일 </label>
-                        <input type="email" name="temail" id="temail" class="form-control" value="${detail.temail}" autocomplete="off" required readonly>
+                        <label for="title"> 내용 </label>
+                        <textarea name="content" id="content" class="form-control" cols="30" rows="10">
+<table border="1" cellpadding="1" cellspacing="1" style="width:100%; text-align:center">
+    <thead>
+        <tr><td>#</td><td>아이디</td><td>이름</td></tr>
+    </thead>
+    <tbody>
+                        <c:forEach var="winner" items="${winners}" varStatus="status">
+        <tr><td>${status.index + 1}</td><td>${winner.id}</td><td>${winner.name}</td></tr>
+                        </c:forEach>
+    </tbody>
+</table>
+축하드립니다! 당첨자분들께는 개별적으로 연락드려 상세한 안내를 드리겠습니다.
+                            </textarea>
+                        <script>
+                            CKEDITOR.replace('content', {filebrowserUploadUrl: '${path}/winner/imageUpload.do'});
+                        </script>
                     </div>
-                    <div class="form-group mt-3">
-                        <label for="tcontent"> 강사 소개 </label>
-                        <textarea name="tcontent" id="tcontent" class="form-control" cols="30" rows="10" maxlength="1400" required>${detail.tcontent}</textarea>
-                    </div>
-                    <div class="custom-file mt-3">
-                        <input type="file" name="upfile" class="custom-file-input" id="customFile" onchange="chk_file_type(this)">
-                        <label class="custom-file-label" id="file-label" for="customFile">Choose file</label>
-                    </div>
-                    <div class="text-right mt-3">
-                        <button type="submit" class="btn btn-dark"> 등록하기 </button>
-                    </div>
+                    <c:if test='${sid eq "admin"}'>
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-dark"> 등록하기 </button>
+                        </div>
+                    </c:if>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-    $(document).ready(() => {
-        // 템플릿과 부트스트랩 간의 충돌 해결
-        $(".nice-select.custom-select").addClass("d-none");
-
-        $("#tid").on("change", () => {
-            let data = {"keyword": $("#tid option:selected").val()}
-            $.ajax({
-                url: "${path}/admin/findID",
-                data: data,
-                type: "post",
-                dataType: "json",
-                success: function(result) {
-                    $("#tname").val(result[0].name);
-                    $("#ttel").val(result[0].tel);
-                    $("#temail").val(result[0].email);
-                },
-                error: function(res, text) {
-                    alert("문제가 발생하였습니다. 잠시 후 다시 시도해주세요.");
-                }
-            });
-        });
-    });
-</script>
-<script>
-    function chk_file_type(obj) {
-        let file_kind = obj.value.lastIndexOf('.');
-        let file_name = obj.value.substring(file_kind+1,obj.length);
-        let file_type = file_name.toLowerCase();
-
-        let check_file_type=['jpg','gif','png','jpeg','bmp'];
-
-        if(check_file_type.indexOf(file_type) == -1){
-            alert('이미지 파일만 선택할 수 있습니다.');
-            let parent_Obj = obj.parentNode
-            let node = parent_Obj.replaceChild(obj.cloneNode(true),obj);
-            return false;
-        } else {
-            let fileName = '';
-            let fileLength = $("#customFile")[0].files.length;
-            if(fileLength > 1) {
-                fileName = fileLength + "개의 파일";
-            } else {
-                fileName = $("#customFile").val().split("\\").pop();
-            }
-            $("#file-label").text("선택한 파일 : " + fileName);
-        }
-    }
-</script>
-
 <jsp:include page="../layout/footer.jsp"/>
-
 <script src="${path}/resources/js/sidebarmenu.js"></script>
 <script src="${path}/resources/js/app.min.js"></script>
-
-
 </body>
 </html>

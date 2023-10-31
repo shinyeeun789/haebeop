@@ -2,6 +2,7 @@ package kr.ed.haebeop.controller;
 
 import kr.ed.haebeop.domain.*;
 import kr.ed.haebeop.service.*;
+import kr.ed.haebeop.util.ApplyPage;
 import kr.ed.haebeop.util.FilterPage;
 import kr.ed.haebeop.util.LecturePage;
 import kr.ed.haebeop.util.Page;
@@ -227,6 +228,27 @@ public class AdminController {
         return "redirect:/admin/boardMgmt";
     }
 
+    @GetMapping("applyList")
+    public String applyList(HttpServletRequest request, Model model) throws Exception {
+        int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+        int eno = Integer.parseInt(request.getParameter("eno"));
+
+        ApplyPage page = new ApplyPage();
+        page.setEno(eno);
+        int total = winnerService.getCount(eno);
+        page.makeBlock(curPage, total);
+        page.makeLastPageNum(total);
+        page.makePostStart(curPage, total);
+
+        //WinnerList
+        List<Apply> applyList = winnerService.applyList(page);
+        model.addAttribute("applyList", applyList);
+        model.addAttribute("eno", eno);
+        model.addAttribute("curPage", curPage);
+        model.addAttribute("page", page);
+        return "/admin/applyList";
+    }
+
     @RequestMapping("eventMgmt")
     public String getEventList(HttpServletRequest request, HttpServletResponse response,Model model) throws Exception {
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
@@ -272,6 +294,7 @@ public class AdminController {
     public String winnerList(@RequestParam int eno, Model model) throws Exception {
         List<WinnerDetail> winners = winnerService.winners(eno);
         model.addAttribute("winners", winners);
+        model.addAttribute("eno", eno);
         return "/admin/winnerList";
     }
 

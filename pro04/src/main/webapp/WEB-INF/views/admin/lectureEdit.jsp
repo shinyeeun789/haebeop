@@ -142,14 +142,6 @@
                             <span class="hide-menu"> 이벤트 관리 </span>
                         </a>
                     </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="${path}/admin/winner" aria-expanded="false">
-                            <span>
-                                <i class="fa-solid fa-star"></i>
-                            </span>
-                            <span class="hide-menu"> 당첨자 추첨 </span>
-                        </a>
-                    </li>
                 </ul>
             </nav>
         </div>

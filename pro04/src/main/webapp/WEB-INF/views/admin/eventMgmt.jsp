@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,15 +10,17 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> 강사관리 </title>
+    <title> 이벤트 관리 </title>
     <jsp:include page="../layout/head.jsp"></jsp:include>
-
-    <!-- ckEditor 적용 -->
-    <script type="text/javascript" src="${path}/resources/ckeditor/ckeditor.js"></script>
-
     <!-- 관리자 페이지 CSS 적용 -->
-    <link rel="stylesheet" href="${path}/resources/css/admin-style.css" />
-    <link rel="stylesheet" href="${path}/resources/vendors/simplebar/dist/simplebar.css" />
+    <link rel="stylesheet" href="${path}/resources/css/admin-style.css"/>
+    <link rel="stylesheet" href="${path}/resources/vendors/simplebar/dist/simplebar.css"/>
+
+    <c:if test="${not empty msg}">
+        <script>
+            alert('${msg}');
+        </script>
+    </c:if>
 </head>
 <body>
 <jsp:include page="../layout/header.jsp"></jsp:include>
@@ -30,12 +32,11 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="banner_content text-center">
-                        <h2> Teacher </h2>
+                        <h2> Event </h2>
                         <div class="page_link">
                             <a href="${path}/"> Home </a>
                             <a href="${path}/admin/dashboard"> Admin </a>
-                            <a href="${path}/admin/teacherMgmt"> Teacher </a>
-                            <a href="${path}/admin/teacherEdit"> Edit </a>
+                            <a href="${path}/admin/eventMgmt"> Event </a>
                         </div>
                     </div>
                 </div>
@@ -104,7 +105,7 @@
                             <span class="hide-menu"> 폐강관리 </span>
                         </a>
                     </li>
-                    <li class="sidebar-item active">
+                    <li class="sidebar-item">
                         <a class="sidebar-link" href="${path}/admin/lectureInsert" aria-expanded="false">
                             <span>
                                 <i class="fa-solid fa-file-video"></i>
@@ -135,7 +136,7 @@
                         <span class="hide-menu"> 이벤트 관리 </span>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="${path}/admin/eventMgmt" aria-expanded="false">
+                        <a class="sidebar-link active" href="${path}/admin/eventMgmt" aria-expanded="false">
                             <span>
                                 <i class="fa-solid fa-gifts"></i>
                             </span>
@@ -159,95 +160,86 @@
             </nav>
         </header>
         <div class="container-fluid">
-            <div class="container shadow mb-30 p-5">
-                <h1> 강사 등록하기 <i class="fa-solid fa-pencil"></i> </h1>
-                <form action="${path}/admin/teacherEdit" method="post" enctype="multipart/form-data">
-                    <div class="form-group mt-3">
-                        <label for="tname"> 강사 이름 </label>
-                        <input type="text" name="tname" id="tname" class="form-control" value="${detail.tname}" autocomplete="off" required readonly>
-                        <input type="hidden" name="tcode" id="tcode" value="${detail.tcode}">
-                        <input type="hidden" name="tid" id="tid" value="${detail.tid}">
-                    </div>
-                    <div class="form-group mt-3">
-                        <label for="ttel"> 강사 연락처 </label>
-                        <input type="text" name="ttel" id="ttel" class="form-control" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" value="${detail.ttel}" autocomplete="off" required readonly>
-                    </div>
-                    <div class="form-group mt-3">
-                        <label for="temail"> 강사 이메일 </label>
-                        <input type="email" name="temail" id="temail" class="form-control" value="${detail.temail}" autocomplete="off" required readonly>
-                    </div>
-                    <div class="form-group mt-3">
-                        <label for="tcontent"> 강사 소개 </label>
-                        <textarea name="tcontent" id="tcontent" class="form-control" cols="30" rows="10" maxlength="1400" required>${detail.tcontent}</textarea>
-                    </div>
-                    <div class="custom-file mt-3">
-                        <input type="file" name="upfile" class="custom-file-input" id="customFile" onchange="chk_file_type(this)">
-                        <label class="custom-file-label" id="file-label" for="customFile">Choose file</label>
-                    </div>
-                    <div class="text-right mt-3">
-                        <button type="submit" class="btn btn-dark"> 등록하기 </button>
-                    </div>
-                </form>
-            </div>
+            <table class="table project-table table-centered table-nowrap" id="event-table">
+                <thead>
+                <tr>
+                    <th class="text-center" style="border-bottom: 1px solid;" width="5%">#</th>
+                    <th class="text-center" style="border-bottom: 1px solid;">제목</th>
+                    <th class="text-center" style="border-bottom: 1px solid;" width="10%">이벤트상태</th>
+                    <th class="text-center" style="border-bottom: 1px solid;" width="10%">작성일</th>
+                    <th class="text-center" style="border-bottom: 1px solid;" width="10%">당첨</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${eventList }" var="event" varStatus="status">
+                    <tr class="table-hover">
+                        <th class="text-center" style="vertical-align: middle;">${event.eno }</th>
+                        <th style="vertical-align: middle;"><a href="${path}/event/detail?eno=${event.eno}&page=${curPage}" style="color: #000000; text-decoration: none;">${event.title }</a></th>
+                        <c:if test='${event.status eq "1"}'>
+                            <th class="text-center" style="vertical-align: middle;"><span class="ba badge-pill badge-success p-2">진행 중</span></th>
+                        </c:if>
+                        <c:if test='${event.status eq "0"}'>
+                            <th class="text-center" style="vertical-align: middle;"><span class="ba badge-pill badge-danger p-2">종료</span></th>
+                        </c:if>
+                        <th class="text-center" style="vertical-align: middle;">
+                            <fmt:parseDate value="${event.regdate }" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
+                            <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd" />
+                        </th>
+                        <th class="text-center" style="vertical-align: middle;">
+                            <div class="btn-group" style="align-items: center">
+                                <a class="btn btn-dark" href="${path}/admin/applyList?eno=${event.eno}">참여자 확인</a>
+                            </div>
+                        </th>
+                    </tr>
+                </c:forEach>
+                <c:if test="${empty eventList}">
+                    <tr>
+                        <td colspan="6" class="has-text-centered"> 작성된 이벤트가 없습니다. </td>
+                    </tr>
+                </c:if>
+                </tbody>
+            </table>
+            <!-- pagination -->
+            <nav aria-label="Page navigation example" class="mt-25 mb-30">
+                <ul class="pagination justify-content-center">
+                    <c:if test="${curPage > 5}">
+                        <li class="page-item">
+                            <a class="page-link" href="${path}/admin/lectureMgmt?page=${page.blockStartNum - 1}"
+                               aria-label="Previous">
+                                <span aria-hidden="true"><<</span>
+                            </a>
+                        </li>
+                    </c:if>
+                    <c:forEach var="i" begin="${page.blockStartNum}" end="${page.blockLastNum}">
+                        <c:choose>
+                            <c:when test="${i == curPage}">
+                                <li class="page-item active" aria-current="page">
+                                    <a class="page-link" href="${path}/admin/lectureMgmt?page=${i}">${i}</a>
+                                </li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="page-item">
+                                    <a class="page-link" href="${path}/admin/lectureMgmt?page=${i}">${i}</a>
+                                </li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                    <c:if test="${page.blockLastNum < page.totalPageCount}">
+                        <li class="page-item">
+                            <a class="page-link" href="${path}/admin/lectureMgmt?page=${page.blockLastNum + 1}"
+                               aria-label="Next">
+                                <span aria-hidden="true">>></span>
+                            </a>
+                        </li>
+                    </c:if>
+                </ul>
+            </nav>
         </div>
     </div>
 </div>
 
-<script>
-    $(document).ready(() => {
-        // 템플릿과 부트스트랩 간의 충돌 해결
-        $(".nice-select.custom-select").addClass("d-none");
-
-        $("#tid").on("change", () => {
-            let data = {"keyword": $("#tid option:selected").val()}
-            $.ajax({
-                url: "${path}/admin/findID",
-                data: data,
-                type: "post",
-                dataType: "json",
-                success: function(result) {
-                    $("#tname").val(result[0].name);
-                    $("#ttel").val(result[0].tel);
-                    $("#temail").val(result[0].email);
-                },
-                error: function(res, text) {
-                    alert("문제가 발생하였습니다. 잠시 후 다시 시도해주세요.");
-                }
-            });
-        });
-    });
-</script>
-<script>
-    function chk_file_type(obj) {
-        let file_kind = obj.value.lastIndexOf('.');
-        let file_name = obj.value.substring(file_kind+1,obj.length);
-        let file_type = file_name.toLowerCase();
-
-        let check_file_type=['jpg','gif','png','jpeg','bmp'];
-
-        if(check_file_type.indexOf(file_type) == -1){
-            alert('이미지 파일만 선택할 수 있습니다.');
-            let parent_Obj = obj.parentNode
-            let node = parent_Obj.replaceChild(obj.cloneNode(true),obj);
-            return false;
-        } else {
-            let fileName = '';
-            let fileLength = $("#customFile")[0].files.length;
-            if(fileLength > 1) {
-                fileName = fileLength + "개의 파일";
-            } else {
-                fileName = $("#customFile").val().split("\\").pop();
-            }
-            $("#file-label").text("선택한 파일 : " + fileName);
-        }
-    }
-</script>
-
 <jsp:include page="../layout/footer.jsp"/>
-
 <script src="${path}/resources/js/sidebarmenu.js"></script>
 <script src="${path}/resources/js/app.min.js"></script>
-
-
 </body>
 </html>

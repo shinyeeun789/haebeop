@@ -7,20 +7,22 @@ import kr.ed.haebeop.util.Page;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface WinnerMapper {
-    public List<Apply> applyList(int eno) throws Exception;
+    public int getcount(int eno) throws Exception;
+    public List<Apply> applyList(Page page) throws Exception;
     public void random(int eno) throws Exception;
     //당첨자 리스트
     public List<WinnerDetail> winners(int eno) throws Exception;
     public void closeEvent(int eno) throws Exception;
     //당첨자 발표 게시글 목록
-    public List<Winner> winnerList (Page page) throws Exception;
+    public List<Winner> winnerList(Page page) throws Exception;
     public int winnerListCount(Page page) throws Exception;
     public Winner winnerDetail(int wno) throws Exception;
     public void winnerInsert(Winner dto) throws Exception;
-    public void winnerUpdate(Winner dto) throws Exception;
     public void winnerDelete(int wno) throws Exception;
+    public Winner winnerRef(Map<String, Object> data) throws Exception;
 
 }

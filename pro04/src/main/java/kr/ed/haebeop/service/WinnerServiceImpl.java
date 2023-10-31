@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class WinnerServiceImpl implements WinnerService{
@@ -17,8 +19,13 @@ public class WinnerServiceImpl implements WinnerService{
     private WinnerMapper winnerMapper;
 
     @Override
-    public List<Apply> applyList(int eno) throws Exception {
-        return winnerMapper.applyList(eno);
+    public int getCount(int eno) throws Exception {
+        return winnerMapper.getcount(eno);
+    }
+
+    @Override
+    public List<Apply> applyList(Page page) throws Exception {
+        return winnerMapper.applyList(page);
     }
 
     @Override
@@ -50,12 +57,15 @@ public class WinnerServiceImpl implements WinnerService{
     }
 
     @Override
-    public void winnerUpdate(Winner dto) throws Exception {
-        winnerMapper.winnerUpdate(dto);
+    public void winnerDelete(int wno) throws Exception {
+        winnerMapper.winnerDelete(wno);
     }
 
     @Override
-    public void winnerDelete(int wno) throws Exception {
-        winnerMapper.winnerDelete(wno);
+    public Winner winnerRef(int wno, String type) throws Exception {
+        Map<String, Object> data = new HashMap<>();
+        data.put("wno", wno);
+        data.put("type", type);
+        return winnerMapper.winnerRef(data);
     }
 }

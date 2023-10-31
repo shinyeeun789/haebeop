@@ -1,5 +1,6 @@
 package kr.ed.haebeop.controller;
 
+import kr.ed.haebeop.domain.Event;
 import kr.ed.haebeop.domain.Winner;
 import kr.ed.haebeop.service.WinnerService;
 import kr.ed.haebeop.util.Page;
@@ -36,6 +37,8 @@ public class WinnerController {
         //Page
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
         Page page = new Page();
+        page.setType(request.getParameter("type"));
+        page.setKeyword(request.getParameter("keyword"));
 
         //페이징에 필요한 데이터 저장
         int total = winnerService.winnerListCount(page);
@@ -57,6 +60,12 @@ public class WinnerController {
         Winner detail = winnerService.winnerDetail(wno);
         model.addAttribute("detail", detail);
         model.addAttribute("curPage", request.getParameter("page"));
+
+        Winner prev = winnerService.winnerRef(wno, "prev");
+        Winner next = winnerService.winnerRef(wno, "next");
+        model.addAttribute("prev", prev);
+        model.addAttribute("next", next);
+
         return "/winner/winnerDetail";
     }
     
@@ -74,7 +83,7 @@ public class WinnerController {
     public String getWinnerDelete(HttpServletRequest request, Model model) throws Exception {
         int wno = Integer.parseInt(request.getParameter("wno"));
         winnerService.winnerDelete(wno);
-        return "redirect:/admin/selectWinner";
+        return "redirect:/admin/eventMgmt";
     }
 
     //ckeditor를 이용한 이미지 업로드

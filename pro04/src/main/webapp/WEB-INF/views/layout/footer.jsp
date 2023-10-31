@@ -9,10 +9,7 @@
             <div class="col-lg-2 col-md-6 single-footer-widget">
                 <h4> 강의 </h4>
                 <ul>
-                    <li><a href="#">Managed Website</a></li>
-                    <li><a href="#">Manage Reputation</a></li>
-                    <li><a href="#">Power Tools</a></li>
-                    <li><a href="#">Marketing Service</a></li>
+                    <li><a href="${path}/lecture/list">강의 목록</a></li>
                 </ul>
             </div>
             <div class="col-lg-2 col-md-6 single-footer-widget">
