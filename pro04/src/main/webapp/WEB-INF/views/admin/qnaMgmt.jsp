@@ -246,7 +246,7 @@
 <jsp:include page="../layout/footer.jsp" />
 <script src="${path}/resources/js/sidebarmenu.js"></script>
 <script src="${path}/resources/js/app.min.js"></script>
-<script src="${path}/resources/js/dashboard.js"></script>
+
 
 </body>
 </html>

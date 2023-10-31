@@ -96,4 +96,8 @@ public class UserServiceImpl implements UserService {
         return userMapper.userCntList();
     }
 
+    @Override
+    public List<User> visitRank() throws Exception {
+        return userMapper.visitRank();
+    }
 }

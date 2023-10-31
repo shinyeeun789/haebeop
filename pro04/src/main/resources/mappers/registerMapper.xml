@@ -62,7 +62,7 @@
     </select>
 
     <select id="yearProfit" resultType="hashMap">
-        SELECT label, FORMAT(SUM(profit), 0) AS profit FROM
+        SELECT label, SUM(profit) AS profit FROM
             (SELECT DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 YEAR), '%Y') AS label, 0 AS profit FROM dual
              UNION ALL
              SELECT DATE_FORMAT(sdate, '%Y') AS label, SUM(lprice) AS profit FROM lecture l JOIN register r ON (l.lcode=r.lcode)
@@ -71,8 +71,19 @@
         GROUP BY label
     </select>
 
-    <select id="monthProfit" resultType="hashMap">
+    <select id="payProfit" resultType="hashMap">
+        SELECT label, SUM(profit) AS profit FROM
+            (SELECT DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 MONTH), '%Y-%m') AS label, 0 AS profit FROM dual
+             UNION ALL
+             SELECT DATE_FORMAT(resdate, '%Y-%m') AS label, SUM(amount) AS profit FROM payment
+             WHERE resdate >= DATE_ADD(NOW(), INTERVAL -1 YEAR)
+             GROUP BY DATE_FORMAT(resdate, '%Y-%m')) a
+        GROUP BY label
+    </select>
 
+    <select id="popularLectures" resultType="kr.ed.haebeop.domain.PopularLecture">
+        SELECT reg.lcode as lcode, lname, lprice, saveFile, IFNULL(ROUND(AVG(star)), 0) AS star FROM lecture lec JOIN register reg ON (lec.lcode=reg.lcode) LEFT OUTER JOIN review rev ON (lec.lcode=rev.lcode)
+        GROUP BY reg.lcode ORDER BY COUNT(reg.lcode) DESC LIMIT 6
     </select>
 
 </mapper>

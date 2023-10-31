@@ -2,6 +2,7 @@ package kr.ed.haebeop.service;
 
 import kr.ed.haebeop.domain.LectureVO;
 import kr.ed.haebeop.domain.Payment;
+import kr.ed.haebeop.domain.PopularLecture;
 import kr.ed.haebeop.domain.UserProgress;
 import kr.ed.haebeop.persistence.PaymentMapper;
 import kr.ed.haebeop.util.Page;
@@ -17,6 +18,7 @@ public interface RegisterService {
     public List<LectureVO> myLectures(Page page) throws Exception;
     public List<UserProgress> progressList(String id) throws Exception;
     public List<Map<String, Integer>> yearProfit() throws Exception;
-    public List<Map<String, Integer>> monthProfit() throws Exception;
+    public List<Map<String, Integer>> payProfit() throws Exception;
+    public List<PopularLecture> popularLectures() throws Exception;
 
 }

@@ -64,6 +64,11 @@ public class AdminController {
 
     @RequestMapping("dashboard")
     public String dashboard(Model model) throws Exception {
+        List<User> visitRank = userService.visitRank();
+        model.addAttribute("visitRank", visitRank);
+
+        List<PopularLecture> popularLectures = registerService.popularLectures();
+        model.addAttribute("popularLectures", popularLectures);
 
         return "/admin/dashboard";
     }
@@ -97,9 +102,9 @@ public class AdminController {
         out.println(jsonArray);
     }
 
-    @PostMapping("profitMonthReport")
-    public void profitMonthReport(HttpServletResponse response) throws Exception {
-        List<Map<String, Integer>> profitList = registerService.monthProfit();
+    @PostMapping("profitPayReport")
+    public void profitPayReport(HttpServletResponse response) throws Exception {
+        List<Map<String, Integer>> profitList = registerService.payProfit();
         JSONArray jsonArray = new JSONArray();
         for(Map<String, Integer> profits : profitList) {
             JSONObject obj = new JSONObject();

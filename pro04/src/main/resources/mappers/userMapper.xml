@@ -114,4 +114,9 @@
                       ON (a.label = b.label)
     </select>
 
+    <!-- 방문수 랭킹 조회 -->
+    <select id="visitRank" resultType="kr.ed.haebeop.domain.User">
+        select * from user order by visited desc
+    </select>
+
 </mapper>

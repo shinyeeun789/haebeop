@@ -21,4 +21,5 @@ public interface UserService {
     public List<User> teacherInfoList() throws Exception;
     public List<User> findID(String keyword) throws Exception;
     public List<Map<String, Integer>> userCntList() throws Exception;
+    public List<User> visitRank() throws Exception;
 }

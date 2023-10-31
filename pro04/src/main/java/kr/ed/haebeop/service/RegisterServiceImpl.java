@@ -2,6 +2,7 @@ package kr.ed.haebeop.service;
 
 import kr.ed.haebeop.domain.LectureVO;
 import kr.ed.haebeop.domain.Payment;
+import kr.ed.haebeop.domain.PopularLecture;
 import kr.ed.haebeop.domain.UserProgress;
 import kr.ed.haebeop.persistence.PaymentMapper;
 import kr.ed.haebeop.persistence.RegisterMapper;
@@ -78,7 +79,12 @@ public class RegisterServiceImpl implements RegisterService {
     }
 
     @Override
-    public List<Map<String, Integer>> monthProfit() throws Exception {
-        return registerMapper.monthProfit();
+    public List<Map<String, Integer>> payProfit() throws Exception {
+        return registerMapper.payProfit();
+    }
+
+    @Override
+    public List<PopularLecture> popularLectures() throws Exception {
+        return registerMapper.popularLectures();
     }
 }
