@@ -160,7 +160,7 @@
         </header>
         <div class="container-fluid">
             <div class="container shadow mb-30 p-5">
-                <h1> 강의 등록하기 <i class="fa-solid fa-pencil"></i> </h1>
+                <h1> 강의 수정하기 <i class="fa-solid fa-pencil"></i> </h1>
                 <form action="${path}/admin/lectureEdit" method="post" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-3">

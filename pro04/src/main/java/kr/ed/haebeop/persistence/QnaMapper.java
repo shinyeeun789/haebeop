@@ -2,10 +2,12 @@ package kr.ed.haebeop.persistence;
 
 import kr.ed.haebeop.domain.Qna;
 import kr.ed.haebeop.util.Page;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
 
+@Mapper
 public interface QnaMapper {
 
     public List<Qna> qnaList(Page page) throws Exception;

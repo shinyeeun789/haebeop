@@ -12,9 +12,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title> Dashboard </title>
     <jsp:include page="../layout/head.jsp"></jsp:include>
-
     <!-- 관리자 페이지 CSS 적용 -->
     <link rel="stylesheet" href="${path}/resources/css/admin-style.css" />
+    <link rel="stylesheet" href="${path}/resources/vendors/simplebar/dist/simplebar.css" />
 </head>
 <body>
 <jsp:include page="../layout/header.jsp"></jsp:include>
@@ -179,7 +179,7 @@
                                         <div class="col-8">
                                             <h4 class="fw-semibold mb-3" id="profit"></h4>
                                             <div class="d-flex align-items-center mb-3">
-                                                <span class="me-1 rounded-circle bg-light-success round-20 d-flex align-items-center justify-content-center" id="yearIcon"></span>
+                                                <span class="me-1 rounded-circle round-20 d-flex align-items-center justify-content-center" id="yearIcon"></span>
                                                 <p class="text-dark me-1 fs-3 mb-0" id="profitDiff"></p>
                                                 <p class="fs-3 mb-0">last year</p>
                                             </div>
@@ -211,9 +211,9 @@
                                             <h5 class="card-title mb-9 fw-semibold"> Monthly Payment Earnings </h5>
                                             <h4 class="fw-semibold mb-3" id="payProfitReport"></h4>
                                             <div class="d-flex align-items-center pb-1">
-                                                <span class="me-2 rounded-circle bg-light-danger round-20 d-flex align-items-center justify-content-center" id="payProfit"></span>
+                                                <span class="me-2 rounded-circle round-20 d-flex align-items-center justify-content-center" id="payProfit"></span>
                                                 <p class="text-dark me-1 fs-3 mb-0" id="payProfitDiff"></p>
-                                                <p class="fs-3 mb-0">last year</p>
+                                                <p class="fs-3 mb-0">last month</p>
                                             </div>
                                         </div>
                                         <div class="col-4">
@@ -421,12 +421,14 @@
                     $(".profitYear").eq(i).text(labelList[i]);
                 }
                 $("#profit").text(profitList[1] + " 포인트");
-                let result = (profitList[1] - profitList[0]) / profitList[1] * 100;
+                let result = profitList[1] == 0 ? -100 : (profitList[1] - profitList[0]) / profitList[1] * 100;
                 $("#profitDiff").text(result + "%");
                 if(result >= 0) {
                     $("#yearIcon").html('<i class="ti ti-arrow-up-left text-success"></i>');
+                    $("#yearIcon").addClass('bg-light-success');
                 } else {
                     $("#yearIcon").html('<i class="ti ti-arrow-down-right text-danger"></i>');
+                    $("#yearIcon").addClass('bg-light-danger');
                 }
                 var breakup = {
                     color: "#5D87FF",
@@ -496,8 +498,15 @@
                     profitList[i] = temp.profit;
                 }
                 $("#payProfitReport").text(profitList[1] + " 원");
-                let result = (profitList[1] - profitList[0]) / profitList[1] * 100;
+                let result = profitList[1] == 0 ? -100 : (profitList[1] - profitList[0]) / profitList[1] * 100;
                 $("#payProfitDiff").text(result + "%");
+                if(result >= 0) {
+                    $("#payProfit").html('<i class="ti ti-arrow-up-left text-success"></i>');
+                    $("#payProfit").addClass('bg-light-success');
+                } else {
+                    $("#payProfit").html('<i class="ti ti-arrow-down-right text-danger"></i>');
+                    $("#payProfit").addClass('bg-light-danger');
+                }
                 var earning = {
                     chart: {
                         id: "sparkline3",

@@ -77,7 +77,9 @@
              UNION ALL
              SELECT DATE_FORMAT(resdate, '%Y-%m') AS label, SUM(amount) AS profit FROM payment
              WHERE resdate >= DATE_ADD(NOW(), INTERVAL -1 YEAR)
-             GROUP BY DATE_FORMAT(resdate, '%Y-%m')) a
+             GROUP BY DATE_FORMAT(resdate, '%Y-%m')
+             UNION all
+             SELECT DATE_FORMAT(NOW(), '%Y-%m') AS label, 0 AS profit FROM dual) a
         GROUP BY label
     </select>
 
