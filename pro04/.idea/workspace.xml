@@ -10,14 +10,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a147832c-7786-4925-9520-67c97c968941" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/persistence/QnaMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/ed/haebeop/persistence/QnaMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/registerMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/registerMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/dashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/dashboard.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/lectureEdit.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/lectureEdit.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/admin-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/admin-style.css" afterDir="false" />
-    </list>
+    <list default="true" id="a147832c-7786-4925-9520-67c97c968941" name="변경" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -218,7 +211,7 @@
       <workItem from="1698573208573" duration="2390000" />
       <workItem from="1698665624054" duration="10218000" />
       <workItem from="1698710196829" duration="30169000" />
-      <workItem from="1698798166894" duration="14817000" />
+      <workItem from="1698798166894" duration="15051000" />
     </task>
     <servers />
   </component>
