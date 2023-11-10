@@ -154,8 +154,30 @@
         </div>
     </div>
 </section>
-
 <!-- ##### Online Lecture Area End ##### -->
+
+<!-- ##### Review Area Start ##### -->
+<section class="mt-5 mb-5 pt-5 pb-5 text-center" id="reviews" style="background-color: #eee">
+    <div class="container">
+        <div class="section-heading style-2">
+            <p> 언제 어디서든 해법과 함께 </p>
+            <h2 class="mb-5"> 리뷰 </h2>
+        </div>
+        <div class="row">
+            <c:forEach var="lecture" items="${onLectures}">
+                <div class="col-4 text-center">
+                    <img src="${path}/resources/upload/lecture/${lecture.saveFile}" alt="${lecture.lname} 커버 이미지" class="w-100">
+                    <a href="${path}/lecture/detail?lcode=${lecture.lcode}">
+                        <h5 class="mt-4 text-center">${lecture.lname}</h5>
+                    </a>
+                    <p class="text-center">${lecture.tname} 선생님</p>
+                </div>
+            </c:forEach>
+        </div>
+    </div>
+</section>
+<!-- ##### Review Area End ##### -->
+
 <section class="mt-5 mb-5 pt-5 pb-5" id="location">
     <div class="content">
         <div class="text-center">

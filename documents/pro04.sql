@@ -1,4 +1,10 @@
--- 회원
+DROP DATABASE haebeop;
+
+CREATE DATABASE haebeop;
+
+USE haebeop;
+
+-- 회원 테이블 생성
 CREATE TABLE user(
   id VARCHAR(20) PRIMARY KEY NOT NULL,
   pw VARCHAR(300) NOT NULL,
@@ -15,12 +21,14 @@ CREATE TABLE user(
   visited INT(11) DEFAULT 0,
   isStudy BOOLEAN DEFAULT false);
 
-SELECT * FROM user;
 
-  
+-- 회원 데이터 생성
+INSERT INTO user
+VALUES('admin', '$2a$10$KXY.EhEskta7wG/HvMSeZ.CQ4FuGQZOmaHTL2eZPnidD6AUvc.rUS', '관리자', 'admin@haebeop.com', '010-1234-5678', NULL, NULL, NULL, DEFAULT, '2000-01-01', 'ADMIN', 100000, DEFAULT, DEFAULT);
+INSERT INTO user
+VALUES('kimname', '$2a$10$KXY.EhEskta7wG/HvMSeZ.CQ4FuGQZOmaHTL2eZPnidD6AUvc.rUS', '김이름', 'kimname@haebeop.com', '010-2424-5487', NULL, NULL, NULL, DEFAULT, '2000-04-30', 'USER', DEFAULT, DEFAULT, DEFAULT);
+
 SELECT * FROM user;
-UPDATE user SET pw='$2a$10$KXY.EhEskta7wG/HvMSeZ.CQ4FuGQZOmaHTL2eZPnidD6AUvc.rUS'
-WHERE id='admin';
 
 -- 커뮤니티 카테고리 테이블 생성
 CREATE TABLE category(
@@ -161,7 +169,7 @@ create table winnerList(
    FOREIGN key(id) references user(id) on delete cascade);
 
 
---당첨자 발표 글
+-- 당첨자 발표 글
 create table winner(
 	wno int primary key AUTO_INCREMENT,			/* 당첨글 번호 */
    eno int not NULL,									/* 이벤트 글 번호 */
@@ -210,15 +218,6 @@ CREATE TABLE teacher(
 	saveFile VARCHAR(300) NOT NULL
 );
 
-SELECT label, FORMAT(SUM(profit), 0) AS profit FROM 
-(SELECT DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 YEAR), '%Y-%m') AS label, 0 AS profit FROM dual
-UNION ALL
-SELECT DATE_FORMAT(sdate, '%Y-%m') AS label, SUM(lprice) AS profit FROM lecture l JOIN register r ON (l.lcode=r.lcode) 
-WHERE sdate >= DATE_ADD(NOW(), INTERVAL -1 YEAR)
-GROUP BY DATE_FORMAT(sdate, '%Y-%m')) a
-GROUP BY label;
-
-
 -- 강의 테이블 (강의코드, 강의명, 과목코드, 강사코드, 강의 소개, 강의 단가, 수강인원, 강의 썸네일(saveFile), 강의 시작일, 강의 종료일, (오프라인 시)강의 시작시간, 온오프 여부, 강의실)
 CREATE TABLE lecture(
 	lcode VARCHAR(50) PRIMARY KEY,
@@ -244,7 +243,7 @@ CREATE TABLE curriculum(
 	ccode INT PRIMARY KEY AUTO_INCREMENT,
 	lcode VARCHAR(50) NOT NULL,
 	cname VARCHAR(500) NOT NULL,
-	cvideo VARCHAR(500)
+	cvideo VARCHAR(500),
 	FOREIGN KEY(lcode) REFERENCES lecture(lcode) ON DELETE CASCADE
 );
 
@@ -299,7 +298,6 @@ CREATE TABLE lectureAttend(
 	FOREIGN KEY(lcode) REFERENCES lecture(lcode) ON DELETE CASCADE
 );
 
-
 -- 결제 정보 테이블
 CREATE TABLE payment(
    pno INT PRIMARY KEY AUTO_INCREMENT,
@@ -314,8 +312,10 @@ CREATE TABLE payment(
 	FOREIGN KEY (id) REFERENCES user (id) ON DELETE CASCADE
 );
 
-SELECT lname, lprice, saveFile, IFNULL(ROUND(AVG(star)), 0) AS star FROM lecture lec JOIN register reg ON (lec.lcode=reg.lcode) LEFT OUTER JOIN review rev ON (lec.lcode=rev.lcode)
-GROUP BY reg.lcode ORDER BY COUNT(reg.lcode) DESC LIMIT 6;
+SELECT * FROM user;
+UPDATE user SET pt = 10000 WHERE id ='kimname'
+
+DELETE FROM attendance;
 
 -- 핵심 기능: 공지사항, 자료실, 회원, 자유게시판, 강의별 댓글,  교재와 시범강의, 결제
 -- 부가 기능: 파일업로드, 채팅, 타계정 또는 SNS 로그인, 수강평, 달력, 가입 시 축하 이메일 보내기, 비밀번호 변경 시 이메일 보내기, 온라인 평가, 진도관리, 학습 스케줄러, 나의 강의실 등

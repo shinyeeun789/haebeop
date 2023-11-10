@@ -1,5 +1,6 @@
 package kr.ed.haebeop.controller;
 
+import kr.ed.haebeop.domain.User;
 import kr.ed.haebeop.service.AttendanceService;
 import kr.ed.haebeop.util.CalendarInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +44,11 @@ public class AttendanceController {
     @GetMapping("addAttend")
     public String addAttend(HttpServletRequest request, RedirectAttributes rttr) throws Exception {
         String id = (String) session.getAttribute("sid");
+        User user = new User();
+        user.setId(id);
         int point = 0;
         if(!attendanceService.isAttendance(id)) {
-            point = attendanceService.addAttend(id);
+            point = attendanceService.addAttend(user);
         }
 
         rttr.addFlashAttribute("point", point);

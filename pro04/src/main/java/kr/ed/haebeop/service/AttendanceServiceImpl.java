@@ -1,6 +1,7 @@
 package kr.ed.haebeop.service;
 
 import kr.ed.haebeop.domain.Attendance;
+import kr.ed.haebeop.domain.User;
 import kr.ed.haebeop.persistence.AttendanceMapper;
 import kr.ed.haebeop.persistence.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,16 +36,14 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     @Override
-    public int addAttend(String id) throws Exception {
-        attendanceMapper.addAttend(id);
+    public int addAttend(User user) throws Exception {
+        attendanceMapper.addAttend(user.getId());
 
         // 랜덤 포인트 (10~100)
         Random random = new Random();
         int point = (int) (random.nextInt(10) + 1) * 10;
-        Map<String, Object> data = new HashMap<>();
-        data.put("id", id);
-        data.put("point", point);
-        userMapper.updatePt(data);
+        user.setPt(point);
+        userMapper.updatePt(user);
 
         return point;
     }

@@ -17,7 +17,7 @@ public interface UserMapper {
     public void userEdit(User member) throws Exception;
     public void userDelete(String id) throws Exception;
     public int userCnt(Page page) throws Exception;
-    public void updatePt(Map<String, Object> data) throws Exception;
+    public void updatePt(User user) throws Exception;
     public void minusPoint(Map<String, String> data) throws Exception;
     public void updateIsStudy(Map<String, Object> data) throws Exception;
     public boolean getIsStudy(String id) throws Exception;
