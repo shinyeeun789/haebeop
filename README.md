@@ -2,10 +2,8 @@
   <img src="https://github.com/shinyeeun789/haebeop/assets/70800414/4bf270be-c1d7-46a0-ba97-e6ed185cb7d0" height="120px">
 </div>
 
-#
+###  💻 프로젝트 소개
 온오프라인 강의 웹 애플리케이션 개발 프로젝트입니다.
-
-##  💻 프로젝트 소개
 
 ### 🕰 개발 기간
 2023.10.05 ~ 2023.11.01
